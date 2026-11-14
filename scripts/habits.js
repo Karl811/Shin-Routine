@@ -89,7 +89,7 @@ function flowBack(id){
 }
 drawCard=function(){
   if(!CARD||!HMAP[CARD.id])return;var id=CARD.id,tab=CARD.tab==='journal'?'journal':'card';CARD.tab=tab;
-  var h=habitHeader33(id,tab)+'<div class="f2-body" id="habit-body33" role="tabpanel" aria-labelledby="habit-tab-'+tab+'">'+(tab==='journal'?habitJournal33(id):'<div class="flow-card-stage" data-flow-type>'+(CARD.back?flowBack(id):flowFront(id))+'</div>')+'</div>';
+  var h=habitHeader33(id,tab)+'<div class="f2-body" id="habit-body33" role="tabpanel" aria-labelledby="habit-tab-'+tab+'">'+(tab==='journal'?habitJournal33(id):'<div class="flow-card-stage" data-flow-type>'+shinCardFaces(id,CARD.back)+'</div>')+'</div>';
   if(tab==='card')h+='<footer class="sbar f2-footer f2-detail-footer flow-card-footer" data-flow-type><button class="flow-flip" data-act="flowFlip" aria-pressed="'+!!CARD.back+'">'+mi('swap_horiz')+(CARD.back?'Mặt trước':'Mặt sau')+'</button>'+f2DetailAction(id)+'</footer>';
   f2Mount('detail',h);$('.sheet',OV).classList.toggle('flow-card-mode',tab==='card');if(FLOW_CARD_OBSERVER)FLOW_CARD_OBSERVER.disconnect();var stage=$('.flow-card-stage',OV);if(stage&&window.ResizeObserver){FLOW_CARD_OBSERVER=new ResizeObserver(flowFitCard);FLOW_CARD_OBSERVER.observe(stage);}requestAnimationFrame(flowFitCard);
 };

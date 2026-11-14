@@ -93,7 +93,7 @@ function treeLettersSVG37(stage,stems,sx,order,interactive){
    KAIZEN MỖI NGÀY · TQ02
    Một file HTML, dữ liệu lưu trong trình duyệt của từng máy.
    ========================================================= */
-var APP_VER = 'M3.3.19';
+var APP_VER = 'M3.3.20';
 var APP_NAME = 'Shin routine';
 var KEY = 'shin-curriculum16-v1-data', KEY_DEMO = 'shin-curriculum16-v1-demo', KEY_MODE = 'shin-curriculum16-v1-mode';
 var DEMO_CLASS = 'DEMO-KZ';

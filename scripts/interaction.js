@@ -30,12 +30,7 @@ growthChallengePanel=function(){
 function touchAcceptChallenge(key){if(!/^\d{4}-\d{2}-\d{2}_[01]$/.test(key)||growthOffer()!==key)return false;var g=growthState();if(g.challenges[key])return false;g.challenges[key]={status:'accepted',template:growthChallengeTemplate(key),note:'',credited:false};save(true);return true;}
 
 /* Match the existing flip button, including its first-use guidance flag. */
-function touchFlipCard(focusButton){
-  if(!CARD||CARD.tab==='journal'||!$('.flow-card-stage .flow-paper',OV))return;
-  CARD.back=!CARD.back;if(!S.gFlip){S.gFlip=1;save();}drawCard();
-  var paper=$('.flow-card-stage .flow-paper',OV);if(paper&&!reduceMotion())paper.animate([{transform:'perspective(900px) rotateY(-18deg)',opacity:.65},{transform:'perspective(900px) rotateY(0)',opacity:1}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'});
-  if(focusButton){var b=$('[data-act=flowFlip]',OV);if(b)b.focus({preventScroll:true});}
-}
+/* Active flip implementation is in SECTION routine-evening.js below. */
 function touchCardControl(target){return !!target.closest('button,a,input,textarea,select,label,summary,[role=button],[role=tab],[data-act],[contenteditable=true]');}
 var TOUCH_GESTURE=null;
 function touchResetGesture(g){
@@ -319,18 +314,16 @@ recordFeedback=function(id,d,removed){var row=PG===0&&d===dk()&&!removed?$('[dat
 
 /* Fit the frame, never shrink the approved reading sizes. Long content scrolls. */
 flowFitCard=function(){var stage=$('.flow-card-stage'),body=stage&&stage.parentElement;if(!stage||!body)return;var cs=getComputedStyle(body),height=Math.max(120,Math.floor(body.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom)));stage.style.height=height+'px';stage.style.setProperty('--ref12-s','1');stage.style.setProperty('--card-scale','1');var paper=$('.flow-paper',stage);if(paper){paper.style.transform='';paper.style.transformOrigin='';}};
-/* Both actual faces participate in one 720 ms flip; controls cannot queue a second flip. */
-touchFlipCard=function(focusButton){if(EVENING_FLIPPING||!CARD||CARD.tab==='journal'||!$('.flow-card-stage .flow-paper',OV))return;var stage=$('.flow-card-stage',OV),old=$('.flow-paper',stage),nextBack=!CARD.back;if(!S.gFlip){S.gFlip=1;save();}if(reduceMotion()){CARD.back=nextBack;drawCard();return;}EVENING_FLIPPING=true;
- var ghost=document.createElement('div');ghost.className='evening-flip-layer';ghost.setAttribute('aria-hidden','true');ghost.innerHTML=nextBack?flowBack(CARD.id):flowFront(CARD.id);stage.appendChild(ghost);var next=$('.flow-paper',ghost);next.style.height=old.getBoundingClientRect().height+'px';
- old.animate([{transform:'perspective(1100px) rotateY(0)'},{transform:'perspective(1100px) rotateY(180deg)'}],{duration:360,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
- var animation=next.animate([{transform:'perspective(1100px) rotateY(-180deg)'},{transform:'perspective(1100px) rotateY(0)'}],{duration:360,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'}),card=CARD;
- animation.finished.catch(function(){}).then(function(){EVENING_FLIPPING=false;if(CARD!==card||!stage.isConnected)return;CARD.back=nextBack;drawCard();if(focusButton){var button=$('[data-act="flowFlip"]',OV);if(button)button.focus({preventScroll:true});}});};
-var EVENING_PRESS=null;
-function eveningReleasePress(){var p=EVENING_PRESS;if(!p)return;EVENING_PRESS=null;p.paper.style.transform='';p.paper.classList.remove('evening-pressed');if(p.held)FLOW_SWIPE_UNTIL=Date.now()+400;}
-document.addEventListener('pointerdown',function(e){var p=e.target.closest('.flow-card-stage>.flow-paper');if(!p||touchCardControl(e.target)||reduceMotion()||EVENING_FLIPPING||e.button!==0)return;var r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;EVENING_PRESS={paper:p,x:e.clientX,y:e.clientY,start:Date.now(),held:false};p.classList.add('evening-pressed');p.style.transform='perspective(1000px) rotateX('+(y*7)+'deg) rotateY('+(-x*7)+'deg) scale(.99)';});
-document.addEventListener('pointermove',function(e){var p=EVENING_PRESS;if(p&&Math.hypot(e.clientX-p.x,e.clientY-p.y)>10)eveningReleasePress();},{passive:true});
-document.addEventListener('pointerup',function(){if(EVENING_PRESS)EVENING_PRESS.held=Date.now()-EVENING_PRESS.start>=350;eveningReleasePress();},true);
-document.addEventListener('pointercancel',eveningReleasePress);window.addEventListener('blur',eveningReleasePress);
+/* Animate the persistent turner, never rebuild the dialog at flip completion. */
+touchFlipCard=function(focusButton){
+ var stage=OV&&$('.flow-card-stage',OV),turner=stage&&$('.shin-card-turner',stage);if(EVENING_FLIPPING||!CARD||CARD.tab==='journal'||!turner)return;
+ if(!S.gFlip){S.gFlip=1;save();}var before=!!CARD.back,next=!before,card=CARD;CARD.back=next;
+ var finish=function(){if(CARD!==card||!stage.isConnected)return;$$('.shin-card-face',turner).forEach(function(face){var active=face.classList.contains('shin-card-back')===next;face.inert=!active;if(active)face.removeAttribute('aria-hidden');else face.setAttribute('aria-hidden','true');});var b=$('[data-act=flowFlip]',OV);if(b){b.setAttribute('aria-pressed',String(next));b.innerHTML=mi('swap_horiz')+(next?'Mặt trước':'Mặt sau');if(focusButton)b.focus({preventScroll:true});}};
+ turner.style.transform='rotateY('+(next?180:0)+'deg)';if(reduceMotion()){finish();return;}
+ EVENING_FLIPPING=true;var anim=turner.animate([{transform:'rotateY('+(before?180:0)+'deg)'},{transform:'rotateY('+(next?180:0)+'deg)'}],{duration:360,easing:'cubic-bezier(.4,0,.2,1)'});window.SHIN_FLIP_ANIMATION=anim;
+ anim.finished.then(finish,function(){}).finally(function(){if(window.SHIN_FLIP_ANIMATION===anim){window.SHIN_FLIP_ANIMATION=null;EVENING_FLIPPING=false;}});
+};
+/* Old per-face press tilt removed: the persistent turner owns all transforms. */
 
 /* Local-only settings extend backups without changing the old data schema. */
 var eveningValidate=validateState32;
