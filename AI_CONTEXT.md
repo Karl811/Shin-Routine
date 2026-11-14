@@ -6,7 +6,7 @@
 Dữ liệu nằm trên thiết bị/trình duyệt. Mã lớp Demo-KZ dùng dữ liệu minh họa. Khác địa chỉ web có thể khác vùng dữ liệu. Đừng suy luận rằng dữ liệu đã mất chỉ vì chuyển sang địa chỉ xem thử khác.
 
 ## Mốc hiện tại
-- **M.Claude.3.3.25 (mới nhất):** "Cách làm" bằng hình cho đủ 14/14 thói quen trong `scripts/how-visual.js`; xem mục 0 của HANDOFF.md. Các dòng dưới mô tả gốc M3.3.20-5S.2.
+- **M.Claude.3.3.28 (bản final, đã bỏ mọi trích dẫn lời Thầy):** "Cách làm" bằng hình cho đủ 14/14 thói quen và 5 bài "Nền tảng rèn luyện" (mục LV trong how-visual.js) trong `scripts/how-visual.js`; xem mục 0 của HANDOFF.md. Các dòng dưới mô tả gốc M3.3.20-5S.2.
 - Giao diện/chức năng: M3.3.20.
 - Gói bảo trì/cache: **M3.3.20-5S.2 — bản chốt**, ngày 14/11/2026; 52 tệp.
 - Gốc trực tiếp của lần này: M3.3.20-5S (cache 5S.1). Gốc lịch sử của lần dọn 5S là M3.3.19 GitHub 79 tệp.

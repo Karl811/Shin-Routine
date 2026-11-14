@@ -1,8 +1,8 @@
 {
-  "feature_version": "M.Claude.3.3.25",
-  "cache_build": "M.Claude.3.3.25",
+  "feature_version": "M.Claude.3.3.28",
+  "cache_build": "M.Claude.3.3.28",
   "date": "2026-11-14",
-  "status": "all_14_habits_ready_for_review",
+  "status": "final_pending_physical_device_test",
   "files": 53,
   "baseline": "M3.3.20-5S.2 (bản chốt 52 tệp); không dùng bản thử M3.3.21",
   "physical_phones_tested": false,
@@ -53,7 +53,7 @@
     },
     "service_worker_cache": {
       "passed": true,
-      "note": "Chromium: cache M.Claude.3.3.25 chứa scripts/how-visual.js"
+      "note": "Chromium: cache M.Claude.3.3.28 chứa scripts/how-visual.js"
     },
     "batch2_visual_review_390px": {
       "habits": [
@@ -82,6 +82,23 @@
       ],
       "also": "rà lại bàn tay ở mọi hình sau khi thay hand()",
       "method": "chụp màn hình và xem bằng mắt"
+    },
+    "lessons_b1_b5_chromium": {
+      "passed": true,
+      "figures": "b1:3 b2:3 b3:3 b4:3 b5:4",
+      "widths": [
+        "390px",
+        "1280px"
+      ],
+      "note": "mở đủ 4 thẻ mỗi bài, không lỗi JavaScript; thẻ Thử giữ tương tác cũ"
+    },
+    "no_quotes_shown": {
+      "passed": true,
+      "note": "14 thói quen × mọi thẻ Cách làm và 5 bài × 4 thẻ: không còn khung trích dẫn; grep 'Lê Long Sơn' = 0"
+    },
+    "lesson_text_fixes": {
+      "passed": true,
+      "note": "Bài 1, 3, 4 hiển thị đúng chữ mới ở thẻ Trong app"
     }
   },
   "not_run": [

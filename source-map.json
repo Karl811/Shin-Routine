@@ -1,5 +1,5 @@
 {
-  "build": "M.Claude.3.3.25",
+  "build": "M.Claude.3.3.28",
   "canonical_sources": {
     "letters.js": "scripts/core.js",
     "app.js": "scripts/core.js",
@@ -138,7 +138,10 @@
     "M.Claude.3.3.22": "Cách làm bằng hình PA2, đợt 1 (vandong, ngu, chitieu, horenso) + ý A/B/C/D; CSS ở SECTION how-visual cuối design-system.css",
     "M.Claude.3.3.23": "Cách làm bằng hình đợt 2 (anuong, camxuc, giup, 5phut); spot cho anuong; cân bằng nam/nữ; nhãn Ở TRƯỜNG/Ở NHẬT",
     "M.Claude.3.3.24": "Cách làm bằng hình đợt 3 (5s, som, chao); giữ hình ill cũ; spot thay tidy cho 5s; sửa bóng chữ",
-    "M.Claude.3.3.25": "Bàn tay mới hand()/arm(); đợt 4 memo, xinloi, viecko; đủ 14 thói quen"
+    "M.Claude.3.3.25": "Bàn tay mới hand()/arm(); đợt 4 memo, xinloi, viecko; đủ 14 thói quen",
+    "M.Claude.3.3.26": "5 bài Nền tảng rèn luyện bằng hình (LV)",
+    "M.Claude.3.3.27": "Bỏ trích dẫn Thầy Lê Long Sơn (5 quote thẻ, bài 3, bài 5)",
+    "M.Claude.3.3.28": "Sửa 4 chỗ chữ bài học cho khớp app; bản final"
   },
   "final_approved_art": {
     "canonical_source": "design-system.js: SHIN_BACK_ART and SHIN_BACK_ART_VIEWBOX",

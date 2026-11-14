@@ -724,6 +724,123 @@ function spotAct(a,v){if(a!=='prTap'||PR.done)return;var SP=HV[PR.P.hv].spot,i=+
  spotDraw();var btn=$('#prBox .hv-spot button[data-v="'+i+'"]');if(btn)btn.focus({preventScroll:true});}
 var hvPrDraw=prDraw;prDraw=function(){if(PR&&PR.P&&PR.P.type==='spot'){spotDraw();return;}hvPrDraw();};
 var hvPrAct=prAct;prAct=function(a,v){if(PR&&PR.P&&PR.P.type==='spot'){spotAct(a,v);return;}hvPrAct(a,v);};
+/* =========================================================
+   NỀN TẢNG RÈN LUYỆN · 5 bài học (M.Claude.3.3.26)
+   Hiểu: hình ý chính · Senpai kể: cảnh câu chuyện · Trong app: mô phỏng thẻ thật, khoanh chỗ cần nhìn.
+   ========================================================= */
+function book(x,y,s,open){s=s||1;return '<g transform="translate('+x+' '+y+') scale('+s+')">'+(open?'<path d="M0 0q-12-6-24-2v22q12-4 24 2q12-6 24-2v-22q-12-4-24 2z" fill="#fff" stroke="'+K+'" stroke-width="1.4" stroke-linejoin="round"/><path d="M0 0v22" stroke="'+K+'" stroke-width="1.2"/><path d="M-19 4h12M-19 9h12M5 4h12M5 9h12" stroke="#C9B07A" stroke-width="1.3"/>':'<rect x="-10" y="-14" width="20" height="26" rx="2" fill="#7FB3D5" stroke="'+K+'" stroke-width="1.4"/><path d="M-6 -14v26" stroke="#5B8FB8" stroke-width="2"/>')+'</g>';}
+function toothbrush(x,y,r){return '<g transform="translate('+x+' '+y+') rotate('+(r||-30)+')"><rect x="-2.5" y="-20" width="5" height="32" rx="2.5" fill="#9FD3FF" stroke="'+K+'" stroke-width="1.3"/><rect x="-4" y="-28" width="8" height="9" rx="2" fill="#fff" stroke="'+K+'" stroke-width="1.2"/><path d="M-3 -26v6M0 -26v6M3 -26v6" stroke="#9DB9E8" stroke-width="1"/></g>';}
+function stamp(x,y,r,t){return '<g transform="translate('+x+' '+y+') rotate(-8)"><circle r="'+r+'" fill="#FDECE8" stroke="'+RED+'" stroke-width="1.8"/>'+T(0,r*.38,t||'済',{jp:1,s:r*1.05,w:700,c:RED_T})+'</g>';}
+function dayDot(x,y,st,t){var s=st==='y'?'<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+GREEN+'"/><path d="M'+(x-5)+' '+y+'l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>':
+ st==='s'?'<circle cx="'+x+'" cy="'+y+'" r="11" fill="#9BD3AE"/><circle cx="'+x+'" cy="'+y+'" r="4" fill="#fff"/>':st==='n'?'<circle cx="'+x+'" cy="'+y+'" r="11" fill="#fff" stroke="'+RED+'" stroke-width="1.8" stroke-dasharray="3 3"/>':'<circle cx="'+x+'" cy="'+y+'" r="11" fill="#fff" stroke="#C9CEE0" stroke-width="1.5"/>';
+ return s+(t?T(x,y-17,t,{s:10,w:700,c:MUTE}):'');}
+/* Mô phỏng thẻ thói quen trong app (nhãn đúng như thẻ thật: MÌNH SẼ · KHI · Trở thành…). */
+function cardMock(x,y,o){var w=196,h=o.h||186,s='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="16" fill="#F2EBF8" stroke="#D9CDE6" stroke-width="1.5"/>',hl=function(yy,hh){return '<rect x="'+(x+8)+'" y="'+yy+'" width="'+(w-16)+'" height="'+hh+'" rx="8" fill="#FFF3C4" stroke="'+YEL+'" stroke-width="2"/>';};
+ s+=T(x+14,y+20,o.level||'CẤP 1 · Tập sự',{a:'start',s:10,w:700,c:'#6B5A7A'})+T(x+14,y+40,o.title,{a:'start',s:13.5,w:800,c:'#4A2E5C'});
+ if(o.hl==='se')s+=hl(y+48,38);if(o.hl==='khi')s+=hl(y+88,36);if(o.hl==='tro')s+=hl(y+126,22);if(o.hl==='week')s+=hl(y+150,30);
+ s+=T(x+14,y+60,'MÌNH SẼ',{a:'start',s:9,w:800,c:'#8A7A99'})+T(x+14,y+78,o.se,{a:'start',s:12,w:700,c:'#4A2E5C'})+
+  T(x+14,y+100,'KHI',{a:'start',s:9,w:800,c:'#8A7A99'})+T(x+14,y+117,o.khi,{a:'start',s:11.5,w:600,c:'#7A6A88'})+
+  T(x+14,y+141,'Trở thành '+o.tro,{a:'start',s:11,w:600,c:'#7A6A88'});
+ var wk=o.week||['y','y','y','','','',''];['T2','T3','T4','T5','T6','T7','CN'].forEach(function(d,i){var cx=x+22+i*25.5,cy=y+168,st=wk[i];s+=st==='y'?'<circle cx="'+cx+'" cy="'+cy+'" r="8" fill="#3E5BBF"/><path d="M'+(cx-3.5)+' '+cy+'l2.5 2.5 4.5-5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/>':st==='n'?'<circle cx="'+cx+'" cy="'+cy+'" r="8" fill="#fff" stroke="'+RED+'" stroke-width="1.4" stroke-dasharray="2.5 2.5"/>':'<circle cx="'+cx+'" cy="'+cy+'" r="8" fill="none" stroke="#C9C1D6" stroke-width="1.3"/>';});
+ return s;}
+function callout(x,y,w,lines,c){c=c||BLUE_T;var h=15+lines.length*15,s='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="10" fill="#fff" stroke="'+(c===GREEN_T?GREEN:BLUE)+'" stroke-width="1.5"/>';lines.forEach(function(l,i){s+=T(x+w/2,y+19+i*15,l,{s:11.5,w:i?600:800,c:c});});return s;}
+function lfig(cls,label,inner,cap,vb){return '<figure class="ill hv-key '+(cls||'')+'">'+svg(vb||'0 0 340 200',label,inner)+(cap?'<figcaption>'+esc(cap)+'</figcaption>':'')+'</figure>';}
+function bars(x,y,vals,c,max){var s='<path d="M'+x+' '+y+'h'+(vals.length*9+4)+'" stroke="#C9CEE0" stroke-width="1.4"/>';vals.forEach(function(v,i){if(v>0)s+='<rect x="'+(x+3+i*9)+'" y="'+(y-v/max*56)+'" width="6" height="'+(v/max*56)+'" rx="2" fill="'+c+'"/>';else s+='<circle cx="'+(x+6+i*9)+'" cy="'+(y-2)+'" r="1.6" fill="#C9CEE0"/>';});return s;}
 
-window.HOW_VISUAL={data:HV,parts:{stepsHTML:stepsHTML,whyHTML:whyHTML,tipHTML:tipHTML}};
+var LV={
+ b1:{
+  hieu:function(){return lfig('','Kiểu 1 học 1 tiếng mỗi tối được 3 hôm rồi bỏ. Kiểu 2 học 10 phút mỗi tối, đều cả tháng, có hôm thành 30 phút.',
+   panel(4,4,162,170,'#FDECE8')+panel(174,4,162,170,'#E2F7EE')+T(85,26,'KIỂU 1 · 1 tiếng/tối',{s:11,w:800,c:RED_T})+T(255,26,'KIỂU 2 · 10 phút/tối',{s:11,w:800,c:GREEN_T})+
+   bars(16,120,[60,60,60,0,0,0,0,0,0,0,0,0,0,0],'#E8604F',60)+bars(186,120,[10,10,30,10,10,10,20,10,10,30,10,10,20,10],GREEN,60)+
+   T(85,142,'3 hôm rồi nghỉ',{s:11.5,w:800,c:RED_T})+T(255,142,'Đều mỗi ngày',{s:11.5,w:800,c:GREEN_T})+T(85,160,'cả tuần trống',{s:10.5,w:600,c:RED_T})+T(255,160,'có hôm 30 phút',{s:10.5,w:600,c:GREEN_T})+
+   cross(150,20,9)+check(320,20,9),'Làm đều trước, làm nhiều sau.','0 0 340 180');},
+  story:function(){return lfig('','Đi làm thêm về mệt, vẫn mở sách đọc vài từ trong 10 phút',
+   '<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/><rect x="20" y="16" width="70" height="48" rx="4" fill="#2F3D5A" stroke="'+K+'" stroke-width="1.4"/>'+moon(40,32,7)+
+   floor(10,330,156)+desk(120,112,150)+g(150,156,1,sitChair({f:1,legs:[[-6,-40,18,-40,18,-6]],hip:[-6,-40],sh:[-4,-78],head:[-1,-100],arms:[[12,-62,30,-50]],smile:false}))+'<path d="M128 46q-3 5 0 7q3-2 0-7z" fill="#8FD0E8"/>'+
+   book(196,102,1,true)+bag(60,128)+clock(268,52,16,'')+T(268,86,'10 phút',{s:12,w:800,c:GREEN_T})+shinMini('cheer',284,100,46),'Ngày mệt nhất vẫn làm được: đó là việc vừa đủ nhỏ.','0 0 340 170');},
+  app:function(){return lfig('','Trên thẻ, dòng Mình sẽ là việc nhỏ của bạn. Cấp Tập sự 7 ngày đầu chỉ cần việc nhỏ đó.',
+   cardMock(8,8,{title:'Ôn tiếng Nhật',se:'mở sổ, đọc 3 từ vựng',khi:'vừa ngồi vào bàn học',tro:'người tiến bộ mỗi ngày',hl:'se'})+
+   arrow(206,74,226,74,'#C98A12',2.2)+callout(228,44,108,['Việc nhỏ','ngày mệt vẫn làm','được'])+callout(228,118,108,['Tập sự: 7 ngày','chỉ cần việc nhỏ'],GREEN_T),'','0 0 340 202');}
+ },
+ b2:{
+  hieu:function(){var pts=[['☀','Thức dậy'],['','Cổng trường'],['','Vào lớp'],['','Ăn trưa'],['','Đi làm về'],['','Đánh răng']],s='<path d="M24 70H316" stroke="#C9CEE0" stroke-width="3" stroke-linecap="round"/>'+T(170,24,'Mỗi ngày đã có sẵn nhiều việc quen',{s:11.5,w:800,c:BLUE_T});
+   pts.forEach(function(p,i){var x=34+i*54,on=i===5;s+='<circle cx="'+x+'" cy="70" r="'+(on?11:8)+'" fill="'+(on?YEL:'#fff')+'" stroke="'+(on?'#C98A12':BLUE)+'" stroke-width="2"/>'+T(x,i%2?98:52,p[1],{s:11,w:on?800:700,c:on?'#946400':MUTE});});
+   s+=toothbrush(40,150,-20)+arrow(60,140,100,140,BLUE,2.2)+book(130,134,1,true)+T(166,140,'Đánh răng xong',{a:'start',s:11.5,w:800,c:'#946400'})+T(166,157,'→ mở sổ, đọc 5 từ',{a:'start',s:11.5,w:800,c:GREEN_T});
+   return lfig('','Mỗi ngày có sẵn nhiều việc quen như thức dậy, vào lớp, đánh răng. Gắn việc mới ngay sau một việc quen.',s,'Việc quen thành tín hiệu nhắc bạn làm việc mới.','0 0 340 176');},
+  story:function(){return lfig('','Đánh răng xong, lên giường là mở sổ đọc 5 từ',
+   '<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/><rect x="240" y="16" width="70" height="48" rx="4" fill="#2F3D5A" stroke="'+K+'" stroke-width="1.4"/>'+moon(262,32,7)+floor(10,330,156)+
+   '<rect x="24" y="92" width="58" height="10" rx="3" fill="#fff" stroke="'+K+'" stroke-width="1.4"/><path d="M30 102v54M76 102v54" stroke="'+K+'" stroke-width="2"/><rect x="34" y="60" width="38" height="30" rx="4" fill="#DDF1FA" stroke="'+K+'" stroke-width="1.3"/>'+toothbrush(66,90,-10)+
+   arrow(96,110,130,110,BLUE,2.2)+bed(130,134,190,{})+g(216,156,1,sitChair({f:1,girl:true,legs:[[-6,-40,18,-40,18,-6]],hip:[-6,-40],sh:[-4,-78],head:[-1,-100],arms:[[12,-64,26,-60]]}))+book(254,96,.9,true)+
+   T(53,46,'Đánh răng xong',{s:10.5,w:800,c:'#946400'})+T(150,46,'mở sổ, 5 từ',{s:11,w:800,c:GREEN_T}),'Việc quen kéo việc mới theo.','0 0 340 170');},
+  app:function(){return lfig('','Trên thẻ, dòng Khi là tín hiệu. Chọn việc ngày nào cũng có; nút Gợi ý có sẵn những lúc quen thuộc.',
+   cardMock(8,8,{title:'Ôn tiếng Nhật',se:'mở sổ, đọc 5 từ vựng',khi:'đánh răng buổi tối xong',tro:'người tiến bộ mỗi ngày',hl:'khi'})+
+   arrow(206,114,226,114,'#C98A12',2.2)+callout(228,84,108,['Tín hiệu','việc ngày nào','cũng có'])+'<rect x="236" y="150" width="92" height="28" rx="14" fill="#E5EFFC" stroke="'+BLUE+'" stroke-width="1.4"/>'+T(282,168,'+ Gợi ý',{s:11.5,w:800,c:BLUE_T}),'','0 0 340 202');}
+ },
+ b3:{
+  hieu:function(){var s=panel(4,4,162,176,'#E2F7EE')+panel(174,4,162,176,'#FDECE8')+T(85,26,'Việc tốt: để GẦN',{s:11.5,w:800,c:GREEN_T})+T(255,26,'Việc chưa tốt: để XA',{s:11.5,w:800,c:RED_T});
+   s+=g(54,160,.72,standSide({girl:true,arms:[[10,-80,14,-66]]}))+memoPad(70,96,-6,.7)+desk(90,124,64)+bottle(118,108,0,.8)+shoe(108,170,'#7FB3D5',0)+shoe(124,170,'#7FB3D5',0)+T(85,52,'sổ trong túi áo',{s:10,w:700,c:GREEN_T})+T(122,82,'bình nước',{s:10,w:700,c:GREEN_T});
+   s+='<rect x="190" y="60" width="62" height="70" rx="4" fill="#E3B97F" stroke="'+K+'" stroke-width="1.4"/><path d="M190 96h62" stroke="'+K+'" stroke-width="1.2"/><circle cx="244" cy="80" r="2" fill="'+K+'"/><circle cx="244" cy="114" r="2" fill="'+K+'"/>'+snack(220,94)+soda(222,128)+T(221,148,'kẹo cất tủ',{s:10,w:700,c:RED_T})+
+    charging(290,108)+T(296,148,'sạc xa giường',{s:10,w:700,c:RED_T})+T(290,62,'điện thoại',{s:10,w:700,c:RED_T})+T(290,76,'ngoài tầm tay',{s:10,w:700,c:RED_T});
+   return lfig('','Việc tốt để gần, dễ thấy: sổ trong túi áo, bình nước trên bàn, giày cạnh cửa. Việc chưa tốt để xa: kẹo cất tủ, điện thoại sạc xa giường.',s,'Đừng chỉ dựa vào cố gắng: sắp xếp để việc tốt dễ làm hơn.','0 0 340 184');},
+  story:function(){var s='<rect x="0" y="0" width="340" height="176" rx="14" fill="#E9EEF8"/>'+floor(10,330,166);
+   s+='<rect x="14" y="144" width="312" height="6" rx="2" fill="'+WOOD+'" stroke="'+WOOD_D+'" stroke-width="1.2"/><path d="M24 150v16M316 150v16M170 150v16" stroke="'+WOOD_D+'" stroke-width="3"/>';
+   [[50,0],[110,1],[230,0],[290,1]].forEach(function(p,i){s+=g(p[0],166,.62,sitBench({f:i<2?1:-1,girl:i%2===1,arms:[[i<2?10:-10,-56,i<2?20:-20,-62]]}));});
+   s+='<rect x="148" y="112" width="44" height="32" rx="4" fill="#F4B63B" stroke="'+K+'" stroke-width="1.4"/><rect x="160" y="112" width="20" height="4" fill="'+K+'"/>'+T(170,134,'100¥',{s:11,w:800,c:'#5A3E00'})+
+    bubble(10,14,90,26,['日本語で!'],{tail:'bl',s:11,jp:1})+bubble(240,14,92,26,['いいね!'],{tail:'br',s:11,jp:1,st:GREEN,c:GREEN_T});
+   return lfig('','Bốn người cùng phòng thống nhất nói tiếng Nhật với nhau, quên thì bỏ 100 yên vào hộp chung',s,'Người xung quanh cũng là môi trường.','0 0 340 176');},
+  app:function(){return lfig('','Ví dụ trong app: thẻ 5S, mỗi món một chỗ; thẻ Ngủ đủ giấc, sạc điện thoại xa giường.',
+   cardMock(8,8,{title:'5S - Gọn gàng',se:'cất đồ về đúng chỗ',khi:'học xong, trước khi đứng dậy',tro:'người ngăn nắp',hl:'se'})+
+   arrow(206,74,226,74,'#C98A12',2.2)+callout(228,48,108,['Mỗi món','một chỗ'])+
+   '<rect x="228" y="108" width="108" height="86" rx="12" fill="#F2EBF8" stroke="#D9CDE6" stroke-width="1.4"/>'+T(282,128,'Ngủ đủ giấc',{s:11.5,w:800,c:'#4A2E5C'})+g(258,158,1,charging(0,0))+T(296,152,'xa',{s:11,w:800,c:BLUE_T})+T(296,166,'giường',{s:11,w:800,c:BLUE_T}),'','0 0 340 202');}
+ },
+ b4:{
+  hieu:function(){var r1=['y','y','y','n','s','y','y'],r2=['y','y','y','n','n','',''],s=T(14,30,'Lỡ 1 ngày',{a:'start',s:11.5,w:800,c:GREEN_T})+T(14,46,'làm nhỏ, nối lại',{a:'start',s:10.5,w:700,c:GREEN_T});
+   r1.forEach(function(st,i){var x=136+i*29;if(i)s+='<path d="M'+(x-18)+' 40h7" stroke="'+(st===''?'#E4E8F2':GREEN)+'" stroke-width="3"/>';s+=dayDot(x,40,st);});
+   s+=T(14,104,'Lỡ 2 ngày liền',{a:'start',s:11.5,w:800,c:RED_T})+T(14,120,'thói quen bỏ bắt đầu',{a:'start',s:10.5,w:700,c:RED_T});
+   r2.forEach(function(st,i){var x=136+i*29;if(i&&st==='y')s+='<path d="M'+(x-18)+' 114h7" stroke="'+GREEN+'" stroke-width="3"/>';s+=dayDot(x,114,st);});
+   s+='<path d="M232 128q28 22 60 0" stroke="'+RED+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+T(262,158,'chuỗi đứt',{s:10.5,w:800,c:RED_T})+T(252,74,'phiên bản nhỏ nhất',{s:10,w:700,c:GREEN_T})+'<path d="M252 64l-6-10" stroke="'+GREEN+'" stroke-width="1.3"/>';
+   return lfig('','Lỡ một ngày rồi làm phiên bản nhỏ nhất ngay hôm sau thì chuỗi nối lại. Lỡ hai ngày liền là chuỗi đứt.',s,'Sau ngày lỡ: không bù gấp đôi, làm nhỏ ngay hôm nay.','0 0 340 170');},
+  story:function(){return lfig('','Thi trượt N2 vẫn không bỏ: hôm mệt chỉ làm một trang đề',
+   '<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/>'+floor(10,330,156)+desk(110,112,150)+g(138,156,1,sitChair({f:1,girl:true,legs:[[-6,-40,18,-40,18,-6]],hip:[-6,-40],sh:[-4,-78],head:[-1,-100],arms:[[12,-62,30,-52]]}))+
+   '<rect x="168" y="90" width="40" height="22" rx="2" fill="#fff" stroke="'+K+'" stroke-width="1.3"/>'+T(188,106,'1 trang',{s:9.5,w:800,c:BLUE_T})+
+   '<g transform="translate(30 30)"><rect width="64" height="44" rx="6" fill="#fff" stroke="'+K+'" stroke-width="1.3"/>'+T(32,18,'N2',{s:12,w:800,c:INK})+T(32,34,'chưa đạt',{s:10,w:700,c:RED_T})+'</g>'+arrow(100,52,124,52,MUTE,2)+
+   [0,1,2,3,4].map(function(i){return dayDot(236+i*20,40,i===2?'s':'y').replace(/r="11"/g,'r="8"');}).join('')+T(276,70,'không để 2 ngày trống',{s:10,w:800,c:GREEN_T})+shinMini('cheer',272,92,46),'Ngã bảy lần, đứng dậy tám lần.','0 0 340 170');},
+  app:function(){var s='<rect x="8" y="8" width="210" height="150" rx="16" fill="#fff" stroke="#D5DEEF" stroke-width="1.5"/>'+T(22,32,'Tuần này',{a:'start',s:11,w:800,c:INK})+
+    '<g transform="translate(176 26)"><path d="M0 -10q10 8 6 18q-2 6-6 6q-8 0-8-8q0-6 8-16z" fill="#F29A3C" stroke="'+K+'" stroke-width="1.2"/></g>'+T(196,34,'12',{s:13,w:800,c:'#A35A00'});
+   ['y','y','n','y','y','',''].forEach(function(st,i){s+=dayDot(28+i*28,72,st,['T2','T3','T4','T5','T6','T7','CN'][i]).replace(/r="11"/g,'r="9.5"');});
+   s+='<rect x="18" y="96" width="190" height="24" rx="8" fill="#E2F7EE"/>'+T(113,112,'Lỡ 1 ngày: chuỗi vẫn giữ',{s:10.5,w:800,c:GREEN_T})+'<rect x="18" y="126" width="190" height="24" rx="8" fill="#FDECE8"/>'+T(113,142,'Lỡ 2 ngày liền: chuỗi về 0',{s:10.5,w:800,c:RED_T});
+   s+='<path d="M82 56q0-18-18-18" stroke="'+BLUE+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+callout(228,14,108,['Quên đóng dấu?','ghi bù trong 3 ngày'])+callout(228,74,108,['Thẻ khi gặp dịp','tính theo số lần','3 · 6 · 12'],GREEN_T)+
+    '<g transform="translate(250 150)" stroke="#9DA9BC" stroke-width="1" fill="none"><path d="M0 0L-14 0M0 0L-10-10M0 0L0-14M0 0L10-10M0 0L14 0"/><path d="M-5 0Q-4-4-3.5-3.5Q-1-5 0-5Q1-5 3.5-3.5Q4-4 5 0M-10 0Q-8-7-7-7Q-2-10 0-10Q2-10 7-7Q8-7 10 0"/></g>'+T(296,150,'7 ngày',{s:10.5,w:700,c:MUTE})+T(296,164,'không làm:',{s:10.5,w:700,c:MUTE})+T(272,182,'“mạng nhện”',{s:11,w:800,c:MUTE});
+   return lfig('','Trong app: lỡ 1 ngày chuỗi vẫn giữ, lỡ 2 ngày liền chuỗi về 0. Quên đóng dấu ghi bù trong 3 ngày.',s,'','0 0 340 194');}
+ },
+ b5:{
+  hieu:function(){var s=T(86,22,'Mỗi lần làm = 1 lá phiếu',{s:11.5,w:800,c:BLUE_T})+'<rect x="40" y="82" width="92" height="70" rx="8" fill="#E5EFFC" stroke="'+K+'" stroke-width="1.5"/><rect x="66" y="80" width="40" height="5" rx="2" fill="'+K+'"/>'+T(86,124,'người',{s:11,w:800,c:BLUE_T})+T(86,140,'đúng giờ',{s:11,w:800,c:BLUE_T})+
+    stamp(66,52,12)+stamp(98,44,12)+'<path d="M84 66v10" stroke="'+BLUE+'" stroke-width="2"/>';
+   s+=T(254,22,'Tuần sau nhiều phiếu hơn',{s:11.5,w:800,c:GREEN_T})+'<path d="M190 150h134" stroke="#C9CEE0" stroke-width="1.6"/>'+
+    '<rect x="206" y="104" width="40" height="46" rx="4" fill="#9BD3AE"/>'+T(226,166,'Tuần này',{s:10.5,w:700,c:MUTE})+T(226,98,'4',{s:13,w:800,c:GREEN_T})+
+    '<rect x="270" y="86" width="40" height="64" rx="4" fill="'+GREEN+'"/>'+T(290,166,'Tuần sau',{s:10.5,w:700,c:MUTE})+T(290,80,'5',{s:13,w:800,c:GREEN_T});
+   return lfig('','Mỗi lần làm là một lá phiếu cho con người mình chọn, như người đúng giờ. Không cần hoàn hảo, chỉ cần tuần sau nhiều phiếu hơn tuần trước.',s,'','0 0 340 176');},
+  ladder:function(){var st=['Bị','Phải','Muốn','Thích','Đam mê'],s='';st.forEach(function(t,i){var x=14+i*64,y=150-i*26;s+='<rect x="'+x+'" y="'+y+'" width="62" height="'+(26+i*26)+'" rx="6" fill="'+['#E9EEF8','#DCE7F7','#CFE0F5','#C1EBD6','#9BD3AE'][i]+'" stroke="#9DB9E8" stroke-width="1.2"/>'+T(x+31,y+17,t,{s:12,w:800,c:i>2?GREEN_T:BLUE_T});});
+   s+=g(176,98,.42,standSide({girl:true,arms:[[12,-104,16,-128]]}))+arrow(206,70,236,46,GREEN,2);
+   return lfig('','Thang năm bậc: Bị, Phải, Muốn, Thích, Đam mê',s,'Bạn đang ở bậc nào với thói quen của mình?','0 0 340 180');},
+  story:function(){var s='<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/>'+floor(10,330,156)+clock(40,32,15,'')+T(40,62,'giờ tự học',{s:10.5,w:700,c:MUTE})+
+    desk(30,112,120)+desk(170,112,120)+g(64,156,.9,sitChair({f:1,arms:[[12,-62,28,-52]]}))+book(104,104,.85,true)+g(204,156,.9,sitChair({f:1,girl:true,arms:[[12,-62,28,-52]]}))+book(244,104,.85,true)+
+    '<rect x="250" y="14" width="78" height="44" rx="8" fill="#fff" stroke="#C9CEE0" stroke-width="1.3" stroke-dasharray="3 3"/>'+T(289,33,'không ai',{s:10.5,w:700,c:MUTE})+T(289,49,'giám sát',{s:10.5,w:700,c:MUTE});
+   return lfig('','Giờ tự học buổi tối không có người giám sát, vẫn vào đúng giờ và học',s,'Người Nhật tin mình từ chính những lúc không ai nhìn.','0 0 340 170');},
+  app:function(){return lfig('','Trên thẻ, dòng Trở thành là con người bạn chọn. Mỗi con dấu là một lá phiếu; lên cấp có bạn và thầy cô xác nhận.',
+   cardMock(8,8,{title:'Đúng giờ, đúng hẹn',se:'ra khỏi phòng sớm 5 phút',khi:'nghe báo thức reo',tro:'người đúng giờ',hl:'tro',week:['y','y','y','y','','','']})+
+   arrow(206,144,226,144,'#C98A12',2.2)+callout(228,20,108,['Con người','bạn chọn'])+stamp(282,100,16)+T(282,132,'1 dấu = 1 phiếu',{s:10,w:800,c:RED_T})+
+   callout(228,146,108,['Lên cấp: bạn và','thầy cô xác nhận'],GREEN_T),'','0 0 340 202');}
+ }
+};
+/* Ghép vào bài học */
+LESSONS.forEach(function(L){var V=LV[L.id];if(!V||L._hv)return;L._hv=1;var c=L.c1,i=c.indexOf('</p>');
+ if(V.hieu&&i>0)c=c.slice(0,i+4)+V.hieu()+c.slice(i+4);
+ if(V.pair)c=c.replace('<div class="pair">',V.pair()+'<div class="pair">');
+ if(V.ladder)c=c.replace(/<div class="ladder">[\s\S]*?<\/div>/,V.ladder());
+ L.c1=c;});
+var hvLsDialog=lsDialog;lsDialog=function(L){var V=LV[L.id],h=hvLsDialog(L);return V&&V.story?h.replace('<div class="hw__k">SHIN PHỎNG VẤN SENPAI</div>','<div class="hw__k">SHIN PHỎNG VẤN SENPAI</div>'+V.story()):h;};
+var hvLsApp=lsApp;lsApp=function(L){var V=LV[L.id],h=hvLsApp(L);return V&&V.app?h.replace('<div class="hw__k">Trong app này</div>','<div class="hw__k">Trong app này</div>'+V.app()):h;};
+
+window.HOW_VISUAL={lessons:LV,data:HV,parts:{stepsHTML:stepsHTML,whyHTML:whyHTML,tipHTML:tipHTML}};
 })();

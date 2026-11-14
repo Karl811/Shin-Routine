@@ -1,5 +1,5 @@
-/* Shin routine · M.Claude.3.3.25 · cache riêng theo địa chỉ cài app */
-const VERSION='M.Claude.3.3.25';
+/* Shin routine · M.Claude.3.3.28 · cache riêng theo địa chỉ cài app */
+const VERSION='M.Claude.3.3.28';
 const SCOPE=self.registration.scope;
 const PREFIX='shin-m3-release:'+encodeURIComponent(SCOPE)+':';
 const CACHE=PREFIX+VERSION;

@@ -1,5 +1,40 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.28 — 14/11/2026 — Bản final của đợt "Cách làm bằng hình"
+
+Người dùng duyệt 2 câu mới ở Bài 3, Bài 5 và đồng ý sửa 4 chỗ chữ bài học chưa khớp app.
+
+- `scripts/core.js` (LESSONS):
+  - Bài 1: "Ô “Tôi sẽ…”" → "Dòng “Mình sẽ…”" (ở mục Trong app và Luyện ngay), khớp nhãn MÌNH SẼ trên thẻ.
+  - Bài 3: "Thẻ 5S một phút" → "Thẻ 5S - Gọn gàng và ngăn nắp"; "Thẻ Ngủ sớm" → "Thẻ Ngủ đủ giấc"; bỏ câu về "Thẻ Giảm dần" (thẻ đã bỏ khỏi bộ 14).
+  - Bài 4: "(như Nhận góp ý)" → "(như Lắng nghe và sửa sai)" — thẻ này đúng là loại "khi gặp dịp" trong bộ 14 (cùng Dám thử việc khó, Báo cáo và xác nhận, Giúp đỡ một việc).
+- APP_VER và cache: M.Claude.3.3.28.
+
+**Tổng kết đợt M.Claude.3.3.22 → 3.3.28:** 14/14 thói quen có hình trong "Cách làm" (tranh đôi Ở TRƯỜNG/Ở NHẬT hoặc BÂY GIỜ/SANG NHẬT, 3 khung bước, cặp Nên/Tránh, Shin mách nhỏ; giữ 9 hình cũ); 3 bài Tìm điểm (Ngủ, Ăn uống, 5S); 2 hình động (squat, vòng thở); 5 bài Nền tảng rèn luyện có hình ở thẻ Hiểu, Senpai kể, Trong app; bỏ mọi trích dẫn lời Thầy. Dữ liệu, khóa lưu, cách tính tiến độ/XP không đổi. Việc còn lại: thử trên Safari/iPhone và điện thoại Android thật.
+
+## M.Claude.3.3.27 — 14/11/2026 — Bỏ trích dẫn Thầy Lê Long Sơn
+
+Yêu cầu: xóa hết trích dẫn của Thầy trong 5 bài học và "Cách làm" của 14 thói quen; câu nào hay thì chuyển thành chữ của khóa học.
+
+- `scripts/core.js`: xóa 5 trường `quote` (chao, memo và 3 thẻ cũ đã bỏ khỏi bộ 14 thẻ: loihua và hai thẻ cũ khác).
+- Bài 3: khung trích dẫn đổi thành câu của khóa học "Thói lười có thể lây sang nhau." (nối với "Siêng năng cũng lây…").
+- Bài 5: khung trích dẫn đổi thành "Khi đã thật sự muốn, mình tự học, tự làm mà không cần ai nhắc." (dẫn vào thang Bị → Đam mê).
+- Kiểm tra: không còn chữ "Lê Long Sơn" trong mã; mở mọi thẻ của 14 thói quen và 5 bài không còn khung trích dẫn.
+- **Quy ước:** app không trích dẫn lời Thầy; không thêm lại.
+- APP_VER và cache: M.Claude.3.3.27.
+
+## M.Claude.3.3.26 — 14/11/2026 — 5 bài "Nền tảng rèn luyện" bằng hình (chờ duyệt)
+
+Yêu cầu: áp dụng hướng "Cách làm bằng hình" cho 5 bài học nền tảng (hiểu cách dùng app và phương pháp rèn luyện).
+
+- `scripts/how-visual.js`, mục `LV` (b1–b5), không sửa chữ của bài:
+  - **Hiểu**: hình ý chính chèn sau câu in đậm đầu bài — b1 biểu đồ 14 ngày "1 tiếng/tối vs 10 phút/tối"; b2 dòng thời gian việc quen trong ngày + "đánh răng xong → mở sổ"; b3 GẦN/XA; b4 chuỗi ngày lỡ 1 ngày vs lỡ 2 ngày liền; b5 hộp phiếu + cột phiếu tuần này/tuần sau, và thang 5 bậc Bị → Đam mê vẽ thành bậc thang (thay khối chữ `.ladder`, giữ nguyên 5 từ).
+  - **Senpai kể**: cảnh minh họa câu chuyện ở đầu thẻ (bọc `lsDialog`).
+  - **Trong app**: mô phỏng thẻ thói quen đúng nhãn thật (MÌNH SẼ · KHI · Trở thành…), khoanh vàng chỗ bài nhắc tới; b4 mô phỏng chuỗi tuần, ghi bù 3 ngày, thẻ "khi gặp dịp", "mạng nhện" (bọc `lsApp`).
+- Thẻ "Thử" giữ nguyên tương tác cũ.
+- APP_VER và cache: M.Claude.3.3.26. Dữ liệu không đổi.
+- Phát hiện chữ cũ chưa khớp app hiện tại (chưa sửa, chờ người dùng duyệt): b1 "Ô “Tôi sẽ…”" (thẻ ghi MÌNH SẼ); b3 "Thẻ 5S một phút", "Thẻ Ngủ sớm", "Thẻ Giảm dần" (đã bỏ khỏi bộ 14 thẻ); b4 "(như Nhận góp ý)" (nay là Lắng nghe và sửa sai).
+
 ## M.Claude.3.3.25 — 14/11/2026 — "Cách làm" bằng hình, đợt 4 (đủ 14 thói quen, chờ duyệt)
 
 Người dùng duyệt đợt 3, góp ý: bàn tay vẽ hơi thô (Đúng giờ hình 2; Chào hỏi tranh đôi và hình 1–3; 5S hình 3).

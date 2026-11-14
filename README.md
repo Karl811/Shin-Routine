@@ -1,6 +1,6 @@
-# Shin routine M.Claude.3.3.25 — "Cách làm" bằng hình, đủ 14 thói quen
+# Shin routine M.Claude.3.3.28 (final) — "Cách làm" và 5 bài nền tảng bằng hình
 
-**Bản mới nhất: M.Claude.3.3.25 (gốc M3.3.20-5S.2).** Có hình trong "Cách làm" của cả 14 thói quen; bài Thực tập "Tìm điểm chưa ổn" cho Ngủ, Ăn uống, 5S. Đọc HANDOFF.md mục 0 trước khi sửa.
+**Bản mới nhất: M.Claude.3.3.28 (gốc M3.3.20-5S.2).** Có hình trong "Cách làm" của cả 14 thói quen và trong 5 bài "Nền tảng rèn luyện"; bài Thực tập "Tìm điểm chưa ổn" cho Ngủ, Ăn uống, 5S. Đọc HANDOFF.md mục 0 trước khi sửa.
 
 ---
 
