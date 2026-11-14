@@ -1,5 +1,63 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.25 — 14/11/2026 — "Cách làm" bằng hình, đợt 4 (đủ 14 thói quen, chờ duyệt)
+
+Người dùng duyệt đợt 3, góp ý: bàn tay vẽ hơi thô (Đúng giờ hình 2; Chào hỏi tranh đôi và hình 1–3; 5S hình 3).
+
+- **Bàn tay mới cho mọi hình**: hàm `hand()` vẽ lòng bàn tay bo tròn xoay theo cẳng tay, có ngón cái, viền mảnh hơn; `arm()` dùng chung. Tay mọc từ vai (thấp hơn đỉnh thân 4px) thay vì đỉnh thân. Áp dụng tự động cho cả 14 thói quen.
+  - Đúng giờ bước 2: vẽ lại dáng ngồi nhìn thẳng, hai tay vươn lên.
+  - Chào hỏi bước 1, 3: tay vẫy chào; bước 2 và tranh đôi: tay buông tự nhiên.
+- Đợt 4: **memo, xinloi, viecko** (giữ hình cũ memo, sorry). Dám thử việc khó có hình trọng tâm "3 vùng: An toàn / Vừa sức / Quá sức".
+- Đủ 14/14 thói quen có tranh đôi, 3 khung bước, cặp Nên/Tránh, Shin mách nhỏ; 3 bài Tìm điểm (Ngủ, Ăn uống, 5S); 2 hình động (squat, vòng thở).
+- APP_VER và cache: M.Claude.3.3.25. Dữ liệu không đổi.
+
+## M.Claude.3.3.24 — 14/11/2026 — "Cách làm" bằng hình, đợt 3 (chờ người dùng duyệt)
+
+Người dùng duyệt đợt 2, nhắc: lời thoại (bóng chữ) không được đè lên nhân vật; đồng ý thay bài dọn bàn 30 giây của 5S.
+
+- Đợt 3 trong `scripts/how-visual.js`: **5s, som, chao**.
+  - **Giữ hình cũ**: `whyHTML`/`stepsHTML` giờ tự chèn `x.ill[0]` (Vì sao) và `x.ill[1]` (Các bước) bằng `illSVG` gốc — Chào hỏi giữ "nói trước, cúi sau" và "3 mức cúi"; 5S giữ "bàn trước/sau" và "xếp giày"; Đúng giờ giữ "thước 7:45–8:00".
+  - 5S: Thực tập `tidy` (dọn bàn 30 giây) thay bằng `spot` phòng ký túc xá buổi sáng (giày ở cửa, chăn chưa gấp, rác đầy; 3 chỗ ổn).
+  - Hàm mới `bowSide()` (dáng cúi chào nhìn ngang), đồ vật: giày, thùng rác, kệ có nhãn, cửa, bảng treo dụng cụ.
+- Rà lại lời thoại đợt 1–2: dời bóng chữ ở Báo cáo (bước 1, bước 3) và Giúp đỡ (bước 3, cặp Nên/Tránh) để không chạm đầu nhân vật; dời Shin ở Giúp đỡ bước 2.
+- APP_VER và cache: M.Claude.3.3.24. Dữ liệu không đổi; bài 5S vẫn ghi S.prDone như cũ.
+
+Còn lại (đợt 4): memo, xinloi, viecko.
+
+## M.Claude.3.3.23 — 14/11/2026 — "Cách làm" bằng hình, đợt 2 (chờ người dùng duyệt)
+
+Người dùng duyệt đợt 1 ("rất ổn, tiếp tục hướng như thế") và chốt thêm: cân bằng nhân vật nam/nữ; nhãn tranh đôi mặc định **Ở TRƯỜNG / Ở NHẬT**, dùng **BÂY GIỜ / SANG NHẬT** khi bối cảnh là đời sống ngoài trường; thêm bài "Tìm điểm chưa ổn" cho Ăn uống (và 5S ở đợt sau).
+
+- Đợt 2 trong `scripts/how-visual.js`: **anuong, camxuc, giup, 5phut** — tranh đôi, 3 khung bước, cặp Nên/Tránh, Shin mách nhỏ.
+  - Ăn uống: Thực tập đổi sang `spot` (bàn ăn trưa: 3 món nên thay, 3 chỗ ổn), thay bài chọn chữ cũ.
+  - Cảm xúc: bước 2 có hình động vòng thở 8 giây (dừng khi giảm chuyển động).
+- `duo()` nhận tham số nhãn; Báo cáo, Cảm xúc, Giúp đỡ, 05 phút dùng Ở TRƯỜNG/Ở NHẬT; Vận động, Ngủ, Chi tiêu, Ăn uống dùng BÂY GIỜ/SANG NHẬT.
+- Cân bằng nam/nữ ở đợt 1: Vận động (tranh đôi, cặp hình), Ngủ (tranh đôi, cặp hình), Chi tiêu (tranh đôi), Báo cáo (bước 3, người làm ở Nhật) dùng nhân vật nữ.
+- `head()` thêm tùy chọn `blush`, `mad` (mặt đỏ, nhíu mày) cho Cảm xúc.
+- APP_VER và cache: M.Claude.3.3.23.
+- Dữ liệu: không đổi khóa lưu, schema, cách tính tiến độ/XP. Bài Thực tập Ăn uống đổi dạng nhưng vẫn ghi S.prDone như cũ.
+
+Còn lại (đợt 3–4): chao, som, 5s, memo, xinloi, viecko — giữ 9 hình cũ, bổ sung khung bước, tranh đôi, cặp Nên/Tránh; bài Tìm điểm cho 5S (phòng KTX).
+
+## M.Claude.3.3.22 — 14/11/2026 — "Cách làm" bằng hình, đợt 1 (chờ người dùng duyệt)
+
+Yêu cầu: mọi thói quen có ít nhất 2–3 hình trong "Cách làm", đồng bộ nét với hình gốc (chào hỏi, memo, 5S). Người dùng chốt PA2 "Bước bằng hình", nhân vật kết hợp (người làm động tác, Shin nhắc mẹo), duyệt cả 4 ý A–D, tên bản M.Claude.3.3.22. Lý do bỏ bản thử M3.3.21: vẽ chưa đẹp, không đồng bộ với hình sẵn có — bản này vẽ lại từ đầu theo đúng nét `person()`/`illSVG()` trong core.js.
+
+- **Mới `scripts/how-visual.js`** (nạp sau design-system.js, trước boot.js): bộ nét vẽ chung (dáng người nhiều tư thế, đồ vật), bọc `openHow` để thay 3 thẻ của 4 thói quen đợt 1:
+  - Vì sao: tranh đôi "BÂY GIỜ ↔ SANG NHẬT" (ý A), hai ô chữ giữ nguyên nội dung, xếp lại thứ tự Với bạn → Ở Nhật cho khớp tranh.
+  - Các bước: mỗi bước một khung tranh phía trên chữ; Vận động có hình động squat 3 dáng (ý C, dừng khi bật giảm chuyển động); hộp "Shin mách nhỏ" (ý D) cuối thẻ; Shin xuất hiện trong một vài khung.
+  - Ghi nhớ: cặp hình Nên ✓ / Tránh ✗ trên danh sách chữ.
+  - Thực tập kiểu mới `type:'spot'` "Tìm điểm chưa ổn" (ý B), dùng cho **Ngủ** (thay bài chọn chữ cũ): phòng lúc 22:30, 3 chỗ chưa ổn + 2 chỗ ổn (chạm vào chỉ hiện ghi chú, không trừ điểm). Bọc `prDraw`/`prAct`; hoàn thành gọi `prWin` như cũ.
+- Đợt 1: **vandong, ngu, chitieu, horenso** (4 thói quen chưa có hình). 10 thói quen còn lại hiển thị như M3.3.20.
+- `design-system.css`: thêm SECTION how-visual cuối tệp (bỏ giới hạn cao 180px cho hình mới, khung bước, hộp Shin, hình động, Tìm điểm).
+- `scripts/core.js`: chỉ đổi APP_VER thành M.Claude.3.3.22. `index.html`, `habit-game.html`, `sw.js`: cache M.Claude.3.3.22, thêm how-visual.js vào CORE offline.
+- Chữ mới (cần người dùng duyệt): nhãn trong hình, chú thích, 4 câu "Shin mách nhỏ", đề và phản hồi bài Tìm điểm. Số tiền/giờ trong hình là ví dụ, có nhãn "Ví dụ".
+- Dữ liệu: không đổi khóa lưu, schema, cách tính tiến độ/XP.
+
+Kiểm tra thực sự đã chạy: xem VALIDATION.json. Chưa thử WebKit/Safari và điện thoại thật.
+
+**Việc tiếp theo:** người dùng duyệt đợt 1 → sửa theo góp ý → đợt 2–4 cho 10 thói quen còn lại (giữ 9 hình cũ, bổ sung khung bước, tranh đôi, cặp Nên/Tránh; cân nhắc thêm bài Tìm điểm cho 5S phòng KTX, Ăn uống khay cơm).
+
 ## M3.3.20-5S.2 — 14/11/2026 — bản chốt sau duyệt hình
 
 Người dùng duyệt đủ 7 hình vẽ lại, chốt 6A và 7B, yêu cầu áp dụng trên M3.3.20–5S và đóng gói kèm tiến độ để chuyển hội thoại/công cụ AI. Bản thử “Cách làm bằng hình” M3.3.21-5S-preview được tạm bỏ, không nhập vào bản này.

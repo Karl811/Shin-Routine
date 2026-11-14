@@ -1,4 +1,21 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine sau phiên 14/11/2026
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.25, 14/11/2026)
+
+## 0. Bản hiện tại: M.Claude.3.3.25 — "Cách làm" bằng hình, đủ 14 thói quen
+
+- Gốc: M3.3.20–5S.2 (các mục 1–6 bên dưới vẫn đúng cho phần còn lại của app). APP_VER và cache đều là **M.Claude.3.3.25**; gói 53 tệp.
+- Người dùng đã chốt: **PA2 "Bước bằng hình"**; nhân vật kết hợp (người làm động tác, Shin nhắc mẹo); làm cả 4 ý: A tranh đôi Bây giờ ↔ Sang Nhật, B "Tìm điểm chưa ổn", C hình động nhẹ, D Shin trong khung/"Shin mách nhỏ".
+- Nét vẽ **bắt buộc đồng bộ** với hình gốc `person()`/`illSVG()` (viền #2B2420, áo #EAF4F5, quần #2F3D5A, da #F3CDA8, nền khung #F4F6FE, chữ xanh #1D5FD1, xanh lá #0B6E4B, đỏ #8E2F22). Bản thử M3.3.21 bị bỏ chính vì không đồng bộ.
+- Đợt 1–3 đã được duyệt (đợt 3 có góp ý bàn tay, đã sửa bằng `hand()`). Đợt 4 (memo, xinloi, viecko) chờ duyệt. Đủ 14/14 thói quen.
+- Bàn tay: luôn dùng `arm()`/`hand()` (lòng bàn tay + ngón cái), không vẽ tay bằng hình tròn.
+- Lời thoại (bóng chữ) không được đè lên nhân vật: luôn đặt bóng chữ cao hơn đỉnh đầu, kiểm tra bằng ảnh chụp từng khung.
+- Hình cũ trong `ill:[...]` được giữ tự động khi thói quen có mục HV.
+- Quy ước đã chốt: cân bằng nhân vật nam/nữ (`girl:true`); nhãn tranh đôi mặc định Ở TRƯỜNG / Ở NHẬT, dùng BÂY GIỜ / SANG NHẬT khi bối cảnh là đời sống ngoài trường; bài Tìm điểm (`type:'spot'`) dùng cho Ngủ, Ăn uống, 5S. Kế hoạch: đợt 2–4 cho 10 thói quen còn lại, mỗi đợt 3–4 thói quen, giữ 9 hình cũ (gosen, bow, desk, shoes, time, memo, sorry; thanks có thể gắn cho Chào hỏi).
+- Nơi sửa: `scripts/how-visual.js` (dữ liệu hình HV[id] = duo, steps[3], key, pair, tip, spot) và SECTION how-visual cuối `design-system.css`. Thêm thói quen mới = thêm một mục vào HV; không sửa core.js.
+- Không đổi dữ liệu/tiến độ. Chưa thử WebKit/Safari và điện thoại thật.
+
+---
+
+# (Bối cảnh bản gốc) bàn giao sau phiên 14/11/2026
 
 ## 1. Bản nào là bản đúng để làm tiếp?
 
@@ -19,7 +36,7 @@
 | Mặt sau xanh đậm, chữ xanh trắng, hình trên 1/4 thẻ | Đã áp dụng cho 14 thẻ |
 | Lật mượt bằng hai mặt thường trú, nhớ cuộn riêng | Giữ nguyên triển khai M3.3.20 |
 | Vẽ lại 7 hình chưa đạt | Đã duyệt đủ và áp dụng trong 5S.2 |
-| Đưa hình vào “Cách làm” | Tạm dừng; không nằm trong gói này |
+| Đưa hình vào “Cách làm” | Mở lại ở M.Claude.3.3.22 theo PA2; đợt 1 xong (4 thói quen), chờ duyệt |
 | Yêu cầu đã duyệt còn chờ lập trình | Không còn trong phạm vi phiên này |
 | Kiểm tra | Xem kết quả thực sự trong VALIDATION.json; không coi hướng dẫn kiểm tra là kết quả đã chạy |
 
