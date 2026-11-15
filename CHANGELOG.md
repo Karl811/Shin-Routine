@@ -1,5 +1,55 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.38 — 15/11/2026 — Đợt 3: Thư viện mới, “Shin nhìn lại tuần này”, Thẻ thành tựu nhẹ hơn
+
+Gốc M.Claude.3.3.37. Toàn bộ ở SECTION batch38 (design-system.js/.css). Người dùng chốt: giữ thang Bị → Đam mê; tab Hành trình giữ nguyên, chỉ làm nhẹ Thẻ thành tựu khi chạm thẻ trên cây; làm lại Thư viện tab Thói quen và Bài học theo tinh thần thẻ game, M3.
+
+- **Chữ câu công thức** khi thiết lập thói quen/thẻ riêng: 16 → 18px (`.sheet.wizard16 .sentence`); nơi khác không đổi.
+- **Thư viện › Thói quen** (bọc `eveningLibrary`; tab Trải nghiệm vẫn gọi bản cũ): ô tìm kiểu M3; tìm không dấu, có từ khóa đời thường cho 14 thói quen (`KW38`), khớp đúng từ trước (“ngủ” không ra “người”), không có kết quả thì nới ra khớp đầu từ; chỉ cập nhật phần kết quả nên bàn phím không bị đóng. Chip lọc có số. Thẻ nổi bật đổi theo ngày, dùng hình mặt sau thẻ trên nền #173F79. Danh sách theo 4 nhóm + Thẻ tự tạo: icon M3 44px, tên, chấm + trạng thái (Đang rèn · Bậc n / Đã cất · Bậc n / Tạm dừng / Đang duy trì / Chưa rèn). “Chọn thẻ để rèn” dùng cùng danh sách và ô tìm.
+- **Thư viện › Bài học**: thẻ nổi bật với hình đường 5 bậc đá (bài đã học có dấu tích, bài tiếp theo viền vàng), nút Bắt đầu/Học tiếp/Ôn lại; danh sách 5 bài; “Cách làm từng thói quen” thành ô 2 cột nhỏ gọn + ô tìm riêng.
+- **Sổ tay › Tiến bộ** (bọc `nbSum`): “Shin nhìn lại tuần này” 7 phần; 6 ô số liệu cũ bỏ; phần viết trong bài học và memo gập lại.
+- **Thẻ thành tựu** (bọc `openTreeCard30`, giữ ô “Một điều bạn muốn ghi nhớ” và nút lưu): đầu thẻ gọn, dòng thời gian, bỏ các khối nền đậm.
+- Kiểm thử Chromium 390×844 và 1280×800 (Demo): tìm 15 từ mẫu, chip lọc, mở thẻ từ thẻ nổi bật và từ danh sách, Cách làm (tìm + mở), mở bài từ thẻ nổi bật, Chọn thẻ để rèn (tìm), Sổ tay (các phần, mở thẻ), Thẻ thành tựu (lưu kỷ niệm), bài học còn dở; lặp lại kiểm thử đợt 2 (menu ⋯, tạo thẻ). Không lỗi JavaScript. Chưa thử WebKit/điện thoại thật.
+
+## M.Claude.3.3.37 — 15/11/2026 — Đợt 2: bỏ câu lấy từ lời Thầy, trang tạo thẻ gọn, nút ⋯ khi xem thẻ
+
+Gốc M.Claude.3.3.36. Mã mới: SECTION batch37 cuối design-system.js và design-system.css.
+
+- (14) **Bỏ câu lấy từ lời Thầy Lê Long Sơn** (core.js, LESSONS): Bài 3 bỏ “Thói lười có thể lây sang nhau.” và “Siêng năng cũng lây.” [T26 – V13], còn “Người xung quanh cũng là môi trường. Ngồi gần bạn chăm, mình cũng chăm hơn.”; Bài 5 bỏ “Khi đã thật sự muốn, mình tự học, tự làm mà không cần ai nhắc.” [T26 – V17], thay câu dẫn “Thử xem mình đang làm việc này với tâm thế nào:”. Giữ thang Bị→Đam mê (mô hình), thành ngữ 七転び八起き ở Bài 4. Đã rà 14 thẻ Cách làm, mặt sau, Senpai kể: không còn trích dẫn. Chú thích đầu LESSONS cập nhật. Liệt kê trong `Shin-routine-3.3.37_Duyet-chu-dot-2.xlsx`.
+- (17) **Trang đầu tự tạo thẻ gọn hơn** (`cuStepName` trong core.js, CSS `.cu37`): bỏ dòng “Thẻ của riêng bạn”; ô tên nằm trong khung xem trước (nhãn nhỏ “Tên thói quen”, gạch chân); “Màu” cùng hàng 6 chấm 44px; biểu tượng 6 cột cao 44px; nhịp thành 2 nút liền (Hằng ngày | Khi gặp dịp) + 1 dòng chú thích. Vẫn chọn màu, biểu tượng; `cuRefresh`, gợi ý mẫu, chế độ sửa, nút Xóa giữ nguyên. Ở 390×844 cả bước vừa một màn hình.
+- (28) **Nút ⋯ ở thanh dưới khi xem thẻ** (thẻ đang trên tay, không áp cho thẻ ở Thư viện/duy trì): menu M3 nổi phía trên với Sửa công thức (data-act edit) · Tạm dừng thẻ / Tiếp tục rèn · Cất thẻ (data-act unslot). Đóng bằng chạm ra ngoài, Esc, mũi tên lên/xuống chuyển mục.
+  - **Tạm dừng** = `status:'pause'`, thẻ vẫn trong khung (giữ chỗ), không tính ngày, không tính lỡ, không chặn +2 Lửa (r2TrainingNow, handList, activeIds đã loại thẻ pause từ trước). Mặt trước có nhãn “Tạm dừng”; nút chính đổi thành “Tiếp tục rèn”; trang Hôm nay có mục “Đang tạm dừng · n” với nút “Tiếp tục”.
+  - `stPause` (nút Tạm dừng trong Sửa công thức) đổi theo nghĩa mới: không cất về Thư viện nữa; ẩn khi thẻ đã tạm dừng.
+  - Esc: listener keydown của sheet14 (extensions.js) đóng menu ⋯ trước khi xử lý quay lại.
+- Kiểm thử Chromium 390×844 và 1280×800 (Demo): menu 3 mục, tạm dừng → nhãn + nút Tiếp tục rèn + không còn trong r2TrainingNow, tiếp tục rèn, Esc/chạm ngoài đóng menu, Sửa công thức qua menu, Tạm dừng trong Sửa công thức, Hôm nay có mục tạm dừng → Tiếp tục, Cất thẻ, thẻ Thư viện không có ⋯, tạo thẻ riêng (chọn màu/biểu tượng/nhịp, đếm chữ), sửa thẻ riêng 320px, 5 bài học, habit-game.html, người học mới. Không lỗi JavaScript. Chưa thử WebKit/điện thoại thật.
+
+## M.Claude.3.3.36 — 15/11/2026 — Sửa lỗi đợt 1 theo góp ý của người dùng (memo 30 mục)
+
+Gốc M.Claude.3.3.35. Mã mới: SECTION batch36 cuối design-system.js và design-system.css; sửa nhỏ trong interaction.js (eveningLibrary, mi), extensions.js (thẻ game), core.js (lựa chọn bài học).
+
+- (2) Ghi nhận thói quen: dải tay nắm cùng màu xanh đậm #173F79 với phần đầu.
+- (5–6) Hành trình: khối “Gửi một lời nhắn” lên sát khối cây (bỏ khoảng trắng 104px → 16px); “Những chặng đã qua” cách đường kẻ 16px.
+- (7) Nút check-in: “Hẹn bạn ngày mai” một dòng, nút ⋮ luôn cùng hàng.
+- (8) Bài học – Thử ngay: các lựa chọn cách nhau 8px (`.ls-chips36`).
+- (9, 12) Chọn thẻ để rèn (từ Hôm nay): chỉ hiện danh sách thói quen, ẩn tab Bài học và Trải nghiệm, không hiện thẻ game.
+- (10) Tab “Công cụ” đổi tên “Trải nghiệm”, icon tay cầm chơi game (Lucide gamepad, cùng kiểu nét).
+- (11) Sổ tay: đổi tab chỉ thay phần nội dung, không dựng lại cả màn hình.
+- (13) Thanh điều hướng nền gần như đặc, ô đánh dấu tab rõ cả trên nền tối của Hành trình.
+- (22) Nền gốc html #F9F9FF (thử khắc phục đường gạch khi cài app trên Android — cần người dùng kiểm tra trên máy thật).
+- (23) Senpai kể mở từ thẻ: đóng xong quay lại đúng thẻ (dùng cơ chế rememberHabit33/restoreHabit33 có sẵn).
+- (24) Nhật ký thẻ: chấm chú thích cùng màu ô ngày (Đã làm xanh, Một phần vàng, Chưa làm đỏ nhạt, Không gặp dịp xám).
+- (25) Mở Teams: chép tin nhắn đồng bộ ngay lúc chạm (trước khi rời app).
+- (26) Cài đặt › Hướng dẫn lần đầu › Mở lại: luôn hiện đủ 3 bước kể cả khi đã làm xong.
+- (30) Không bôi đen/sao chép chữ trên trang (ô nhập vẫn chọn, chép được). Ô ghi chú rèn luyện hằng ngày (ghi nhận thẻ `data-in=note`, ghi chú check-in `ciNote29`, memo cuối ngày `ciMemo29`) chặn dán và kéo-thả chữ, báo “Ghi chú rèn luyện cần tự gõ, không dán được nhé.” Các ô khác (tên, lớp, mã học viên, lời nhắn…) dán bình thường.
+- Mục 15 (thẻ công cụ dính): người dùng xác nhận không còn lỗi. Câu “Mỗi thẻ đạt cấp 2…” trong ảnh người dùng là bản cũ; bản hiện tại đã là “bậc 2”.
+
+## M.Claude.3.3.35 — 15/11/2026 — Màu icon nhẹ nhàng hơn
+
+Gốc M.Claude.3.3.34. Người dùng thấy màu icon 3.3.34 quá rực, gây mệt mắt; chọn mức nằm giữa PA1-A (nhạt) và PA1-A1 (rực hơn 25%), tức PA1-A thêm khoảng 12,5% độ rực. Đổi cả màu thẻ tự tạo.
+
+- Chỉ đổi biến màu `--m3c` (nền khung) và `--m3o` (icon) của 10 nhóm màu trong SECTION m3-habit-icons (design-system.css). Nhóm 1 #E2E7F3/#445E85, 2 #DFEBE2/#44664F, 3 #DCEAE9/#3D6466, 4 #F1E4E7/#7D4F5E; màu thẻ tự tạo 5 #E8E3F1/#5C4F7C, 6 #F3E6DC/#7A593E, 7 #F2E3E0/#804D49, 8 #EEE5DC/#64523C, 9 #E3E7ED/#485868, 10 #F1E9D4/#695728.
+- Ô chọn màu khi tạo thẻ riêng dùng cùng tông: vòng nền nhạt, chấm giữa màu icon (dấu ✓ trắng khi đã chọn), để vẫn phân biệt được 6 màu.
+
 ## M.Claude.3.3.34 — 15/11/2026 — Icon thói quen chuẩn Material 3; sửa hộp thoại “Đang duy trì”
 
 Gốc M.Claude.3.3.33. Người dùng chốt PA1 (khung vuông bo góc, nền nhạt, icon đậm cùng tông), đổi cả icon thói quen tự tạo, sửa lỗi màn hình Đang duy trì.

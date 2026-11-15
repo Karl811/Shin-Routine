@@ -59,3 +59,173 @@ bandCardIcon=function(id){return m3HabitSvg(id);};
 m3HabitIcon=function(id){return 'm3h:'+id;};
 var m3hiMi=mi;
 mi=function(name){if(typeof name==='string'&&name.indexOf('m3h:')===0)return m3HabitBadge(name.slice(4));return m3hiMi.apply(this,arguments);};
+
+/* ===== SECTION: batch36 (M.Claude.3.3.36) — sửa lỗi đợt 1 theo góp ý người dùng ===== */
+/* 23. Senpai kể mở từ mặt sau thẻ: đóng xong quay lại đúng thẻ (mặt sau). */
+var senpai36Open=openSenpai;
+openSenpai=function(id){if(OV&&CARD)rememberHabit33();return senpai36Open.apply(this,arguments);};
+/* 26. Mở lại "Hướng dẫn lần đầu" trong Cài đặt: luôn hiện đủ 3 bước, kể cả khi đã làm xong. */
+var GDREVIEW36=false,guide36Box=guideBox;
+guideBox=function(){if(!GDREVIEW36)return guide36Box.apply(this,arguments);var st=guideSteps(),done=0,cur=-1;st.forEach(function(s,k){if(s.done)done++;else if(cur<0)cur=k;});
+ return '<div class="gd open"><div class="gd__bar"><span class="gd__ring">'+done+'/'+st.length+'</span><span class="gd__t"><small>LÀM QUEN</small><b>'+st.length+' việc đầu tiên cùng Shin</b></span></div><div class="gd__l">'+st.map(function(s,k){return '<div class="gd__s'+(s.done?' done':k===cur?' cur':'')+'"><i>'+(s.done?'✓':(k+1))+'</i><div><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span>'+(!s.done&&s.btn?'<button class="btn btn--sm btn--soft" data-act="'+s.btn[0]+'"'+(s.btn[2]?' data-v="'+s.btn[2]+'"':'')+'>'+esc(s.btn[1])+'</button>':'')+'</div></div>';}).join('')+'</div></div>';};
+var close36=closeOv;
+closeOv=function(silent){var wasGuide=!!(OV&&OV.querySelector('#gdw'));var out=close36.apply(this,arguments);if(wasGuide)GDREVIEW36=false;return out;};
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-act]');if(!b)return;var a=b.getAttribute('data-act');
+ if(a==='guideOpen'){GDREVIEW36=true;return;}
+ /* 25. Mở Teams: chép tin nhắn ngay trong lúc chạm (trước khi rời app), để Teams không tự điền vẫn dán được. */
+ if(a==='teamsGo'){try{fbCopy(reportMsg());}catch(err){}return;}
+ /* 11. Sổ tay: đổi tab chỉ thay phần nội dung, không dựng lại cả màn hình (hết giật). */
+ if(a==='nbTab'&&OV){var body=$('#f3-notebook-view',OV),tabs=body&&body.previousElementSibling;if(!body||!tabs||!tabs.classList.contains('f3-tabs'))return;e.preventDefault();e.stopImmediatePropagation();var v=b.getAttribute('data-v');if(v===NBTAB)return;NBTAB=v;
+  var tmp=document.createElement('div');tmp.innerHTML=vNb();var nt=tmp.querySelector('.f3-tabs'),nb=tmp.querySelector('#f3-notebook-view');if(!nt||!nb){refreshAll();return;}tabs.replaceWith(nt);body.replaceWith(nb);nb.scrollTop=0;var f=$('[data-act=nbTab][data-v="'+v+'"]',OV);if(f)f.focus({preventScroll:true});}
+},true);
+/* 30. Không sao chép chữ trên trang (ô nhập vẫn chọn, chép bình thường).
+   Ô ghi chú rèn luyện hằng ngày (ghi nhận thẻ, ghi chú check-in, memo cuối ngày) không cho dán; các ô khác dán bình thường. */
+function noPaste36(t){return !!(t&&t.closest&&t.closest('[data-in="note"],[data-in="ciNote29"],[data-in="ciMemo29"]'));}
+function inField36(t){return !!(t&&t.closest&&t.closest('input,textarea,[contenteditable="true"]'));}
+['copy','cut'].forEach(function(type){document.addEventListener(type,function(e){if(!inField36(e.target))e.preventDefault();},true);});
+var NOPASTE_T36=0;
+function pasteBlocked36(e){e.preventDefault();var now=Date.now();if(now-NOPASTE_T36>2500){NOPASTE_T36=now;toast('Ghi chú rèn luyện cần tự gõ, không dán được nhé.',3000);}}
+document.addEventListener('paste',function(e){if(noPaste36(e.target))pasteBlocked36(e);},true);
+document.addEventListener('drop',function(e){if(noPaste36(e.target))pasteBlocked36(e);},true);
+document.addEventListener('beforeinput',function(e){if((e.inputType==='insertFromPaste'||e.inputType==='insertFromDrop'||e.inputType==='insertFromPasteAsQuotation')&&noPaste36(e.target))pasteBlocked36(e);},true);
+
+/* ===== SECTION batch37 (M.Claude.3.3.37 — đợt 2) ===== */
+/* 28. Nút ⋯ ở thanh dưới khi xem thẻ: Sửa công thức · Tạm dừng thẻ / Tiếp tục rèn · Cất thẻ.
+   Tạm dừng = thẻ vẫn trên tay (giữ chỗ), không tính ngày, không tính lỡ (r2TrainingNow đã bỏ thẻ status 'pause').
+   Cất thẻ = về Thư viện, nhường chỗ (dùng data-act 'unslot' có sẵn). */
+var PAUSE37_MSG='Đã tạm dừng thẻ. Thẻ vẫn trên tay, tạm không tính ngày. Mở thẻ, chọn “Tiếp tục rèn” khi bạn sẵn sàng.';
+function more37Svg(){return '<svg class="more37-ic" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>';}
+function more37Btn(id){var u=H(id);if(!u||S.slots.indexOf(id)<0||u.status==='keep')return '';return '<button type="button" class="more37" data-act="more37" data-v="'+id+'" aria-label="Tùy chọn của thẻ" aria-haspopup="menu" aria-expanded="false">'+more37Svg()+'</button>';}
+function paused37(id){var u=H(id);return !!u&&u.status==='pause'&&S.slots.indexOf(id)>=0;}
+function pausedHand37(){return S.slots.filter(function(id){return !!id&&!!HMAP[id]&&paused37(id);});}
+var b37DrawCard=drawCard;
+drawCard=function(){b37DrawCard.apply(this,arguments);if(!CARD||CARD.tab==='journal')return;var f=$('.flow-card-footer',OV),flip=f&&$('.flow-flip',f);if(!f||!flip||$('.more37',f))return;var h=more37Btn(CARD.id);if(h){flip.insertAdjacentHTML('afterend',h);f.classList.add('has-more37');}};
+/* Thẻ tạm dừng trên tay: nút chính là “Tiếp tục rèn” thay cho “Cất thẻ” (Cất thẻ nằm trong ⋯) */
+var b37DetailAction=f2DetailAction;
+f2DetailAction=function(id){if(paused37(id))return m3Button('resume37',id,'Tiếp tục rèn','play_arrow');return b37DetailAction(id);};
+/* Nhãn “Tạm dừng” trên mặt thẻ */
+var b37CardTop=flowCardTop;
+flowCardTop=function(id){var h=b37CardTop(id);if(!paused37(id))return h;return h.replace('</span>','</span><span class="pause37-chip">'+mi('pause')+'Tạm dừng</span>');};
+function menu37Close(focusBack){var m=document.querySelector('.menu37');if(m)m.remove();var b=document.querySelector('.more37[aria-expanded="true"]');if(b){b.setAttribute('aria-expanded','false');if(focusBack)b.focus({preventScroll:true});}}
+function menu37Open(btn,id){menu37Close();var u=H(id);if(!u)return;var p=paused37(id);
+ var items=[['edit',mi('edit'),'Sửa công thức','Khi · Mình sẽ · Trở thành'],
+  [p?'resume37':'pause37',mi(p?'play_arrow':'pause'),p?'Tiếp tục rèn':'Tạm dừng thẻ',p?'Tính ngày lại từ hôm nay':'Thẻ vẫn trên tay, tạm không tính ngày'],
+  ['unslot',mi('inventory_2'),'Cất thẻ','Về Thư viện, nhường chỗ. Tiến độ vẫn giữ']];
+ var h='<div class="menu37" role="menu" aria-label="Tùy chọn của thẻ">'+items.map(function(o){return '<button type="button" role="menuitem" data-act="'+o[0]+'" data-v="'+id+'"><span class="menu37-i">'+o[1]+'</span><span class="menu37-t"><b>'+o[2]+'</b><small>'+o[3]+'</small></span></button>';}).join('')+'</div>';
+ var f=btn.closest('.flow-card-footer')||btn.parentNode;f.insertAdjacentHTML('beforeend',h);btn.setAttribute('aria-expanded','true');
+ var first=f.querySelector('.menu37 [role=menuitem]');if(first)first.focus({preventScroll:true});}
+function pause37Set(id,on){var u=H(id);if(!u)return;u.status=on?'pause':'active';save(true);if(typeof render==='function')render();if(CARD&&CARD.id===id&&OV&&$('.flow-card-footer',OV))drawCard();toast(on?PAUSE37_MSG:'Thẻ chạy lại rồi! Hôm nay ghi nhận như bình thường nhé.',on?4500:3000);}
+document.addEventListener('click',function(e){var t=e.target;var m=document.querySelector('.menu37');
+ var b=t.closest&&t.closest('[data-act]'),a=b&&b.getAttribute('data-act');
+ if(a==='more37'){e.preventDefault();e.stopImmediatePropagation();if(m&&b.getAttribute('aria-expanded')==='true'){menu37Close();return;}menu37Open(b,b.getAttribute('data-v'));return;}
+ if(a==='pause37'||a==='resume37'){e.preventDefault();e.stopImmediatePropagation();var id=b.getAttribute('data-v');menu37Close();pause37Set(id,a==='pause37');return;}
+ if(m&&!(t.closest&&t.closest('.menu37')))menu37Close();
+ if(m&&b&&b.closest('.menu37'))setTimeout(function(){menu37Close();},0);},true);
+window.addEventListener('keydown',function(e){var m=document.querySelector('.menu37');if(!m)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();menu37Close(true);return;}
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){var it=[].slice.call(m.querySelectorAll('[role=menuitem]')),i=it.indexOf(document.activeElement);e.preventDefault();i=(i+(e.key==='ArrowDown'?1:-1)+it.length)%it.length;it[i].focus();}},true);
+/* Trang Hôm nay: thẻ tạm dừng hiện riêng một mục để dễ tìm và chạy lại */
+var b37Today=vToday;
+vToday=function(){var h=b37Today(),list=pausedHand37();if(!list.length)return h;
+ var sec='<section class="keep31 pause37" data-flow-type aria-label="Thẻ đang tạm dừng"><div class="keep31-head"><h2>Đang tạm dừng · '+list.length+'</h2></div>'+list.map(function(id){return '<div class="keep31-row pause37-row">'+emblem(id,36)+'<span class="keep31-text"><b>'+esc(sname(id))+'</b><small>Tạm không tính ngày</small></span><button type="button" class="m3-button tonal pause37-go" data-act="resume37" data-v="'+id+'">'+mi('play_arrow')+'Tiếp tục</button></div>';}).join('')+'</section>';
+ var i=h.lastIndexOf('</div>');return i<0?h+sec:h.slice(0,i)+sec+h.slice(i);};
+
+/* ===== SECTION batch38 (M.Claude.3.3.38 — đợt 3) ===== */
+/* Viết kiểu ES5 để chạy trên iPhone đời cũ. */
+var LIB38Q='',HOW38Q='';
+function n38(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\u0111/g,'d');}
+/* Từ khóa đời thường để tìm dễ hơn (học viên hay gõ những từ này) */
+var KW38={som:'dậy sớm đúng giờ trễ muộn báo thức hẹn giờ giấc',memo:'ghi chép sổ tay memo hỏi lại nhớ từ mới',chao:'chào hỏi cảm ơn lễ phép cúi chào giao tiếp',xinloi:'góp ý nhận lỗi xin lỗi sửa sai lắng nghe bị nhắc',horenso:'báo cáo liên lạc thảo luận horenso cấp trên',giup:'giúp đỡ hỗ trợ bạn bè đồng đội',viecko:'thử thách việc khó phát biểu dũng cảm ngại tự tin',vandong:'tập thể dục thể thao chạy squat sức khỏe',anuong:'ăn uống bữa sáng nước rau ăn vặt sức khỏe',ngu:'ngủ sớm thức khuya giấc ngủ điện thoại',chitieu:'tiết kiệm tiền tiêu xài chi tiêu mua sắm cần muốn',camxuc:'cảm xúc buồn giận lo căng thẳng bình tĩnh thở','5s':'dọn dẹp gọn gàng ngăn nắp sạch sẽ phòng ở','5phut':'tranh thủ thời gian rảnh học từ vựng 5 phút'};
+function search38Svg(){return '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>';}
+function chev38(){return '<svg class="chev38" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>';}
+function check38(){return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.2 4.2L19 7"/></svg>';}
+function hay38(id){var x=HMAP[id]||{},g=GROUPS[(x.g||1)-1];return ' '+n38([hname(id),x.s,x.t,x.full,x.act,(x.anchors||[]).join(' '),(x.tiers||[]).join(' '),x.custom?'tự tạo thẻ riêng':'',g&&!x.custom?g.t:'',KW38[id]||''].join(' ')).replace(/[^a-z0-9]+/g,' ')+' ';}
+/* Khớp đúng từ trước (“ngủ” không khớp “người”); từ cuối ≥4 chữ được khớp đầu từ; không có kết quả mới nới ra */
+function qw38(q){return n38(q).replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(Boolean);}
+var LOOSE38=false;
+function match38(id,q){var h=hay38(id),ws=qw38(q);if(!ws.length)return true;if(h.indexOf(' '+ws.join(' ')+' ')>=0)return true;return ws.every(function(w,i){return h.indexOf(' '+w+' ')>=0||((LOOSE38||(i===ws.length-1&&(w.length>=4||ws.length>1)))&&h.indexOf(' '+w)>=0);});}
+function filt38(ids,q){LOOSE38=false;var r=ids.filter(function(id){return match38(id,q);});if(!r.length&&qw38(q).length){LOOSE38=true;r=ids.filter(function(id){return match38(id,q);});LOOSE38=false;}return r;}
+function libSt38(id){var u=H(id);if(!u)return ['Chưa rèn','todo'];if(u.status==='keep')return ['Đang duy trì','keep'];var b=' · Bậc '+(u.lv||1);if(S.slots.indexOf(id)>=0)return u.status==='pause'?['Tạm dừng'+b,'off']:['Đang rèn'+b,'on'];return ['Đã cất'+b,'off'];}
+
+function searchBox38(id,ph,val){return '<label class="search38" for="'+id+'">'+search38Svg()+'<input type="search" id="'+id+'" maxlength="40" autocomplete="off" enterkeyhint="search" placeholder="'+esc(ph)+'" value="'+esc(val||'')+'" aria-label="'+esc(ph)+'"></label>';}
+function row38(id,how){var st=libSt38(id);return '<button type="button" class="row38" data-act="'+(how?'eveningHow':'eveningCard')+'" data-v="'+id+'" aria-label="'+(how?'Cách làm: ':'Xem thẻ: ')+esc(hname(id))+'">'+m3HabitBadge(id)+'<span class="row38-t"><b>'+esc(hname(id))+'</b>'+(how?'':'<small class="st38 k-'+st[1]+'"><i></i>'+esc(st[0])+'</small>')+'</span>'+chev38()+'</button>';}
+function pickHero38(){var day=Math.floor(Date.now()/864e5),c=HABITS.filter(function(x){return !H(x.id);}).map(function(x){return x.id;});
+ if(!c.length)c=HABITS.filter(function(x){var u=H(x.id);return u&&u.status!=='keep'&&S.slots.indexOf(x.id)<0;}).map(function(x){return x.id;});
+ if(!c.length)c=HABITS.map(function(x){return x.id;});
+ return c[day%c.length];}
+function hero38(id){var u=H(id),art=SHIN_BACK_ART[id]?'<svg viewBox="'+(SHIN_BACK_ART_VIEWBOX[id]||'0 0 340 150')+'" aria-hidden="true" focusable="false">'+SHIN_BACK_ART[id]+'</svg>':'';
+ return '<article class="hero38"><div class="hero38-art">'+art+'<span class="hero38-tag">'+(!u?'GỢI Ý HÔM NAY':(u.status!=='keep'&&S.slots.indexOf(id)<0)?'THẺ ĐANG CẤT':'THẺ CỦA NGÀY')+'</span>'+m3HabitBadge(id)+'</div><div class="hero38-body"><div class="hero38-text"><h3>'+esc(hname(id))+'</h3><p>'+esc(BEN[id]||(HMAP[id].why?HMAP[id].why.now:''))+'</p></div><button type="button" class="hero38-go" data-act="eveningCard" data-v="'+id+'">Xem thẻ'+chev38()+'</button></div></article>';}
+function libResults38(pick){var q=LIB38Q.trim(),h='',count=0,ok={};filt38(HABITS.map(function(x){return x.id;}).concat(customIds()),q).forEach(function(id){ok[id]=1;});
+ if(!pick&&!q&&STF==='all'){var hid=pickHero38();if(hid)h+=hero38(hid);}
+ GROUPS.forEach(function(g){var list=HABITS.filter(function(x){return x.g===g.g&&(STF==='all'||libKind(x.id)===STF)&&ok[x.id];});if(!list.length)return;count+=list.length;
+  h+='<section class="grp38 g'+g.g+'"><h3><i></i>'+esc(g.t)+'<small>'+list.length+'</small></h3><div class="list38">'+list.map(function(x){return row38(x.id,false);}).join('')+'</div></section>';});
+ var cu=customIds().filter(function(id){return (STF==='all'||libKind(id)===STF)&&ok[id];}),n=customOnHand(),full=n>=MAX_CUSTOM;count+=cu.length;
+ if(!q||cu.length||!count)h+='<section class="grp38 gcu"><h3><i></i>Thẻ tự tạo<small>'+customIds().length+'</small></h3><div class="list38">'+cu.map(function(id){return row38(id,false);}).join('')+'<button type="button" class="row38 row38-new" data-act="cuNew"><span class="m3hi new38">'+mi('add')+'</span><span class="row38-t"><b>Tự tạo thẻ riêng</b><small>'+(full?'Đã đủ '+MAX_CUSTOM+' thẻ tự tạo trên tay':n+'/'+MAX_CUSTOM+' thẻ tự tạo trên tay')+'</small></span>'+chev38()+'</button></div></section>';
+ if(!count)h='<p class="empty38">'+(q?'Chưa thấy thói quen nào khớp “'+esc(q)+'”. Thử từ khác, hoặc tự tạo thẻ riêng nhé.':'Chưa có thẻ trong mục này.')+'</p>'+h;
+ return h;}
+function libList38(pick){var kinds=[['all','Tất cả'],['on','Đang rèn'],['keep','Đang duy trì'],['todo','Chưa rèn']],all=HABITS.map(function(x){return x.id;}).concat(customIds());
+ var cnt=function(k){return k==='all'?all.length:all.filter(function(id){return libKind(id)===k;}).length;};
+ return (pick?'<p class="evening-library-intro">Chọn một thẻ vừa sức để rèn.</p>':'')+searchBox38('libQ38','Tìm: dậy sớm, tiết kiệm, chào hỏi…',LIB38Q)+
+  '<div class="chips38" role="group" aria-label="Lọc thói quen">'+kinds.map(function(f){return '<button type="button" data-act="sflt" data-v="'+f[0]+'" aria-pressed="'+(STF===f[0])+'">'+(STF===f[0]?check38():'')+esc(f[1])+' <span>'+cnt(f[0])+'</span></button>';}).join('')+'</div>'+
+  '<div id="lib38Results" aria-live="polite">'+libResults38(pick)+'</div>';}
+/* Bài học */
+function lesHeroArt38(){var s='<svg viewBox="0 0 340 120" aria-hidden="true" focusable="false"><path d="M28 98 C90 96 110 70 170 66 S260 40 312 26" fill="none" stroke="#9FB7E3" stroke-width="2.5" stroke-dasharray="5 7" stroke-linecap="round"/>';
+ var pts=[[34,96],[104,84],[170,66],[238,50],[304,28]],nx=LESSONS.filter(function(l){return !S.les[l.id];})[0];LESSONS.forEach(function(l,i){var p=pts[i],ok=!!S.les[l.id],cur=nx&&nx.id===l.id;s+='<g transform="translate('+p[0]+' '+p[1]+')"><ellipse cx="0" cy="10" rx="24" ry="6" fill="#173F79" opacity=".12"/>'+(cur?'<circle r="26" fill="#F2C14E" opacity=".35"/>':'')+'<circle r="19" fill="'+(ok?'#2265C5':'#fff')+'" stroke="'+(ok?'#2265C5':cur?'#E0A100':'#9FB7E3')+'" stroke-width="'+(cur?3.5:2.5)+'"/>'+(ok?'<path d="m-7 0 5 5 9-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>':'<text y="6" text-anchor="middle" font-size="16" font-weight="700" fill="#2265C5" font-family="Roboto Flex,system-ui,sans-serif">'+l.n+'</text>')+'</g>';});
+ return s+'<circle cx="60" cy="30" r="4" fill="#F2C14E"/><circle cx="250" cy="96" r="3" fill="#8FD0B2"/><circle cx="140" cy="22" r="3" fill="#C9A7EB"/></svg>';}
+function lesHero38(){var done=LESSONS.filter(function(l){return S.les[l.id];}).length,next=LESSONS.filter(function(l){return !S.les[l.id];})[0],all=!next;
+ var l=next||LESSONS[Math.floor(Date.now()/864e5)%LESSONS.length];
+ return '<article class="hero38 les38"><div class="hero38-art les38-art">'+lesHeroArt38()+'<span class="hero38-tag">NỀN TẢNG · '+done+'/5</span></div><div class="hero38-body"><div class="hero38-text"><small>'+(all?'Đã học đủ 5 bài · ôn lại':'Bài tiếp theo')+'</small><h3>Bài '+l.n+' · '+esc(l.t)+'</h3><p>4 thẻ ngắn: Hiểu · Thử · Senpai kể · Trong app</p></div><button type="button" class="hero38-go" data-act="lsOpen" data-v="'+l.id+'">'+(all?'Ôn lại':(done?'Học tiếp':'Bắt đầu'))+chev38()+'</button></div></article>';}
+function lesList38(){return '<div class="list38 les38-list">'+LESSONS.map(function(l){var ok=!!S.les[l.id];return '<button type="button" class="row38" data-act="lsOpen" data-v="'+l.id+'"><span class="num38'+(ok?' ok':'')+'">'+(ok?check38():l.n)+'</span><span class="row38-t"><b>'+esc(l.t)+'</b><small>Bài '+l.n+' · '+(ok?'Đã học':'4 thẻ ngắn')+'</small></span>'+chev38()+'</button>';}).join('')+'</div>';}
+function howResults38(){var q=HOW38Q.trim(),ok={};filt38(HABITS.map(function(x){return x.id;}),q).forEach(function(id){ok[id]=1;});var list=HABITS.filter(function(x){return ok[x.id];});if(!list.length)return '<p class="empty38">Chưa thấy cách làm nào khớp “'+esc(q)+'”.</p>';
+ return '<div class="how38">'+list.map(function(x){return '<button type="button" class="how38-chip" data-act="eveningHow" data-v="'+x.id+'" aria-label="Cách làm: '+esc(hname(x.id))+'">'+m3HabitBadge(x.id)+'<b>'+esc(hname(x.id))+'</b></button>';}).join('')+'</div>';}
+function lesTab38(){return lesHero38()+'<h2 class="h38">5 bài nền tảng</h2>'+lesList38()+'<h2 class="h38">Cách làm từng thói quen<small>Xem được cả khi bạn chưa rút thẻ</small></h2>'+searchBox38('howQ38','Tìm cách làm: ngủ, chi tiêu, báo cáo…',HOW38Q)+'<div id="how38Results" aria-live="polite">'+howResults38()+'</div>';}
+var b38Library=eveningLibrary;
+eveningLibrary=function(pick){var v=pick?'list':(['list','lessons','tools'].includes(S.storeView)?S.storeView:'list');if(v==='tools')return b38Library(pick);
+ var h='<section class="evening-library lib38" data-flow-type>'+(pick?'':f3Tabs([['list','Thói quen','style'],['lessons','Bài học','menu_book'],['tools','Trải nghiệm','sports_esports']],v,'sview','evening-library-','evening-library-content','Nội dung thư viện'))+'<div id="evening-library-content"'+(pick?'':' role="tabpanel" aria-labelledby="evening-library-'+v+'"')+'>';
+ return h+(v==='lessons'?lesTab38():libList38(pick))+'</div></section>';};
+document.addEventListener('input',function(e){var t=e.target;if(t.id==='libQ38'){LIB38Q=t.value;var r=document.getElementById('lib38Results');if(r)r.innerHTML=libResults38(PICK!=null);}else if(t.id==='howQ38'){HOW38Q=t.value;var r2=document.getElementById('how38Results');if(r2)r2.innerHTML=howResults38();}});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target&&(e.target.id==='libQ38'||e.target.id==='howQ38')){e.preventDefault();e.target.blur();}});
+
+/* 16. Sổ tay › Tiến bộ: “Shin nhìn lại tuần này” */
+function wk38(){var t=dk(),ws=wkStart(t),el=diffD(ws,t)+1,last=false;if(el<3){ws=addD(ws,-7);el=7;last=true;}var days=[];for(var i=0;i<el;i++)days.push(addD(ws,i));return {ws:ws,days:days,el:el,last:last,end:days[days.length-1]};}
+function did38(d,id){var m=mark(d,id);return m==='y'||m==='p';}
+function dots38(id,W){var s='';for(var i=0;i<7;i++){var d=addD(W.ws,i),m=d>W.end?'':mark(d,id);s+='<i class="'+(m==='y'?'y':m==='p'?'p':m==='n'?'n':m==='x'?'x':d>W.end?'f':'')+'"></i>';}return '<span class="dots38" aria-hidden="true">'+s+'</span>';}
+function nbReview38(){var W=wk38(),nm='<b>'+esc((function(){var f=String(S.name||'bạn').trim()||'bạn',p=f.split(/\s+/);return p.length>2?p.slice(-2).join(' '):f;})())+'</b>',train=handList(),keep=keepIds(),ids=train.concat(keep);
+ var rec=W.days.filter(function(d){var o=S.log[d]||{};return Object.keys(o).some(function(k){return !!o[k];});}).length,ratio=rec/W.el;
+ var done={},notes={},lastNote={};ids.forEach(function(id){done[id]=0;notes[id]=0;});W.days.forEach(function(d){ids.forEach(function(id){if(did38(d,id))done[id]++;var t=(S.notes[d]||{})[id];if(t){notes[id]++;lastNote[id]=t;}});});
+ var noteTotal=0;W.days.forEach(function(d){var o=S.notes[d]||{};Object.keys(o).forEach(function(k){if(o[k])noteTotal++;});if(S.ci[d]&&S.ci[d].note)noteTotal++;});
+ var range=dm(W.ws)+' – '+dm(W.end),mood,msg;
+ if(ratio>=.8){mood='proud';msg='Tuần này '+nm+' ghi nhận '+rec+'/'+W.el+' ngày. Nhịp rất đều, cứ giữ như vậy nhé!';}
+ else if(ratio>=.5){mood='cheer';msg='Tuần này '+nm+' ghi nhận '+rec+'/'+W.el+' ngày, hơn nửa chặng rồi. Thêm một ngày nữa là thấy khác ngay.';}
+ else if(rec>0){mood='smile';msg='Tuần này '+nm+' ghi nhận '+rec+'/'+W.el+' ngày. Bắt đầu lại là bước khó nhất, mình đã làm được.';}
+ else {mood='hi';msg='Tuần này mình chưa ghi ngày nào. Không sao cả, hôm nay đóng một con dấu nhỏ là đủ.';}
+ var h='<section class="rv38"><header class="rv38-head"><div><h2>Shin nhìn lại '+(W.last?'tuần trước':'tuần này')+'</h2><small>'+range+'</small></div></header>';
+ h+='<div class="rv38-shin"><span class="rv38-cat">'+shin(mood)+'</span><p>'+msg+'</p></div>';
+ var best=ids.filter(function(id){return done[id]>=2;}).sort(function(a,b){return done[b]-done[a];})[0];
+ if(best)h+=card38('Giữ nhịp tốt nhất','local_fire',best,(isDip(best)?done[best]+' lần':done[best]+'/'+W.el+' ngày')+dots38(best,W));
+ var nb=ids.filter(function(id){return notes[id]>=1;}).sort(function(a,b){return notes[b]-notes[a];})[0];
+ if(nb)h+=card38('Ghi chú chăm nhất','edit_note',nb,notes[nb]+' ghi chú','<q>'+esc(short(lastNote[nb],110))+'</q>');
+ var watch=[];train.forEach(function(id){if(isDip(id)||H(id).status==='pause')return;var since=H(id).since,days=W.days.filter(function(d){return d>=since&&d<dk();}),miss=days.filter(function(d){return !mark(d,id);}).length;if(miss>=2)watch.push([id,'Chưa ghi '+miss+' ngày trong tuần']);});
+ keep.forEach(function(id){var s=r2KeepState(id);if(s==='web')watch.push([id,'Mạng nhện · '+r2IdleDays(id)+' ngày chưa làm',1]);else if(s==='fade')watch.push([id,'Shin nhắc · '+r2IdleDays(id)+' ngày chưa làm']);});
+ h+='<section class="rv38-sec"><h3>Cần để ý</h3>'+(watch.length?'<div class="list38">'+watch.slice(0,3).map(function(w){return '<button type="button" class="row38" data-act="card" data-v="'+w[0]+'">'+m3HabitBadge(w[0])+'<span class="row38-t"><b>'+esc(hname(w[0]))+'</b><small class="'+(w[2]?'web38':'warn38')+'">'+(w[2]?webIcon():'')+esc(w[1])+'</small></span>'+chev38()+'</button>';}).join('')+'</div>':'<p class="rv38-ok">'+check38()+'Không có thẻ nào bị bỏ quên. Tốt lắm!</p>')+'</section>';
+ var stall=null;if(W.el>=4)train.forEach(function(id){if(stall||isDip(id)||H(id).status==='pause')return;var tail=W.days.slice(-2),head=W.days.slice(0,-2),a=head.filter(function(d){return did38(d,id);}).length;if(a>=2&&tail.every(function(d){return !mark(d,id)||mark(d,id)==='n';})&&tail[1]<dk())stall=[id,a];});
+ if(!stall&&W.el>=4)train.forEach(function(id){if(stall||isDip(id)||H(id).status==='pause')return;var tail=W.days.slice(-3,-1),head=W.days.slice(0,-3),a=head.filter(function(d){return did38(d,id);}).length;if(a>=2&&tail.every(function(d){return !did38(d,id);}))stall=[id,a];});
+ if(stall)h+=card38('Khởi đầu tốt nhưng chững lại','trending_flat',stall[0],'Đầu tuần làm '+stall[1]+' ngày, mấy hôm gần đây chưa có','<p class="rv38-hint">Thu việc nhỏ lại một chút để ngày mệt vẫn làm được.</p>');
+ var L=watch.length?['b4','Lỡ một ngày là chuyện bình thường. Đừng để hai ngày liền trống: hôm nay làm phiên bản nhỏ nhất.']:stall?['b1','Việc càng to càng dễ có cớ để bỏ. Làm đều trước, làm nhiều sau.']:!noteTotal?['b5','Mỗi con dấu là một lá phiếu cho con người bạn chọn. Một dòng ghi chú giúp bạn thấy rõ lá phiếu đó.']:['b2','Gắn việc mới ngay sau một việc quen, việc quen sẽ nhắc bạn.'];
+ h+='<section class="rv38-sec rv38-les"><h3>Bài học nhỏ</h3><p>'+esc(L[1])+'</p><button type="button" class="rv38-link" data-act="lsOpen" data-v="'+L[0]+'">Xem bài '+LMAP[L[0]].n+' · '+esc(LMAP[L[0]].t)+chev38()+'</button></section>';
+ var wf=r2Week(W.ws);h+='<div class="rv38-stats"><div><b>+'+wf.fire+'</b><span>Lửa tuần</span></div><div><b>'+rec+'/'+W.el+'</b><span>Ngày có ghi</span></div><div><b>'+noteTotal+'</b><span>Ghi chú</span></div><div><b>'+streak()+'</b><span>Tổng Lửa</span></div></div>';
+ return h+'</section>';}
+function card38(t,icon,id,meta,extra){return '<section class="rv38-sec"><h3>'+esc(t)+'</h3><button type="button" class="rv38-card" data-act="card" data-v="'+id+'">'+m3HabitBadge(id)+'<span class="row38-t"><b>'+esc(hname(id))+'</b><small>'+meta+'</small></span>'+chev38()+'</button>'+(extra||'')+'</section>';}
+var b38NbSum=nbSum;
+nbSum=function(){var old=b38NbSum(),i=old.indexOf('<p class="ver">'),ver=i>=0?old.slice(i):'',body=(i>=0?old.slice(0,i):old).replace(/<div class="f3-stats">(?:<div>[\s\S]*?<\/div>)*<\/div>/,'');
+ return nbReview38()+'<details class="nb38-more"><summary>Những điều bạn đã viết'+chev38()+'</summary>'+body+'</details>'+ver;};
+
+/* 29. Thẻ thành tựu (chạm thẻ trên cây): nhẹ hơn */
+var b38TreeCard=openTreeCard30;
+openTreeCard30=function(id){b38TreeCard(id);var sheet=OV&&$('.sheet',OV),box=sheet&&$('.tree-detail30',sheet),a=S.treeCards[id];if(!box||!a)return;sheet.classList.add('ach38');
+ var hid=HMAP[a.id||id]?(a.id||id):null,badge=hid?m3HabitBadge(hid):'<span class="m3hi g'+(a.g||1)+'">'+glyph(a.icon||id,'currentColor')+'</span>',lvl='Bậc '+a.lv+(a.mastered?' · Thành nếp':a.lv>=3?' · Vững tay':' · Làm quen');
+ var tl='<ol class="ach38-time"><li><i></i><span>Treo lên cây</span><b>'+treeDate30(a.date)+'</b></li>'+(a.level3date?'<li><i></i><span>Đạt bậc 3</span><b>'+treeDate30(a.level3date)+'</b></li>':'')+'</ol>';
+ var refl=$('.tree-reflection30',box),reflHTML=refl?refl.outerHTML:'';
+ box.innerHTML='<div class="ach38-head">'+badge+'<div><h2>'+esc(a.fullName||a.name)+'</h2><span class="ach38-chip">'+lvl+'</span></div></div>'+tl+
+  (a.act?'<section class="ach38-sec"><small>Việc nhỏ đã bắt đầu</small><p>'+(a.anchor?'Khi '+esc(a.anchor)+', ':'')+'<b>'+esc(a.act)+'</b></p></section>':'')+
+  (a.note?'<section class="ach38-sec ach38-note"><small>Ghi chú của bạn</small><p>“'+esc(a.note)+'”</p></section>':'')+reflHTML;
+ var bar=$('.sbar .btn',sheet);if(bar)bar.className='btn btn--wide ach38-back';};

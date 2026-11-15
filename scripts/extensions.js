@@ -39,7 +39,7 @@ function shinGameScene33(){return '<svg class="play33-scene" viewBox="0 0 320 13
  +'<g class="play33-spark"><rect x="232" y="10" width="7" height="7" rx="2" fill="#F59E0B" transform="rotate(20 235 13)"/><rect x="252" y="30" width="6" height="6" rx="2" fill="#F43F5E" transform="rotate(-15 255 33)"/><rect x="140" y="12" width="6" height="6" rx="2" fill="#8B5CF6"/></g>'
  +'</svg>';}
 function shinGameCard33(){var n=shinGameSaved14().length;return '<button class="play33-card" data-act="gameOpen14" aria-label="Chơi game Tung thói quen"><span class="play33-stage">'+shinGameScene33()+'<span class="play33-badge">'+(n?n+' / 14 đã vào rổ':'GAME')+'</span></span><span class="play33-copy"><span class="play33-text"><b>Tung thói quen</b><span>Chưa biết rèn gì? Tung thử để tìm một gợi ý.</span></span><span class="play33-go">'+mi('play_arrow')+'Chơi ngay</span></span></button>';}
-eveningLibrary=function(pick){var h=play14Library(pick);if(S.storeView!=='tools')return h;return h.replace('</div></section>',shinGameCard33()+'</div></section>');};
+eveningLibrary=function(pick){var h=play14Library(pick);if(pick||S.storeView!=='tools')return h;return h.replace('</div></section>',shinGameCard33()+'</div></section>');};
 function shinGameOpen14(){shinGameResetScope14();GAME14_RETURN=false;EVENING_LIBRARY_ORIGIN=null;FLOW_HOW_RETURN=null;FLOW_NOTE_RETURN=null;HABIT_RETURN33=null;NT=null;HW=null;CARD=null;openOv('');f2Mount('game14','<iframe id="habitGame14" class="play14-frame" src="habit-game.html" title="Game tung thói quen vào rổ"></iframe>');OV.removeAttribute('aria-labelledby');OV.setAttribute('aria-label','Tung thói quen');}
 /* M3.3.33: game full-screen, no header; the ✕ inside the game closes it. */
 function shinGameClose14(){if(OV&&$('#habitGame14',OV))shinDispatch14('close');}
@@ -127,7 +127,7 @@ document.addEventListener('pointercancel',function(){resetDrag(true);},true);
 document.addEventListener('lostpointercapture',function(e){if(drag&&drag.id===e.pointerId&&e.target===drag.owner)resetDrag(true);},true);
 window.addEventListener('blur',function(){resetDrag(true);});
 /* Escape follows the same view history as device Back. The close button still dismisses. */
-window.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches('.sheet14-grip')){e.preventDefault();dismiss();return;}if(e.key!=='Escape'||!OV)return;e.preventDefault();e.stopImmediatePropagation();if(window.breathEscape18&&window.breathEscape18())return;if(index>0)history.back();else dismiss();},true);
+window.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches('.sheet14-grip')){e.preventDefault();dismiss();return;}if(e.key==='Escape'&&window.menu37Close&&document.querySelector('.menu37')){e.preventDefault();e.stopImmediatePropagation();menu37Close(true);return;}/* 3.3.37: Esc đóng menu ⋯ trước */if(e.key!=='Escape'||!OV)return;e.preventDefault();e.stopImmediatePropagation();if(window.breathEscape18&&window.breathEscape18())return;if(index>0)history.back();else dismiss();},true);
 document.addEventListener('input',queue,true);document.addEventListener('change',queue,true);
 document.addEventListener('click',function(){if(frames[index])frames[index].scroll=window.scrollY;queue();},true);
 document.addEventListener('DOMContentLoaded',function(){new MutationObserver(queue).observe(document.body,{subtree:true,childList:true});queue();});

@@ -1,4 +1,56 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.34 — 15/11/2026)
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.38 — 15/11/2026)
+
+## 0. Bản hiện tại: M.Claude.3.3.38 — Đợt 3 (Thư viện, Sổ tay › Tiến bộ, Thẻ thành tựu, chữ công thức)
+
+- Gốc: M.Claude.3.3.37. APP_VER và cache: **M.Claude.3.3.38**; 54 tệp. Toàn bộ mã mới ở SECTION batch38 cuối design-system.js / design-system.css (bọc `eveningLibrary`, `nbSum`, `openTreeCard30`; không sửa tệp khác ngoài số phiên bản).
+- Câu công thức khi thiết lập thói quen (`.sheet.wizard16 .sentence`) 16 → 18px; chỉ trong màn hình thiết lập, nơi khác không đổi.
+- Thư viện › Thói quen: ô tìm (bỏ dấu, từ khóa đời thường `KW38`, khớp đúng từ trước rồi mới nới), chip lọc có số, thẻ nổi bật dùng hình mặt sau (GỢI Ý HÔM NAY / THẺ ĐANG CẤT / THẺ CỦA NGÀY), danh sách M3 theo nhóm, nhóm Thẻ tự tạo + dòng “Tự tạo thẻ riêng”. Màn hình “Chọn thẻ để rèn” dùng cùng danh sách + ô tìm (không có thẻ nổi bật).
+- Thư viện › Bài học: thẻ nổi bật “đường 5 bậc đá” (bài tiếp theo / ôn lại), danh sách 5 bài, Cách làm 14 thói quen dạng ô 2 cột có ô tìm riêng. Tab Trải nghiệm giữ nguyên.
+- Sổ tay › Tiến bộ: “Shin nhìn lại tuần này” 7 phần (`nbReview38`): lời Shin, Giữ nhịp tốt nhất, Ghi chú chăm nhất, Cần để ý (lỡ ≥2 ngày, Shin nhắc, mạng nhện), Khởi đầu tốt nhưng chững lại (chỉ hiện khi có), Bài học nhỏ (chọn B4/B1/B5/B2 theo tình huống), 1 hàng số liệu. Tuần mới chưa đủ 3 ngày thì nhìn lại tuần trước. 6 ô số liệu cũ bỏ; phần đã viết trong bài học + memo gập vào “Những điều bạn đã viết”.
+- Thẻ thành tựu (chạm thẻ trên cây): nhẹ hơn — icon M3 nhỏ cạnh tên, dòng thời gian 2 mốc, các mục ngăn bằng đường kẻ, nút “Về cây thành tựu” dạng tonal. Tab Hành trình không đổi.
+- File duyệt chữ đợt 3: `Shin-routine-3.3.38_Duyet-chu-dot-3.xlsx` (22 dòng chữ mới).
+- Vẫn treo: duyệt chữ đợt 2 (3.3.37) và đợt 3; 14 tên gọn hộp ném + “GAME/Chơi ngay”; file luật v2 (3.3.32); thử trên iPhone/Android thật.
+
+---
+
+# (Bản trước) M.Claude.3.3.37
+
+## 0. Bản hiện tại: M.Claude.3.3.37 — Đợt 2 (mục 14, 17, 28)
+
+- Gốc: M.Claude.3.3.36. APP_VER và cache: **M.Claude.3.3.37**; 54 tệp. Chi tiết ở CHANGELOG.
+- Mã mới: SECTION batch37 cuối design-system.js / design-system.css; sửa trực tiếp `cuStepName` và `stPause` (core.js), Esc của menu ⋯ (extensions.js, listener keydown của sheet14).
+- (14) Bài 3 bỏ “Thói lười có thể lây…/Siêng năng cũng lây” [T26 – V13]; Bài 5 bỏ “Khi đã thật sự muốn…” [T26 – V17]. Thang Bị→Đam mê (mô hình, không phải câu trích) vẫn giữ, chờ thầy quyết. Cách làm 14 thẻ đã sạch từ 3.3.27.
+- (17) Bước 1 tạo thẻ riêng gọn: tên nằm trong khung xem trước, màu một hàng, biểu tượng 2 hàng 44px, nhịp dạng 2 nút + 1 dòng chú thích. Vừa 1 màn hình 390×844.
+- (28) Nút ⋯ ở thanh dưới khi xem thẻ đang trên tay: Sửa công thức · Tạm dừng thẻ/Tiếp tục rèn · Cất thẻ. **Tạm dừng = thẻ vẫn trên tay, không tính ngày, không tính lỡ** (r2TrainingNow đã loại status 'pause'); Cất thẻ = về Thư viện (data-act unslot). Thẻ tạm dừng có nhãn trên mặt thẻ, nút chính “Tiếp tục rèn”, mục “Đang tạm dừng” ở trang Hôm nay. Nút Tạm dừng trong màn hình Sửa công thức đổi theo nghĩa mới.
+- File duyệt chữ đợt 2: `Shin-routine-3.3.37_Duyet-chu-dot-2.xlsx` (19 dòng: nhóm A câu đã bỏ + mã nguồn, nhóm B chữ mới).
+- **Đợt 3 (bản 3.3.38, gửi bản mẫu trước):** (16) tab Tiến bộ → “Shin nhìn lại tuần này” 7 phần; (29) trang Thành tựu kiểu M3. Mục 18 bỏ.
+- Vẫn treo: 14 tên gọn hộp ném + chữ “GAME/Chơi ngay”; file duyệt chữ luật v2 (3.3.32); file duyệt chữ đợt 2; thử trên iPhone/Android thật (đặc biệt mục 22 và menu ⋯).
+
+---
+
+# (Bản trước) M.Claude.3.3.36
+
+## 0. Bản hiện tại: M.Claude.3.3.36 — Sửa lỗi đợt 1 (memo 30 mục của người dùng)
+
+- Gốc: M.Claude.3.3.35. APP_VER và cache: **M.Claude.3.3.36**; 54 tệp. Chi tiết từng mục ở CHANGELOG.
+- Mã mới: SECTION batch36 cuối design-system.js / design-system.css.
+- **Đợt 2 (bản 3.3.37, đã chốt):** (14) bỏ hết câu trích dẫn thầy Lê Long Sơn trong 5 bài học và Cách làm (liệt kê trong Excel duyệt chữ); (17) trang đầu tự tạo thẻ gọn hơn nhưng VẪN cho chọn màu và icon; (28) nút ⋯ ở thanh dưới khi xem thẻ: Sửa công thức, Tạm dừng thẻ, Cất thẻ.
+- **Đợt 3 (bản 3.3.38, gửi bản mẫu trước):** (16) tab Tiến bộ → “Shin nhìn lại tuần này” 7 phần (động viên, giữ nhịp tốt nhất, ghi chú chăm nhất, cần để ý/mạng nhện, khởi đầu tốt nhưng chững lại, bài học nhỏ, 1 hàng số liệu); (29) trang Thành tựu kiểu M3 (cây + 3 số, bộ sưu tập thẻ theo bậc, dòng thời gian). Mục 18 bỏ.
+- Vẫn treo: 14 tên gọn hộp ném + chữ “GAME/Chơi ngay”; file duyệt chữ luật v2 (3.3.32); thử trên iPhone/Android thật (đặc biệt mục 22).
+
+---
+
+# (Bản trước) M.Claude.3.3.35
+
+## 0. Bản hiện tại: M.Claude.3.3.35 — Màu icon nhẹ nhàng hơn
+
+- Gốc: M.Claude.3.3.34. APP_VER và cache: **M.Claude.3.3.35**; 54 tệp.
+- Chỉ đổi màu trong SECTION m3-habit-icons (design-system.css): mức giữa PA1-A và A1 do người dùng chọn; ô chọn màu thẻ tự tạo theo cùng tông. Muốn chỉnh độ rực: sửa 10 cặp `--m3c/--m3o`.
+- Vẫn treo: duyệt 14 tên gọn hộp ném và chữ thẻ game (3.3.33); file duyệt chữ luật v2 (3.3.32); chưa thử trên iPhone/Android thật.
+
+---
+
+# (Bản trước) M.Claude.3.3.34
 
 ## 0. Bản hiện tại: M.Claude.3.3.34 — Icon thói quen chuẩn Material 3; sửa hộp thoại Đang duy trì
 

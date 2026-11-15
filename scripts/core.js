@@ -93,7 +93,7 @@ function treeLettersSVG37(stage,stems,sx,order,interactive){
    KAIZEN MỖI NGÀY · TQ02
    Một file HTML, dữ liệu lưu trong trình duyệt của từng máy.
    ========================================================= */
-var APP_VER = 'M.Claude.3.3.34';
+var APP_VER = 'M.Claude.3.3.38';
 var APP_NAME = 'Shin routine';
 var KEY = 'shin-curriculum16-v1-data', KEY_DEMO = 'shin-curriculum16-v1-demo', KEY_MODE = 'shin-curriculum16-v1-mode';
 var DEMO_CLASS = 'DEMO-KZ';
@@ -1514,15 +1514,18 @@ function openCustom(editId){
   openOv(''); drawStart();
 }
 function cuStepName(){
-  var h=(ST.edit?'<div class="ey">Sửa thẻ của bạn</div>':'<div class="ey">Thẻ của riêng bạn</div>')+
-    '<div class="cuprev"><span class="emb g'+ST.col+'">'+glyph('cu_'+ST.icon,GCOL[ST.col])+'</span><b id="cuName">'+esc(ST.name.trim()||'Tên thói quen')+'</b></div>'+
-    '<label class="lbl" for="cuN">Tên thói quen</label><input class="inp" id="cuN" data-in="cuName" maxlength="30" placeholder="Ví dụ: Uống nước sau khi dậy" value="'+esc(ST.name)+'">'+
-    '<div class="tiny muted" id="cuCnt" style="text-align:right;margin-bottom:10px">'+ST.name.length+'/30</div>'+
-    '<div class="qlab">Biểu tượng</div><div class="igrid">'+CU_ICONS.map(function(o){ return '<button class="g'+ST.col+(ST.icon===o[0]?' on':'')+'" data-act="cuIcon" data-v="'+o[0]+'" aria-label="'+esc(o[1])+'" aria-pressed="'+(ST.icon===o[0])+'">'+glyph('cu_'+o[0],GCOL[ST.col])+'</button>'; }).join('')+'</div>'+
-    '<div class="qlab">Màu</div><div class="swrow">'+CU_COLORS.map(function(o){ return '<button class="g'+o[1]+(ST.col===o[1]?' on':'')+'" data-act="cuCol" data-v="'+o[1]+'" aria-label="'+esc(o[0])+'" aria-pressed="'+(ST.col===o[1])+'">'+(ST.col===o[1]?'✓':'')+'</button>'; }).join('')+'</div>';
-  h+='<div class="qlab">Nhịp của thẻ</div>'+(ST.edit?'<p class="muted small" style="margin:0">'+(ST.rhy==='p'?'Khi gặp dịp · tính theo số lần.':'Hằng ngày · tính theo số ngày.')+'</p>':'<div class="rhyrow" role="radiogroup"><button class="'+(ST.rhy==='d'?'on':'')+'" role="radio" aria-checked="'+(ST.rhy==='d')+'" data-act="cuRhy" data-v="d"><b>Hằng ngày</b><small>Việc ngày nào cũng làm được</small></button><button class="'+(ST.rhy==='p'?'on':'')+'" role="radio" aria-checked="'+(ST.rhy==='p')+'" data-act="cuRhy" data-v="p"><b>Khi gặp dịp</b><small>Chỉ làm khi có tình huống</small></button></div>');
-  if(ST.edit) h+='<div style="margin-top:18px"><button class="btn btn--ghost btn--sm" style="color:#B23A2E" data-act="cuDel" data-v="'+ST.id+'">Xóa thẻ này</button></div>';
-  return h;
+  /* M.Claude.3.3.37 (mục 17): trang đầu tự tạo thẻ gọn hơn — tên nằm ngay trong khung xem trước, màu một hàng, nhịp dạng 2 nút. Vẫn chọn màu và biểu tượng. */
+  var h='<div class="cu37">'+
+    '<div class="cuprev cu37-name"><span class="emb g'+ST.col+'">'+glyph('cu_'+ST.icon,GCOL[ST.col])+'</span>'+
+    '<div class="cu37-field"><label class="cu37-lbl" for="cuN">Tên thói quen</label><input class="inp" id="cuN" data-in="cuName" maxlength="30" placeholder="Ví dụ: Uống nước sau khi dậy" value="'+esc(ST.name)+'"></div></div>'+
+    '<div class="tiny muted cu37-cnt" id="cuCnt">'+ST.name.length+'/30</div>'+
+    '<div class="cu37-row"><span class="qlab">Màu</span><div class="swrow">'+CU_COLORS.map(function(o){ return '<button class="g'+o[1]+(ST.col===o[1]?' on':'')+'" data-act="cuCol" data-v="'+o[1]+'" aria-label="'+esc(o[0])+'" aria-pressed="'+(ST.col===o[1])+'">'+(ST.col===o[1]?'✓':'')+'</button>'; }).join('')+'</div></div>'+
+    '<div class="qlab">Biểu tượng</div><div class="igrid">'+CU_ICONS.map(function(o){ return '<button class="g'+ST.col+(ST.icon===o[0]?' on':'')+'" data-act="cuIcon" data-v="'+o[0]+'" aria-label="'+esc(o[1])+'" aria-pressed="'+(ST.icon===o[0])+'">'+glyph('cu_'+o[0],GCOL[ST.col])+'</button>'; }).join('')+'</div>';
+  h+='<div class="qlab">Nhịp của thẻ</div>'+(ST.edit?'<p class="muted small cu37-rhyd">'+(ST.rhy==='p'?'Khi gặp dịp · tính theo số lần.':'Hằng ngày · tính theo số ngày.')+'</p>':
+    '<div class="rhy37" role="radiogroup" aria-label="Nhịp của thẻ"><button class="'+(ST.rhy==='d'?'on':'')+'" role="radio" aria-checked="'+(ST.rhy==='d')+'" data-act="cuRhy" data-v="d">Hằng ngày</button><button class="'+(ST.rhy==='p'?'on':'')+'" role="radio" aria-checked="'+(ST.rhy==='p')+'" data-act="cuRhy" data-v="p">Khi gặp dịp</button></div>'+
+    '<p class="muted small cu37-rhyd">'+(ST.rhy==='p'?'Chỉ làm khi có tình huống · tính theo số lần.':'Việc ngày nào cũng làm được · tính theo số ngày.')+'</p>');
+  if(ST.edit) h+='<div style="margin-top:14px"><button class="btn btn--ghost btn--sm" style="color:#B23A2E" data-act="cuDel" data-v="'+ST.id+'">Xóa thẻ này</button></div>';
+  return h+'</div>';
 }
 function cuStepWhy(){
   return '<div class="ey">Mặt sau của thẻ</div><h2 style="margin:0 0 6px">Vì sao mình chọn thói quen này?</h2>'+
@@ -2151,7 +2154,7 @@ function drawStart(){
     if(k==='a'){ var acts=[x.act]; if(x.pickBad){ BAD_OPTS.forEach(function(b){ if(b[0]===ST.bad&&b[2]) acts=[b[2]]; }); } body+='<div class="qlab">Việc nhỏ bạn sẽ làm?</div>'+(x.custom?'<input class="inp" id="stIn" data-in="st-a" maxlength="50" placeholder="Ví dụ: uống một ly nước" value="'+esc(ST.act)+'"><div class="tiny muted" id="stCnt" style="text-align:right">'+String(ST.act||'').length+'/50</div><p class="note">Chọn một việc thật nhỏ, làm trong 1–2 phút.</p>':chipsFor(acts,ST.act,'a','một việc thật nhỏ')); }
     if(k==='w') body+='<div class="qlab">Bạn muốn trở thành người như thế nào? <small>· Không bắt buộc</small></div>'+chipsFor(x.who.concat(WHO_GEN),ST.who,'w','người đáng tin cậy')+'<div><button class="evening-skip-choice" data-act="flowWhoNone">Bỏ qua bước này</button></div>';
   }
-  if(ST.edit && ST.i===0 && H(ST.id) && S.slots.indexOf(ST.id)>=0) body+='<div class="pzrow"><button class="btn btn--ghost btn--sm" data-act="stPause" data-v="'+ST.id+'">'+ic('pause')+'Tạm dừng thẻ này</button><span class="note">Thẻ cất vào Thư viện, tiến độ vẫn giữ.</span></div>';
+  if(ST.edit && ST.i===0 && H(ST.id) && S.slots.indexOf(ST.id)>=0 && H(ST.id).status!=='pause') body+='<div class="pzrow"><button class="btn btn--ghost btn--sm" data-act="stPause" data-v="'+ST.id+'">'+ic('pause')+'Tạm dừng thẻ này</button><span class="note">Thẻ vẫn trên tay, tạm không tính ngày. Tiến độ vẫn giữ.</span></div>';
   var s=stState(), last=ST.i===ST.steps.length-1;
   var label=last?(ST.edit?'Lưu':k==='w'&&!ST.who.trim()?'Bỏ qua · Rút thẻ':'Rút thẻ'):'Tiếp tục';
   sheetSet(head+'<div class="lc">'+body+'</div><div class="sbar"><span class="st '+(s.ok?'okk':'miss')+'">'+(s.ok?'✓ Sẵn sàng':esc(s.msg))+'</span><button class="btn'+(s.ok?' invite':'')+'" data-act="stNext"'+(s.ok?'':' disabled')+'>'+label+'</button></div>');
@@ -2502,7 +2505,7 @@ var WK=null;
 /* =========================================================
    TQ14 · 5 BÀI HỌC RÈN THÓI QUEN (mỗi bài 4 thẻ: Hiểu · Thử · Senpai kể · Trong app này)
    Nguyên tắc THT: B1 N8+N5 · B2 N8 · B3 N8, mô hình 5S · B4 N5 · B5 N1+N2, thang 5 trạng thái
-   Lời Thầy (mã nguồn để duyệt): B3 [T26 – V13] · B5 [T26 – V17]
+   3.3.37: không còn câu nào lấy từ lời Thầy (đã bỏ B3 [T26 – V13], B5 [T26 – V17]; xem file duyệt chữ 3.3.37)
    Chuyện Senpai dựa trên chia sẻ trong tài liệu Myway và biên bản case study (đã ẩn danh)
    ========================================================= */
 var LESSONS = [
@@ -2533,8 +2536,7 @@ var LESSONS = [
  {id:'b3', n:3, t:'Sắp xếp quanh mình', icon:'nang', g:3, kind:'sort',
   c1:'<div class="hw__k">Ý chính</div><p class="lsbig">Việc tốt: để gần, dễ thấy. Việc chưa tốt: để xa, mất công.</p>'+
      '<p>Đừng chỉ dựa vào cố gắng. Sắp xếp chỗ ở, chỗ học để việc tốt dễ làm hơn. Sổ memo trong túi áo thì dễ ghi. Điện thoại nằm cạnh sách thì dễ lướt.</p>'+
-     '<p>Người xung quanh cũng là môi trường. Thói lười có thể lây sang nhau.</p>'+
-     '<p>Siêng năng cũng lây. Ngồi gần bạn chăm, mình cũng chăm hơn.</p>'+
+     '<p>Người xung quanh cũng là môi trường. Ngồi gần bạn chăm, mình cũng chăm hơn.</p>'+
      '<div class="lsq">Ở chỗ bạn đang sống, thứ gì đang làm việc tốt khó hơn?</div>',
   dlg:[['s',0,'smile','Phòng anh ở Nhật có 4 người. Tụi anh thống nhất: ngoài giờ gọi về nhà thì nói tiếng Nhật với nhau. Ai quên thì bỏ 100 yên vào hộp chung.'],
        ['shin','think','Vậy có căng quá không anh?'],
@@ -2557,7 +2559,7 @@ var LESSONS = [
   c1:'<div class="hw__k">Ý chính</div><p class="lsbig">Đừng chỉ đặt mục tiêu “làm gì”. Hãy chọn “mình muốn trở thành người như thế nào”.</p>'+
      '<p>“Mình muốn dậy sớm” thì dễ bỏ. “Mình là người đúng giờ” thì khó bỏ hơn, vì bỏ là đi ngược với chính mình.</p>'+
      '<p>Mỗi lần làm là một lá phiếu cho con người đó. Không cần hoàn hảo, chỉ cần tuần sau nhiều phiếu hơn tuần trước.</p>'+
-     '<p>Khi đã thật sự muốn, mình tự học, tự làm mà không cần ai nhắc.</p>'+
+     '<p>Thử xem mình đang làm việc này với tâm thế nào:</p>'+
      '<div class="ladder"><span>Bị</span><span>Phải</span><span>Muốn</span><span>Thích</span><span>Đam mê</span></div>'+
      '<div class="lsq">Với thói quen bạn đang rèn, bạn đang ở bậc nào? 5–10 năm nữa, bạn muốn người khác nhắc đến mình bằng câu nào?</div>',
   dlg:[['s',4,'smile','Ở Nhật, công ty có giờ tự học buổi tối, không ai đứng giám sát. Có bạn hay vào trễ 5–10 phút vì nghĩ không ai thấy.'],
@@ -2640,7 +2642,7 @@ function lsInter(){
   }
   if(L.kind==='vote'){
     st.v=st.v||{};
-    h='<p class="small muted" style="margin:0 0 6px">Bạn muốn trở thành người như thế nào?</p><div>'+D.who.map(function(w,i){ return '<button class="chp'+(st.who===i?' on':'')+'" data-act="ls" data-v="who|'+i+'">'+esc(w)+'</button>'; }).join('')+'</div>';
+    h='<p class="small muted" style="margin:0 0 6px">Bạn muốn trở thành người như thế nào?</p><div class="ls-chips36">'+D.who.map(function(w,i){ return '<button class="chp'+(st.who===i?' on':'')+'" data-act="ls" data-v="who|'+i+'">'+esc(w)+'</button>'; }).join('')+'</div>';
     if(st.who!=null){
       var pro=0, con=0;
       h+='<p class="small muted" style="margin:8px 0 6px">Chạm vào việc bạn từng làm. Việc nào là lá phiếu thuận, việc nào là phiếu chống?</p><div class="votel">'+D.acts.map(function(a,i){ var on=!!st.v[i]; if(on){ if(a[1]) pro++; else con++; }
@@ -2970,7 +2972,7 @@ document.addEventListener('click',function(e){
     case 'gHome': S.gHome=1; save(true); closeOv(); render(); toast('Tuyệt! Từ nay mở bằng biểu tượng Shin nhé.'); break;
     case 'flipHome': flipHome(); break;
     case 'flipCard': CARD.back=!CARD.back; var fc=$('#flip'); if(fc) fc.classList.toggle('flipped',CARD.back); if(!S.gFlip){ S.gFlip=1; save(); } break;
-    case 'stPause': (function(){ closeOv(true); ST=null; var u=H(v); if(!u) return; u.status='pause'; var si=S.slots.indexOf(v); if(si>=0) S.slots[si]=null; SLOT=0; SBACK=false; save(true); render(); toast('Thẻ tạm dừng, đã cất vào Thư viện. Tiến độ vẫn giữ.'); })(); break;
+    case 'stPause': (function(){ closeOv(true); ST=null; var u=H(v); if(!u) return; /* 3.3.37: tạm dừng = thẻ vẫn trên tay, không tính ngày; muốn nhường chỗ thì dùng Cất thẻ */ u.status='pause'; if(S.slots.indexOf(v)<0){ var si=S.slots.indexOf(null); if(si>=0) S.slots[si]=v; } SBACK=false; save(true); render(); toast(PAUSE37_MSG,4500); })(); break;
     case 'sugT': ST.sugOpen=!ST.sugOpen; drawStart(); break;
     case 'sugPick': (function(){ var g=SUG[ST.id][+v]; ST.anchor=g[0]; ST.act=g[1]; ST.who=g[2]; ST.custom={}; ST.sugOpen=false; ST.i=ST.steps.indexOf('w'); drawStart(); ting(); })(); break;
     case 'stSkipQ': (function(){ var qi=ST.steps.indexOf('quiz'); if(qi>=0){ ST.steps.splice(qi,1); if(ST.i>qi) ST.i--; } ST.pick=null; ST.first=ST.first||'later'; if(ST.i>ST.steps.length-1) ST.i=ST.steps.length-1; drawStart(); })(); break;
