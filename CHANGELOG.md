@@ -1,5 +1,14 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.39 — 15/11/2026 — Font chữ: Nunito (tiêu đề) + Be Vietnam Pro (nội dung)
+
+Gốc M.Claude.3.3.38. Người dùng thấy font cũ (Roboto Flex) rõ nhưng đơn điệu; xem 2 vòng bản mẫu (3 phương án, rồi 3 cách ghép với Nunito) và chọn phương án A.
+
+- Thêm `styles/fonts39.css` và 15 tệp woff2 trong assets/fonts: Nunito biến thiên (latin, latin-ext, vietnamese) và Be Vietnam Pro 400/500/600/700 (mỗi độ đậm 3 bộ). Giấy phép `NUNITO-OFL.txt`, `BE-VIETNAM-PRO-OFL.txt`. Tổng khoảng 300 KB, đăng ký trong sw.js CORE.
+- SECTION batch39 (design-system.css): `--f` = Be Vietnam Pro; `--fh`/`--h` = Nunito. Nunito cho h1–h4, tiêu đề trang và hộp thoại, tên thẻ trong danh sách (Hôm nay, Đang duy trì, Thư viện, Cách làm), câu hỏi lớn (`.qlab`), ý chính bài học (`.lsbig`), nút (`.btn`, `.m3-button`, nút thẻ nổi bật), số liệu (Sổ tay, số bài), nhãn nhỏ (BẬC, KHI, MÌNH SẼ, nhãn mục). Đậm: tiêu đề 800, tên thẻ và nút 750, nhãn 800, số 850.
+- Trang game dùng cùng font. Chữ trong hình SVG và ảnh xuất giữ Roboto Flex.
+- Kiểm thử Chromium 390×844 và 320×640: Hôm nay, Tuần, Hành trình, Thư viện, thẻ (2 mặt), Cách làm, Bài học, Sửa công thức, Sổ tay, Check-in, Thẻ thành tựu, tạo thẻ riêng, game; font nạp đủ (Nunito, Be Vietnam Pro), dấu tiếng Việt hiển thị đúng; lặp lại kiểm thử đợt 2–3. Không lỗi JavaScript. Ghi nhận: ở 320px chữ “Không gặp dịp” trong Check-in xuống 2 dòng; thẻ ở màn hình 320×640 bị cắt đáy như bản trước (không do font).
+
 ## M.Claude.3.3.38 — 15/11/2026 — Đợt 3: Thư viện mới, “Shin nhìn lại tuần này”, Thẻ thành tựu nhẹ hơn
 
 Gốc M.Claude.3.3.37. Toàn bộ ở SECTION batch38 (design-system.js/.css). Người dùng chốt: giữ thang Bị → Đam mê; tab Hành trình giữ nguyên, chỉ làm nhẹ Thẻ thành tựu khi chạm thẻ trên cây; làm lại Thư viện tab Thói quen và Bài học theo tinh thần thẻ game, M3.

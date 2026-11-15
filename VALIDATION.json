@@ -1,10 +1,10 @@
 {
-  "feature_version": "M.Claude.3.3.38",
-  "cache_build": "M.Claude.3.3.38",
+  "feature_version": "M.Claude.3.3.39",
+  "cache_build": "M.Claude.3.3.39",
   "date": "2026-11-15",
-  "status": "batch3_done_pending_text_review_and_physical_device_test",
-  "files": 54,
-  "baseline": "M.Claude.3.3.37",
+  "status": "fonts_done_pending_physical_device_test",
+  "files": 72,
+  "baseline": "M.Claude.3.3.38",
   "physical_phones_tested": false,
   "production_deployment_performed": false,
   "structure": {
@@ -17,16 +17,16 @@
   "checks_run_this_build": {
     "structure": {
       "passed": true,
-      "note": "node tools/verify.mjs ok, 54 tệp, cache M.Claude.3.3.38."
+      "note": "node tools/verify.mjs ok, 72 tệp, 53 tài nguyên ngoại tuyến, cache M.Claude.3.3.39."
     },
-    "batch3_chromium": {
+    "fonts_chromium": {
       "passed": true,
-      "note": "Playwright Chromium 390×844 và 1280×800, Demo: tìm thói quen (15 từ mẫu, có dấu/không dấu, giữ con trỏ trong ô), chip lọc, thẻ nổi bật, mở thẻ/Cách làm/bài học, Chọn thẻ để rèn có ô tìm, Sổ tay › Tiến bộ đủ phần, Thẻ thành tựu lưu kỷ niệm, bài học còn dở; kiểm thử lại đợt 2. Không lỗi JavaScript."
+      "note": "Playwright Chromium 390×844 và 320×640, Demo: 12 màn hình chính + game; Nunito và Be Vietnam Pro nạp từ tệp cục bộ; chữ hoa có dấu và dấu chồng hiển thị đúng; kiểm thử chức năng đợt 2–3 chạy lại không lỗi."
     },
     "not_run": [
-      "Safari/WebKit (không có trong môi trường)",
-      "iPhone/Android thật (bàn phím khi tìm, menu ⋯)",
-      "Dữ liệu thật của học viên cho phần nhìn lại tuần"
+      "Safari/WebKit và iPhone đời cũ (hiển thị font biến thiên Nunito)",
+      "Android thật",
+      "Tải ngoại tuyến lần đầu trên điện thoại (cache thêm ~300 KB)"
     ]
   },
   "not_run": [
@@ -36,7 +36,7 @@
     "Âm thanh",
     "Dữ liệu thật của học viên"
   ],
-  "data_impact": "Không đổi khóa lưu trữ. Dùng lại status 'pause' có sẵn cho thẻ trên tay.",
+  "data_impact": "Không đổi dữ liệu.",
   "previous_build_validation": {
     "feature_version": "M.Claude.3.3.31",
     "cache_build": "M.Claude.3.3.31",

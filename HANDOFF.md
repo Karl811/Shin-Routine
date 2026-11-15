@@ -1,4 +1,18 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.38 — 15/11/2026)
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.39 — 15/11/2026)
+
+## 0. Bản hiện tại: M.Claude.3.3.39 — Font chữ phương án A (Nunito + Be Vietnam Pro)
+
+- Gốc: M.Claude.3.3.38. APP_VER và cache: **M.Claude.3.3.39**; 72 tệp (thêm 15 tệp font, 2 giấy phép OFL, `styles/fonts39.css`).
+- Nội dung: **Be Vietnam Pro** 400/500/600/700. Tiêu đề, tên thẻ trong danh sách, nút, số liệu, nhãn nhỏ viết hoa: **Nunito** (biến thiên 200–1000). Mỗi font đủ 3 bộ latin, latin-ext (cho ō trong Hō-Ren-Sō), vietnamese; nhúng cục bộ, có trong sw.js CORE, chạy ngoại tuyến.
+- Quy tắc ở SECTION batch39 cuối design-system.css (`--f`, `--fh`, `--h`; danh sách bộ chọn dùng Nunito với `#shinTypographyRoot#shinTypographyRoot` để thắng các luật `font:` cũ). Câu công thức giữ Be Vietnam Pro. Chữ Nhật vẫn Noto Sans JP.
+- Trang game: habit-game.html nạp fonts39.css; chữ thường Be Vietnam Pro, tiêu đề/nút Nunito (design-game.css).
+- Giữ Roboto Flex cho chữ trong hình SVG minh họa và ảnh xuất (Thẻ tuần, cây thành tựu) để không tràn khung đã vẽ; tệp Roboto Flex vẫn giữ làm font dự phòng.
+- Muốn đổi font về sau: chỉ cần sửa `--f`/`--fh` trong SECTION batch39 và tệp fonts39.css.
+- Vẫn treo: duyệt chữ đợt 2 (3.3.37) và đợt 3 (3.3.38); 14 tên gọn hộp ném + “GAME/Chơi ngay”; file luật v2 (3.3.32); thử trên iPhone/Android thật (font trên Safari đời cũ).
+
+---
+
+# (Bản trước) M.Claude.3.3.38
 
 ## 0. Bản hiện tại: M.Claude.3.3.38 — Đợt 3 (Thư viện, Sổ tay › Tiến bộ, Thẻ thành tựu, chữ công thức)
 

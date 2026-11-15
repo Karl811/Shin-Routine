@@ -561,3 +561,22 @@ html{background:#F9F9FF}
 #shinTypographyRoot .ach38 .tree-reflection30 summary{color:var(--primary,#2265C5);font-weight:600}
 #shinTypographyRoot .ach38 .ach38-back{background:var(--secondary-container,#DCE6F9)!important;color:var(--on-secondary-container,#152A4A)!important;box-shadow:none!important}
 @media (prefers-reduced-motion:reduce){#shinTypographyRoot .row38{transition:none}}
+
+/* ===== SECTION batch39 (M.Claude.3.3.39 — font chữ PA A) =====
+   Nội dung: Be Vietnam Pro · Tiêu đề, tên thẻ, nút, số, nhãn nhỏ: Nunito. Font khai báo ở styles/fonts39.css.
+   Hình SVG minh họa và ảnh xuất (canvas) giữ Roboto Flex để chữ không tràn khung đã vẽ. */
+#shinTypographyRoot{--f:'Be Vietnam Pro','Roboto Flex','Noto Sans JP',system-ui,sans-serif;--fh:'Nunito','Be Vietnam Pro','Noto Sans JP',system-ui,sans-serif;--h:var(--fh);font-family:var(--f)}
+#shinTypographyRoot :is(input,textarea,select,button){font-family:var(--f)}
+#shinTypographyRoot#shinTypographyRoot :is(h1,h2,h3,h4,#pageTitle35,#f2DialogTitle,.sh__h>b,.shin-wizard-head b,
+ .flow-row-main>b,.keep31-text>b,.row38-t>b,.how38-chip>b,.lsbig,.qlab,
+ .btn,.m3-button,.hero38-go,.ckb b,
+ .rv38-stats b,.f3-stats b,.kpi b,.sum .big,.num38,
+ .flow-card-level,.band-block>small,.flow-formula>small,.m3-kicker,.hw__k,.hero38-tag,.ey,.tree-detail-eyebrow30,.ach38-chip,.lv){font-family:var(--fh)!important}
+#shinTypographyRoot#shinTypographyRoot :is(h1,#pageTitle35){font-weight:800!important;letter-spacing:-.1px}
+#shinTypographyRoot#shinTypographyRoot :is(h2,#f2DialogTitle,.sh__h>b,.shin-wizard-head b){font-weight:800!important}
+#shinTypographyRoot#shinTypographyRoot :is(h3,.flow-row-main>b,.keep31-text>b,.row38-t>b,.how38-chip>b,.qlab){font-weight:750!important}
+#shinTypographyRoot#shinTypographyRoot :is(.btn,.m3-button,.hero38-go){font-weight:750!important}
+#shinTypographyRoot#shinTypographyRoot :is(.flow-card-level,.band-block>small,.flow-formula>small,.m3-kicker,.hw__k,.hero38-tag,.ey){font-weight:800!important}
+#shinTypographyRoot#shinTypographyRoot :is(.rv38-stats b,.f3-stats b,.kpi b,.num38){font-weight:850!important}
+#shinTypographyRoot#shinTypographyRoot .sentence{font-family:var(--f)!important}
+#shinTypographyRoot :is(.jp,[lang="ja"]){font-family:var(--jp,'Noto Sans JP'),sans-serif}
