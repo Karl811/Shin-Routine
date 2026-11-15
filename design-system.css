@@ -290,3 +290,42 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){.hv-anim-breath .hv-breath,.hv-anim-breath .hv-in{animation:none}.hv-anim-breath .hv-out{animation:none;opacity:0}}
 /* M.Claude.3.3.29: hình mặt sau hòa vào màu thẻ, mép dưới mờ dần sang vùng chữ. */
 #shinTypographyRoot .shin-back-art svg{-webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent);mask-image:linear-gradient(to bottom,#000 72%,transparent)}
+
+/* ===== SECTION: rules-v2-ui (M.Claude.3.3.31 · đợt 2) ===== */
+/* Thẻ duy trì ở trang Hôm nay */
+.keep31{margin:18px 0 6px}
+.keep31-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 4px 8px}
+#shinTypographyRoot .keep31-head h2{font-size:var(--shin-label)!important;line-height:1.4!important;font-weight:600;color:var(--muted);margin:0;letter-spacing:.02em}
+.keep31-row{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;margin:0 0 8px;padding:8px 10px 8px 12px;border:1px solid var(--outline-variant,#D5DAE3);border-radius:20px;background:var(--surface,#fff);color:var(--on-surface,#1A1C20);text-align:left;font:inherit;cursor:pointer}
+.keep31-row:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+.keep31-row>svg,.keep31-row>span:first-child{flex:0 0 36px}
+.keep31-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.keep31-text b{font:600 15px/1.35 var(--f);overflow-wrap:anywhere}
+#shinTypographyRoot .keep31-text small{font-size:var(--shin-meta)!important;color:var(--muted)}
+.keep31-tag{display:inline-flex;align-items:center;gap:4px;flex:none;padding:3px 8px;border-radius:99px;font:600 12px/1.3 var(--f)}
+.keep31-tag.fade{color:#8A5A00;background:#FFF1CC}
+.keep31-tag.web{color:#4B5563;background:#E8EBF0}
+.keep31-plus{display:grid;place-items:center;flex:0 0 36px;height:36px;color:var(--primary)}
+.keep31-row.is-done{background:var(--surface-low);border-color:transparent}
+.keep31-row.is-done .keep31-text b{color:var(--muted)}
+.keep31-row.is-web{border-style:dashed}
+/* Thẻ tuần: Lửa tuần và các ngày nghỉ / lỡ */
+.wkfire31{margin:12px 0 4px;padding:12px 14px;border-radius:20px;background:#FFF4E8}
+.wkfire31>p{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 10px;color:#7A3412}
+.wkfire31>p b{font:700 16px/1.4 var(--f)}
+.wkfire31>p span:not(.material-symbols-rounded){font:500 14px/1.4 var(--f)}
+.wkfire31>p svg,.wkfire31>p .material-symbols-rounded{color:#D2691E;width:20px;height:20px}
+.wkfire31-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.wkfire31-days span{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}
+.wkfire31-days i{display:grid;place-items:center;width:100%;max-width:40px;height:30px;border-radius:10px;font:700 12px/1 var(--f);font-style:normal;background:#fff;color:#9AA0A8;border:1px dashed #E2C9AE}
+.wkfire31-days .rec i{background:#FFD9B3;color:#7A3412;border:0}
+.wkfire31-days .full i{background:#F08A3C;color:#fff;border:0}
+.wkfire31-days .rest i{background:#E3F0FF;color:#1D5FD1;border:0;font-size:11px}
+.wkfire31-days .miss i{background:#FDE2DC;color:#B42318;border:1.5px solid #E8836F;font-size:11px}
+.wkfire31-days .today i{font-size:9px}
+.wkfire31-days .future i{opacity:.4}
+#shinTypographyRoot .wkfire31-days small{font-size:11px!important;color:#7C6A58}
+#shinTypographyRoot .wkfire31-note{display:block;margin-top:8px;color:#9A3412}
+/* Shin hỏi khi mở app */
+.ask31{padding-top:6px}
+@media (prefers-reduced-motion:reduce){.keep31-row{transition:none}}

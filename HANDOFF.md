@@ -1,6 +1,31 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.30 — 15/11/2026)
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.32 — 15/11/2026)
 
-## 0. Bản hiện tại: M.Claude.3.3.30 — Luật rèn luyện v2, đợt 1 (logic lõi)
+## 0. Bản hiện tại: M.Claude.3.3.32 — Luật rèn luyện v2, đợt 3 (chữ) — đủ 3 đợt
+
+- Gốc: M.Claude.3.3.31 (đợt 2, mục 0b) ← 3.3.30 (đợt 1, mục 0a). APP_VER và cache: **M.Claude.3.3.32**; 54 tệp.
+- Đã làm đợt 3: “Trong app” bài 1, 4, 5 và hình đi kèm; gợi ý ghi chú hướng về ích lợi (`BEN32` trong extensions.js, bọc `noteHints34` ở SECTION rules-v2-text cuối rules-v2.js); thống nhất “Cấp” → “Bậc”; sửa ghi chú mẫu công thức giảm dần. Chi tiết ở CHANGELOG.
+- **Chờ người dùng duyệt chữ** bằng file `Shin-routine-3.3.32_Duyet-chu-luat-v2.xlsx` (57 dòng, cột Mã khóa vị trí). Khi nhận lại: áp đúng từng dòng theo cột Mã, trang “Bổ sung” tìm trong mã nguồn, chỉnh đồng bộ chỗ tương tự, tạo bản 3.3.33.
+- Việc còn lại sau duyệt: thử trên iPhone/Android thật, rồi đưa lên GitHub khi người dùng yêu cầu.
+
+---
+
+# (Bản trước) M.Claude.3.3.31
+
+## 0b. M.Claude.3.3.31 — Luật rèn luyện v2, đợt 2 (giao diện)
+
+- Gốc: M.Claude.3.3.30 (đợt 1 logic lõi, mô tả ở mục 0a bên dưới). APP_VER và cache: **M.Claude.3.3.31**; 54 tệp.
+- Đã làm đủ 5 hạng mục đợt 2 + yêu cầu thêm của người dùng (xem CHANGELOG): thẻ duy trì ở trang Hôm nay; vuốt → màn hình đủ 3 nút; Shin hỏi khi mở app (1 lần/ngày); hỏi chỉnh công thức khi lên bậc; hỏi "Sang duy trì?" khi Thành nếp (nút trên thẻ giữ nguyên); "Lửa tuần · y/7 ngày có ghi" + ô Nghỉ/Lỡ trên Thẻ tuần và ảnh Thẻ tuần.
+- Người dùng chốt: ngày chỉ có ghi bù tính như ngày chưa ghi đối với Lửa; Thành nếp giữ nút bấm "Sang duy trì", kèm câu hỏi.
+- Mã giao diện v2 nằm cuối `scripts/rules-v2.js` (SECTION rules-v2-ui: `r2KeepToday`, `r2WeekFire`, `r2Ask`) và cuối `design-system.css` (SECTION rules-v2-ui: `.keep31`, `.wkfire31`, `.ask31`). `offerTier` và `masterShow` ở core.js.
+- Dữ liệu mới: `S.r2.ask` (ngày Shin đã hỏi). Không đổi khóa lưu trữ.
+- Còn biết: popup mừng lên bậc có thể che thông báo "Hoàn tác" ở đáy; chưa đổi chữ "cấp" → "bậc" trên thẻ và màn hình treo cây.
+- **Việc tiếp theo — đợt 3 (chữ):** phần "Trong app" của bài Nền tảng 1, 4, 5 (LESSONS trong core.js, hình LV trong how-visual.js); gợi ý ghi chú hướng về ích lợi; ghi chú mẫu công thức "Lên cấp vẫn cần bạn xem lại và xác nhận" (habits.js); thống nhất "cấp" → "bậc" nếu người dùng muốn; duyệt các câu mới của đợt 1–2 (popup Lửa, Shin hỏi, câu hỏi lên bậc/duy trì, nhắc ngày Lỡ).
+
+---
+
+# (Bản trước) M.Claude.3.3.30
+
+## 0a. M.Claude.3.3.30 — Luật rèn luyện v2, đợt 1 (logic lõi)
 
 - Gốc: M.Claude.3.3.29 final. APP_VER và cache: **M.Claude.3.3.30**; 54 tệp (thêm `scripts/rules-v2.js`).
 - Luật nguồn: mục 10 tài liệu Claude Docs "Shin routine — Logic rèn luyện" (đã chốt 15/11/2026), thay các mục 1–9 cũ.
@@ -13,7 +38,7 @@
   - Thẻ duy trì: đếm từ lần Đã làm/Một phần gần nhất, hoặc từ ngày Thành nếp nếu chưa làm lại.
 - Dữ liệu: giữ 3 khóa lưu trữ; thêm `S.r2` {v:2, migrated} và `S.r2act`. Trường cũ (`xp`, `tstamps`, `growth.goals`, `growth.challenges`, `cf`, `week[].buddy`) giữ nguyên, không còn dùng (trải nghiệm thử thách cũ vẫn hiện trong nhật ký).
 - Lần mở đầu ở v2: tính lại bậc, Lửa từ lịch sử; Shin báo thẻ đã lên bậc (`r2Notice`, gọi từ boot.js). Demo: chỉnh bậc lặng lẽ.
-- **Chưa làm (đợt 2 — giao diện):** thẻ duy trì ở trang Hôm nay kèm "làm gần nhất"; màn hình sau khi vuốt hiện đủ 3 nút; Shin hỏi khi mở app (1 lần/ngày); câu hỏi "chỉnh công thức?" khi lên bậc (gắn vào `offerTier`, hiện chỉ đóng popup); dòng "Lửa tuần · y/7 ngày có ghi" trên Thẻ tuần (dùng `r2Week`). Nhãn trên thẻ còn ghi "CẤP n · …".
+- **Đợt 2 — đã làm ở 3.3.31:** thẻ duy trì ở trang Hôm nay kèm "làm gần nhất"; màn hình sau khi vuốt hiện đủ 3 nút; Shin hỏi khi mở app (1 lần/ngày); câu hỏi "chỉnh công thức?" khi lên bậc (gắn vào `offerTier`, hiện chỉ đóng popup); dòng "Lửa tuần · y/7 ngày có ghi" trên Thẻ tuần (dùng `r2Week`). Nhãn trên thẻ còn ghi "CẤP n · …".
 - **Chưa làm (đợt 3 — chữ):** phần "Trong app" của bài Nền tảng 1, 4, 5 (LESSONS trong core.js và hình LV trong how-visual.js vẫn nói xác nhận, chuỗi về 0, mạng nhện 7 ngày, mốc 3/6/12, nâng việc); gợi ý ghi chú hướng về ích lợi; ghi chú mẫu công thức "Lên cấp vẫn cần bạn xem lại và xác nhận" (habits.js, routine-templates); chữ "cấp" → "bậc" nếu muốn thống nhất.
 - Không gắn app với học phần: Sổ tay đổi "Báo cáo cuối học phần" → "Báo cáo cho thầy cô". `GROUPS[].d` ("Gợi ý Học phần n") còn trong dữ liệu nhưng không hiện trên giao diện (đã quét Hôm nay, Tuần, Hành trình, Thư viện, Sổ tay, tạo thẻ).
 

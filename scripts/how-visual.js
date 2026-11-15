@@ -736,7 +736,7 @@ function dayDot(x,y,st,t){var s=st==='y'?'<circle cx="'+x+'" cy="'+y+'" r="11" f
  return s+(t?T(x,y-17,t,{s:10,w:700,c:MUTE}):'');}
 /* Mô phỏng thẻ thói quen trong app (nhãn đúng như thẻ thật: MÌNH SẼ · KHI · Trở thành…). */
 function cardMock(x,y,o){var w=196,h=o.h||186,s='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="16" fill="#F2EBF8" stroke="#D9CDE6" stroke-width="1.5"/>',hl=function(yy,hh){return '<rect x="'+(x+8)+'" y="'+yy+'" width="'+(w-16)+'" height="'+hh+'" rx="8" fill="#FFF3C4" stroke="'+YEL+'" stroke-width="2"/>';};
- s+=T(x+14,y+20,o.level||'CẤP 1 · Tập sự',{a:'start',s:10,w:700,c:'#6B5A7A'})+T(x+14,y+40,o.title,{a:'start',s:13.5,w:800,c:'#4A2E5C'});
+ s+=T(x+14,y+20,o.level||'BẬC 1 · Tập sự',{a:'start',s:10,w:700,c:'#6B5A7A'})+T(x+14,y+40,o.title,{a:'start',s:13.5,w:800,c:'#4A2E5C'});
  if(o.hl==='se')s+=hl(y+48,38);if(o.hl==='khi')s+=hl(y+88,36);if(o.hl==='tro')s+=hl(y+126,22);if(o.hl==='week')s+=hl(y+150,30);
  s+=T(x+14,y+60,'MÌNH SẼ',{a:'start',s:9,w:800,c:'#8A7A99'})+T(x+14,y+78,o.se,{a:'start',s:12,w:700,c:'#4A2E5C'})+
   T(x+14,y+100,'KHI',{a:'start',s:9,w:800,c:'#8A7A99'})+T(x+14,y+117,o.khi,{a:'start',s:11.5,w:600,c:'#7A6A88'})+
@@ -758,7 +758,7 @@ var LV={
    '<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/><rect x="20" y="16" width="70" height="48" rx="4" fill="#2F3D5A" stroke="'+K+'" stroke-width="1.4"/>'+moon(40,32,7)+
    floor(10,330,156)+desk(120,112,150)+g(150,156,1,sitChair({f:1,legs:[[-6,-40,18,-40,18,-6]],hip:[-6,-40],sh:[-4,-78],head:[-1,-100],arms:[[12,-62,30,-50]],smile:false}))+'<path d="M128 46q-3 5 0 7q3-2 0-7z" fill="#8FD0E8"/>'+
    book(196,102,1,true)+bag(60,128)+clock(268,52,16,'')+T(268,86,'10 phút',{s:12,w:800,c:GREEN_T})+shinMini('cheer',284,100,46),'Ngày mệt nhất vẫn làm được: đó là việc vừa đủ nhỏ.','0 0 340 170');},
-  app:function(){return lfig('','Trên thẻ, dòng Mình sẽ là việc nhỏ của bạn. Cấp Tập sự 7 ngày đầu chỉ cần việc nhỏ đó.',
+  app:function(){return lfig('','Trên thẻ, dòng Mình sẽ là việc nhỏ của bạn. Bậc Tập sự 7 ngày đầu chỉ cần việc nhỏ đó.',
    cardMock(8,8,{title:'Ôn tiếng Nhật',se:'mở sổ, đọc 3 từ vựng',khi:'vừa ngồi vào bàn học',tro:'người tiến bộ mỗi ngày',hl:'se'})+
    arrow(206,74,226,74,'#C98A12',2.2)+callout(228,44,108,['Việc nhỏ','ngày mệt vẫn làm','được'])+callout(228,118,108,['Tập sự: 7 ngày','chỉ cần việc nhỏ'],GREEN_T),'','0 0 340 202');}
  },
@@ -798,20 +798,20 @@ var LV={
    r1.forEach(function(st,i){var x=136+i*29;if(i)s+='<path d="M'+(x-18)+' 40h7" stroke="'+(st===''?'#E4E8F2':GREEN)+'" stroke-width="3"/>';s+=dayDot(x,40,st);});
    s+=T(14,104,'Lỡ 2 ngày liền',{a:'start',s:11.5,w:800,c:RED_T})+T(14,120,'thói quen bỏ bắt đầu',{a:'start',s:10.5,w:700,c:RED_T});
    r2.forEach(function(st,i){var x=136+i*29;if(i&&st==='y')s+='<path d="M'+(x-18)+' 114h7" stroke="'+GREEN+'" stroke-width="3"/>';s+=dayDot(x,114,st);});
-   s+='<path d="M232 128q28 22 60 0" stroke="'+RED+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+T(262,158,'chuỗi đứt',{s:10.5,w:800,c:RED_T})+T(252,74,'phiên bản nhỏ nhất',{s:10,w:700,c:GREEN_T})+'<path d="M252 64l-6-10" stroke="'+GREEN+'" stroke-width="1.3"/>';
-   return lfig('','Lỡ một ngày rồi làm phiên bản nhỏ nhất ngay hôm sau thì chuỗi nối lại. Lỡ hai ngày liền là chuỗi đứt.',s,'Sau ngày lỡ: không bù gấp đôi, làm nhỏ ngay hôm nay.','0 0 340 170');},
+   s+='<path d="M232 128q28 22 60 0" stroke="'+RED+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+T(262,158,'nhịp đứt',{s:10.5,w:800,c:RED_T})+T(252,74,'phiên bản nhỏ nhất',{s:10,w:700,c:GREEN_T})+'<path d="M252 64l-6-10" stroke="'+GREEN+'" stroke-width="1.3"/>';
+   return lfig('','Lỡ một ngày rồi làm phiên bản nhỏ nhất ngay hôm sau thì nhịp được nối lại. Lỡ hai ngày liền là nhịp bắt đầu đứt.',s,'Sau ngày lỡ: không bù gấp đôi, làm nhỏ ngay hôm nay.','0 0 340 170');},
   story:function(){return lfig('','Thi trượt N2 vẫn không bỏ: hôm mệt chỉ làm một trang đề',
    '<rect x="0" y="0" width="340" height="170" rx="14" fill="#E9EEF8"/>'+floor(10,330,156)+desk(110,112,150)+g(138,156,1,sitChair({f:1,girl:true,legs:[[-6,-40,18,-40,18,-6]],hip:[-6,-40],sh:[-4,-78],head:[-1,-100],arms:[[12,-62,30,-52]]}))+
    '<rect x="168" y="90" width="40" height="22" rx="2" fill="#fff" stroke="'+K+'" stroke-width="1.3"/>'+T(188,106,'1 trang',{s:9.5,w:800,c:BLUE_T})+
    '<g transform="translate(30 30)"><rect width="64" height="44" rx="6" fill="#fff" stroke="'+K+'" stroke-width="1.3"/>'+T(32,18,'N2',{s:12,w:800,c:INK})+T(32,34,'chưa đạt',{s:10,w:700,c:RED_T})+'</g>'+arrow(100,52,124,52,MUTE,2)+
    [0,1,2,3,4].map(function(i){return dayDot(236+i*20,40,i===2?'s':'y').replace(/r="11"/g,'r="8"');}).join('')+T(276,70,'không để 2 ngày trống',{s:10,w:800,c:GREEN_T})+shinMini('cheer',272,92,46),'Ngã bảy lần, đứng dậy tám lần.','0 0 340 170');},
   app:function(){var s='<rect x="8" y="8" width="210" height="150" rx="16" fill="#fff" stroke="#D5DEEF" stroke-width="1.5"/>'+T(22,32,'Tuần này',{a:'start',s:11,w:800,c:INK})+
-    '<g transform="translate(176 26)"><path d="M0 -10q10 8 6 18q-2 6-6 6q-8 0-8-8q0-6 8-16z" fill="#F29A3C" stroke="'+K+'" stroke-width="1.2"/></g>'+T(196,34,'12',{s:13,w:800,c:'#A35A00'});
-   ['y','y','n','y','y','',''].forEach(function(st,i){s+=dayDot(28+i*28,72,st,['T2','T3','T4','T5','T6','T7','CN'][i]).replace(/r="11"/g,'r="9.5"');});
-   s+='<rect x="18" y="96" width="190" height="24" rx="8" fill="#E2F7EE"/>'+T(113,112,'Lỡ 1 ngày: chuỗi vẫn giữ',{s:10.5,w:800,c:GREEN_T})+'<rect x="18" y="126" width="190" height="24" rx="8" fill="#FDECE8"/>'+T(113,142,'Lỡ 2 ngày liền: chuỗi về 0',{s:10.5,w:800,c:RED_T});
-   s+='<path d="M82 56q0-18-18-18" stroke="'+BLUE+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+callout(228,14,108,['Quên đóng dấu?','ghi bù trong 3 ngày'])+callout(228,74,108,['Thẻ khi gặp dịp','tính theo số lần','3 · 6 · 12'],GREEN_T)+
-    '<g transform="translate(250 150)" stroke="#9DA9BC" stroke-width="1" fill="none"><path d="M0 0L-14 0M0 0L-10-10M0 0L0-14M0 0L10-10M0 0L14 0"/><path d="M-5 0Q-4-4-3.5-3.5Q-1-5 0-5Q1-5 3.5-3.5Q4-4 5 0M-10 0Q-8-7-7-7Q-2-10 0-10Q2-10 7-7Q8-7 10 0"/></g>'+T(296,150,'7 ngày',{s:10.5,w:700,c:MUTE})+T(296,164,'không làm:',{s:10.5,w:700,c:MUTE})+T(272,182,'“mạng nhện”',{s:11,w:800,c:MUTE});
-   return lfig('','Trong app: lỡ 1 ngày chuỗi vẫn giữ, lỡ 2 ngày liền chuỗi về 0. Quên đóng dấu ghi bù trong 3 ngày.',s,'','0 0 340 194');}
+    '<g transform="translate(176 26)"><path d="M0 -10q10 8 6 18q-2 6-6 6q-8 0-8-8q0-6 8-16z" fill="#F29A3C" stroke="'+K+'" stroke-width="1.2"/></g>'+T(196,34,'12',{s:13,w:800,c:'#A35A00'})+T(150,34,'Lửa',{s:10.5,w:800,c:'#A35A00'});
+   ['y','y','','y','y','',''].forEach(function(st,i){s+=dayDot(28+i*28,72,st,['T2','T3','T4','T5','T6','T7','CN'][i]).replace(/r="11"/g,'r="9.5"');});
+   s+='<rect x="18" y="96" width="190" height="24" rx="8" fill="#E2F7EE"/>'+T(113,112,'Nghỉ 1 ngày/7 ngày: giữ Lửa',{s:10.5,w:800,c:GREEN_T})+'<rect x="18" y="126" width="190" height="24" rx="8" fill="#FDECE8"/>'+T(113,142,'Lỡ thêm ngày nữa: −1 Lửa',{s:10.5,w:800,c:RED_T});
+   s+='<path d="M82 56q0-18-18-18" stroke="'+BLUE+'" stroke-width="1.6" fill="none" stroke-dasharray="3 3"/>'+callout(228,14,108,['Quên đóng dấu?','ghi bù trong 3 ngày','(không cộng Lửa)'])+callout(228,74,108,['Thẻ khi gặp dịp','tính theo số lần','3 · 6 · 9'],GREEN_T)+
+    '<g transform="translate(250 150)" stroke="#9DA9BC" stroke-width="1" fill="none"><path d="M0 0L-14 0M0 0L-10-10M0 0L0-14M0 0L10-10M0 0L14 0"/><path d="M-5 0Q-4-4-3.5-3.5Q-1-5 0-5Q1-5 3.5-3.5Q4-4 5 0M-10 0Q-8-7-7-7Q-2-10 0-10Q2-10 7-7Q8-7 10 0"/></g>'+T(296,150,'14 ngày',{s:10.5,w:700,c:MUTE})+T(296,164,'không làm:',{s:10.5,w:700,c:MUTE})+T(272,182,'“mạng nhện”',{s:11,w:800,c:MUTE});
+   return lfig('','Trong app: ngày có ghi +1 Lửa, làm trọn mọi thẻ +2. Trong 7 ngày được nghỉ 1 ngày; lỡ thêm thì −1 Lửa. Quên đóng dấu ghi bù trong 3 ngày.',s,'','0 0 340 194');}
  },
  b5:{
   hieu:function(){var s=T(86,22,'Mỗi lần làm = 1 lá phiếu',{s:11.5,w:800,c:BLUE_T})+'<rect x="40" y="82" width="92" height="70" rx="8" fill="#E5EFFC" stroke="'+K+'" stroke-width="1.5"/><rect x="66" y="80" width="40" height="5" rx="2" fill="'+K+'"/>'+T(86,124,'người',{s:11,w:800,c:BLUE_T})+T(86,140,'đúng giờ',{s:11,w:800,c:BLUE_T})+
@@ -827,10 +827,10 @@ var LV={
     desk(30,112,120)+desk(170,112,120)+g(64,156,.9,sitChair({f:1,arms:[[12,-62,28,-52]]}))+book(104,104,.85,true)+g(204,156,.9,sitChair({f:1,girl:true,arms:[[12,-62,28,-52]]}))+book(244,104,.85,true)+
     '<rect x="250" y="14" width="78" height="44" rx="8" fill="#fff" stroke="#C9CEE0" stroke-width="1.3" stroke-dasharray="3 3"/>'+T(289,33,'không ai',{s:10.5,w:700,c:MUTE})+T(289,49,'giám sát',{s:10.5,w:700,c:MUTE});
    return lfig('','Giờ tự học buổi tối không có người giám sát, vẫn vào đúng giờ và học',s,'Người Nhật tin mình từ chính những lúc không ai nhìn.','0 0 340 170');},
-  app:function(){return lfig('','Trên thẻ, dòng Trở thành là con người bạn chọn. Mỗi con dấu là một lá phiếu; lên cấp có bạn và thầy cô xác nhận.',
+  app:function(){return lfig('','Trên thẻ, dòng Trở thành là con người bạn chọn. Mỗi con dấu là một lá phiếu; đủ phiếu thì thẻ tự lên bậc.',
    cardMock(8,8,{title:'Đúng giờ, đúng hẹn',se:'ra khỏi phòng sớm 5 phút',khi:'nghe báo thức reo',tro:'người đúng giờ',hl:'tro',week:['y','y','y','y','','','']})+
    arrow(206,144,226,144,'#C98A12',2.2)+callout(228,20,108,['Con người','bạn chọn'])+stamp(282,100,16)+T(282,132,'1 dấu = 1 phiếu',{s:10,w:800,c:RED_T})+
-   callout(228,146,108,['Lên cấp: bạn và','thầy cô xác nhận'],GREEN_T),'','0 0 340 202');}
+   callout(228,146,108,['Đủ phiếu thì','thẻ tự lên bậc'],GREEN_T),'','0 0 340 202');}
  }
 };
 /* Ghép vào bài học */

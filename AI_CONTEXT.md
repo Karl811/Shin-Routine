@@ -6,6 +6,8 @@
 Dữ liệu nằm trên thiết bị/trình duyệt. Mã lớp Demo-KZ dùng dữ liệu minh họa. Khác địa chỉ web có thể khác vùng dữ liệu. Đừng suy luận rằng dữ liệu đã mất chỉ vì chuyển sang địa chỉ xem thử khác.
 
 ## Mốc hiện tại
+- **M.Claude.3.3.32 (luật v2, đợt 3 chữ):** LESSONS b1/b4/b5 app, LV hình bài 1/4/5, BEN32 (gợi ý ích lợi) + SECTION rules-v2-text, thuật ngữ “Bậc” thay “Cấp”. Chờ duyệt chữ bằng Excel. Xem HANDOFF.md mục 0.
+- **M.Claude.3.3.31 (luật v2, đợt 2 giao diện):** SECTION rules-v2-ui cuối scripts/rules-v2.js và design-system.css (thẻ duy trì ở Hôm nay, Shin hỏi khi mở app, Lửa tuần trên Thẻ tuần); offerTier = câu hỏi chỉnh công thức; masterShow = hỏi sang Duy trì; vuốt mở màn hình ghi nhận đủ 3 nút. Xem HANDOFF.md mục 0.
 - **M.Claude.3.3.30 (luật rèn luyện v2, đợt 1 logic lõi):** mọi cách tính Lửa/ngày nghỉ/bậc/thẻ duy trì nằm ở `scripts/rules-v2.js` (r2Calc, r2Info, r2Sync, r2KeepState, r2Week). `streak()` trả Lửa, `daysAt()` trả số ngày/lần v2, `ready()` luôn false (tự lên bậc), `vitality()` = r2KeepState. Đã bỏ mục tiêu tuần, thử thách tuần, XP, chuỗi riêng, xác nhận bạn/GV, mã GV, chế độ GV, Nâng việc. Xem HANDOFF.md mục 0.
 - **M.Claude.3.3.29 (bản final, mặt sau 8 hình mới, đã bỏ mọi trích dẫn lời Thầy):** "Cách làm" bằng hình cho đủ 14/14 thói quen và 5 bài "Nền tảng rèn luyện" (mục LV trong how-visual.js) trong `scripts/how-visual.js`; xem mục 0 của HANDOFF.md. Các dòng dưới mô tả gốc M3.3.20-5S.2.
 - Giao diện/chức năng: M3.3.20.

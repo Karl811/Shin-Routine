@@ -1,5 +1,5 @@
 {
-  "build": "M.Claude.3.3.30",
+  "build": "M.Claude.3.3.32",
   "canonical_sources": {
     "letters.js": "scripts/core.js",
     "app.js": "scripts/core.js",
@@ -145,7 +145,9 @@
     "M.Claude.3.3.27": "Bỏ trích dẫn Thầy Lê Long Sơn (5 quote thẻ, bài 3, bài 5)",
     "M.Claude.3.3.28": "Sửa 4 chỗ chữ bài học cho khớp app; bản final",
     "M.Claude.3.3.29": "8 hình mặt sau mới (2,4,5,6,7,8,12,13); nền dải hình phẳng",
-    "M.Claude.3.3.30": "Luật v2 đợt 1 (logic lõi): Lửa cộng dồn, 1 ngày nghỉ/7 ngày, tự lên bậc; bỏ mục tiêu tuần, thử thách tuần, XP, chuỗi riêng, xác nhận, mã GV, chế độ GV, Nâng việc"
+    "M.Claude.3.3.30": "Luật v2 đợt 1 (logic lõi): Lửa cộng dồn, 1 ngày nghỉ/7 ngày, tự lên bậc; bỏ mục tiêu tuần, thử thách tuần, XP, chuỗi riêng, xác nhận, mã GV, chế độ GV, Nâng việc",
+    "M.Claude.3.3.31": "Luật v2 đợt 2 (giao diện): thẻ duy trì ở Hôm nay, vuốt mở đủ 3 nút, Shin hỏi khi mở app, hỏi chỉnh công thức khi lên bậc, hỏi sang Duy trì khi Thành nếp, Lửa tuần trên Thẻ tuần; sửa Demo v:5",
+    "M.Claude.3.3.32": "Luật v2 đợt 3 (chữ): bài 1/4/5 “Trong app” + hình, gợi ý ghi chú hướng về ích lợi (BEN32), “Cấp” → “Bậc”"
   },
   "final_approved_art": {
     "canonical_source": "design-system.js: SHIN_BACK_ART and SHIN_BACK_ART_VIEWBOX",

@@ -1,5 +1,30 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.32 — 15/11/2026 — Luật rèn luyện v2, đợt 3: chữ
+
+Gốc M.Claude.3.3.31. Người dùng chốt thống nhất “Cấp” → “Bậc”.
+
+- **Bài Nền tảng 1, 4, 5 — “Trong app này”** (LESSONS trong core.js) viết lại theo luật v2: tự lên bậc + Shin hỏi chỉnh công thức (bài 1); Lửa +1/+2, nghỉ 1 ngày trong 7 ngày, −1 khi lỡ thêm, ghi bù không cộng Lửa, mốc 3·6·9, mạng nhện 14 ngày (bài 4); đủ phiếu tự lên bậc, trình Thẻ tuần khi thầy cô yêu cầu (bài 5). Nút cuối bài 4: “Xem Lửa”. Phản hồi bài 4 “chuỗi” → “nhịp”.
+- **Hình bài học** (LV trong how-visual.js): chú thích và nhãn trong hình bài 1, 4 (Hiểu + Trong app), 5 khớp chữ mới; hình Trong app bài 4 có Lửa, ô nghỉ, “−1 Lửa”, 3·6·9, 14 ngày.
+- **Gợi ý ghi chú hướng về ích lợi:** khi Đã làm / Một phần, câu hỏi thành “Hôm nay thói quen này giúp bạn điều gì?”; 3 gợi ý ích lợi riêng cho từng thói quen (`BEN32` cuối SECTION curriculum14 trong extensions.js; thẻ tự tạo dùng `R2_BEN_DEFAULT`), gợi ý “làm gì, ở đâu” cũ xếp sau (Xem thêm). Chưa làm / Không gặp dịp giữ như cũ. Bọc `noteHints34` trong SECTION rules-v2-text.
+- **“Cấp” → “Bậc”** trên thẻ, thư viện, Cách làm (Ba bậc), Hành trình, cây, tem/thư, nhật ký in, màn hình treo cây (“đã lên bậc Làm quen”). Giữ “cấp trên”, “nâng cấp bản thân”.
+- Ghi chú mẫu công thức giảm dần: bỏ “Lên cấp vẫn cần bạn xem lại và xác nhận”.
+- **File duyệt chữ** `Shin-routine-3.3.32_Duyet-chu-luat-v2.xlsx` (57 dòng chữ mới/đã sửa của đợt 1–3; trang Hướng dẫn, Duyệt chữ, Bổ sung, Tổng hợp).
+- APP_VER và cache: M.Claude.3.3.32.
+
+## M.Claude.3.3.31 — 15/11/2026 — Luật rèn luyện v2, đợt 2: giao diện
+
+Gốc M.Claude.3.3.30. Người dùng chốt: ngày chỉ có ghi bù tính như ngày chưa ghi đối với Lửa (giữ như 3.3.30); thẻ Thành nếp giữ nút "Sang duy trì" và thêm câu hỏi có muốn chuyển sang Duy trì để rèn thói quen mới.
+
+- **Trang Hôm nay — "Đang duy trì"** (`r2KeepToday`, bọc `vToday`): tối đa 3 thẻ duy trì dưới thẻ đang rèn (thẻ chưa ghi hôm nay và lâu chưa làm lên trước), dòng "Làm gần nhất: x ngày trước", nhãn "Shin nhắc" (≥7 ngày) / "Mạng nhện" (≥14 ngày); chạm là mở ghi nhận; "Xem tất cả · n" mở bảng Đang duy trì có sẵn (`openKeeps`).
+- **Sau khi vuốt** thẻ ở Hôm nay: mở màn hình ghi nhận đủ 3 nút (như chạm Đóng dấu), kết quả vuốt được chọn sẵn (interaction.js; `openQuick16` cũng vậy).
+- **Shin hỏi khi mở app** (`r2Ask`, gọi từ boot.js và khi quay lại app): tối đa 1 lần/ngày (`S.r2.ask`); không hỏi nếu mọi thẻ đã ghi hôm nay, khi đang có thông báo lên bậc, khi mở từ lời nhắc check-in, khi chưa có tên. Chọn thẻ: thẻ duy trì ≥7 ngày chưa làm → thẻ đang rèn chưa ghi, ưu tiên thẻ sắp lên bậc (nhắc "còn n ngày/lần" khi ≤3). "Rồi, ghi luôn" mở ghi nhận của thẻ đó; "Chưa" về Hôm nay, Shin để lại 1 mẹo ngắn (bài 1, 4); có nút đóng.
+- **Khi lên bậc** (`offerTier`): Shin hỏi "có muốn chỉnh công thức rèn cho hợp với mình hơn không?" — Chỉnh (mở sửa công thức) / Giữ nguyên. Bậc 2: sau màn hình treo cây ("Tiếp tục"); bậc 3: sau con dấu.
+- **Khi Thành nếp** (`masterShow`): Shin hỏi có muốn chuyển sang Duy trì để có chỗ rèn thói quen mới — "Sang duy trì" / "Để sau". Nút "Sang duy trì" trên thẻ giữ nguyên.
+- **Thẻ tuần:** dòng "Lửa tuần: +x · y/7 ngày có ghi" và 7 ô ngày (+2, +1, Nghỉ, Lỡ, Hôm nay); có ngày Lỡ thì nhắc "Hãy sẵn sàng kể lý do khi trình thẻ". Ảnh Thẻ tuần thêm dòng "Lửa tuần … · Nghỉ: … · Lỡ: …".
+- **Sửa lỗi có từ trước:** Demo mở lại (tải lại trang) biến 10 thẻ duy trì thành đang rèn vì `buildDemo` để `v:3` → `migrate` đổi `keep` thành `active`. Nay `buildDemo` đặt `v:5`.
+- Tệp sửa: scripts/rules-v2.js (SECTION rules-v2-ui), core.js (masterShow, offerTier, wkImage), interaction.js, extensions.js, boot.js, design-system.css (SECTION rules-v2-ui), index.html, habit-game.html, sw.js. APP_VER và cache: M.Claude.3.3.31.
+
 ## M.Claude.3.3.30 — 15/11/2026 — Luật rèn luyện v2, đợt 1: logic lõi
 
 Theo mục 10 tài liệu "Shin routine — Logic rèn luyện" (đã chốt 15/11/2026). Chỉ đổi logic lõi; giao diện để đợt 2, chữ bài học để đợt 3.

@@ -4,6 +4,7 @@ new MutationObserver(function(){animateKPIs();}).observe(document.body,{childLis
 if('scrollRestoration' in history) history.scrollRestoration='manual';
 render(); window.scrollTo(0,0); if(!DEMO)splashBoot();else document.documentElement.classList.remove('growth-starting');
 if(R2_NOTICE)setTimeout(r2Notice,DEMO||location.hash==='#checkin'?500:2600); /* v2: Shin báo thẻ đã lên bậc ở lần mở đầu */
+else setTimeout(r2Ask,DEMO?700:2800); /* v2 đợt 2: Shin hỏi khi mở app, 1 lần mỗi ngày */
 scheduleCheckin36();
 function hashCI(){ if(S.name && location.hash==='#checkin'){ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} setTimeout(function(){ openCI(dk()); },350); } }
 hashCI(); window.addEventListener('hashchange',hashCI);

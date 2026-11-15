@@ -239,6 +239,23 @@ var todayBase=flowTodayName;flowTodayName=function(id){return HABITS.some(functi
 // Người đã rèn thẻ thuộc bộ cũ vẫn tìm và đọc/sửa được; người mới chỉ thấy 14 thẻ.
 cardNo=function(id){var i=HABITS.findIndex(function(h){return h.id===id;});return i<0?'—':pad(i+1);};
 /* v2: bỏ “Nâng việc” khi lên bậc (offerTier trong core.js). */
+/* 3.3.32 · gợi ý ghi chú hướng về ích lợi: “Hôm nay thói quen này giúp mình…” (chờ duyệt chữ) */
+var BEN32={
+ chao:['Mình tự tin bắt chuyện hơn','Mọi người vui vẻ hơn với mình','Người giúp mình thấy được trân trọng'],
+ som:['Mình không phải chạy vội','Vào lớp bình tĩnh, nghe trọn bài','Mọi người tin mình giữ hẹn'],
+ memo:['Mình nhớ đúng lời dặn','Hỏi lại nên hiểu rõ hơn','Làm đúng ngay lần đầu'],
+ '5s':['Không mất công tìm đồ','Chỗ ở gọn, mình thấy dễ chịu','Bắt đầu việc nhanh hơn'],
+ xinloi:['Biết rõ mình cần sửa gì','Lần sau làm tốt hơn','Người góp ý tin mình hơn'],
+ '5phut':['Ôn thêm được vài chữ','Khoảng chờ không bị phí','Mình tiến bộ thêm một chút'],
+ camxuc:['Mình bình tĩnh lại','Không lỡ lời rồi hối hận','Hiểu mình hơn một chút'],
+ vandong:['Ngồi học đỡ mỏi hơn','Người tỉnh táo, nhẹ nhõm','Tối ngủ ngon hơn'],
+ anuong:['Tỉnh táo trong giờ học','Không đuối sức khi làm thêm','Cơ thể khỏe hơn'],
+ ngu:['Sáng dậy tỉnh táo hơn','Không thức khuya theo điện thoại','Chủ động cho ngày mai'],
+ chitieu:['Biết tiền mình đi đâu','Bớt mua món chưa cần','Để dành được cho việc lớn'],
+ viecko:['Mình học được điều mới','Bớt ngại hơn lần trước','Được tin tưởng hơn'],
+ horenso:['Người giao việc yên tâm','Tránh được hiểu lầm','Mình làm đúng ý người giao việc'],
+ giup:['Cả nhóm xong việc sớm hơn','Bạn bè gần mình hơn','Mình thấy vui vì có ích']};
+Object.keys(BEN32).forEach(function(id){if(HMAP[id])HMAP[id].ben=BEN32[id];});
 })();
 
 ;
@@ -258,7 +275,7 @@ document.addEventListener('input',function(e){if(NT&&e.target.id==='ntIn')markSo
 document.addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;if(b.dataset.act==='ntChip'&&NT)markSource16(NT.id,NT.day,'suggestion');if(b.dataset.act==='ciNoteChip34'&&CI)markSource16(b.dataset.v.split('|')[0],CI.date,'suggestion');},true);
 
 // Rebuild the demonstration from the 14 current cards only.
-buildDemo=function(){var s=defState(),t=dk(),start=addD(t,-42);s.name='Minh Anh';s.cls='DEMO-KZ';s.teacher=4;s.created=start;s.introSeen=1;s.onboarded32=true;s.guideOff=true;s.gFlip=1;s.gHome=1;s.growth={goals:{},challenges:{},tips:0,enabled:false};s.evening={morningTime:'07:00',pomodoro:25};
+buildDemo=function(){var s=defState(),t=dk(),start=addD(t,-42);s.v=5;/* 3.3.31: tránh migrate() đổi thẻ duy trì thành đang rèn khi mở lại Demo */s.name='Minh Anh';s.cls='DEMO-KZ';s.teacher=4;s.created=start;s.introSeen=1;s.onboarded32=true;s.guideOff=true;s.gFlip=1;s.gHome=1;s.growth={goals:{},challenges:{},tips:0,enabled:false};s.evening={morningTime:'07:00',pomodoro:25};
  var notes={chao:'Chủ động chào bác bảo vệ và cảm ơn cô nấu ăn.',som:'Soạn đồ từ tối, ra khỏi phòng đúng giờ đã chọn.',memo:'Ghi lại lời dặn và hỏi lại hạn nộp hồ sơ.','5s':'Cất sách đúng chỗ và xếp giày gọn trước khi ra ngoài.',xinloi:'Nghe hết góp ý, hỏi rõ và sửa lại phần bài còn thiếu.','5phut':'Mở Hack-kanji ôn vài chữ trong lúc chờ vào lớp.',camxuc:'Dừng lại, hít chậm và gọi tên cảm xúc trước khi trả lời.',vandong:'Đi bộ một đoạn sau giờ học, thấy người tỉnh hơn.',anuong:'Ăn đủ bữa, thêm rau và mang bình nước.',ngu:'Cất điện thoại vào giờ đã chọn để dành đủ thời gian ngủ.',chitieu:'Ghi khoản chi hôm nay, phân biệt cần và muốn.',viecko:'Mạnh dạn giơ tay phát biểu một câu tiếng Nhật.',horenso:'Nhắc lại việc và thời hạn trước khi bắt đầu.',giup:'Hỏi bạn cần giúp gì sau khi xong phần mình.'};
  HABITS.forEach(function(h,i){var complete=i<10;var sug=(SUG[h.id]||[])[0];s.habits[h.id]={status:complete?'keep':'active',since:start,lv:complete?3:1,lvSince:complete?addD(t,-10):addD(t,-3),anchor:sug?sug[0]:h.anchors[0],act:sug?sug[1]:h.act,who:h.who[0]||'',quiz:'first'};if(complete)s.habits[h.id].master=addD(t,-7);s.order.push(h.id);s.seen[h.id]=1;s.learnedXP[h.id]=1;
  for(var j=complete?35:3;j>=1;j--){var day=addD(t,-j),m=complete?'y':j===2?'p':'y';if(h.cond&&m==='p')m='n';s.log[day]=s.log[day]||{};s.notes[day]=s.notes[day]||{};s.review16[day]=s.review16[day]||{};s.log[day][h.id]=m;s.notes[day][h.id]=notes[h.id];var stamp=new Date(day+'T20:30:00').getTime(),back=j===5&&i%3===0;s.review16[day][h.id]={createdAt:stamp+(back?86400000:0),updatedAt:stamp+(back?86400000:0),source:i%3===0?'mixed':i%3===1?'typed':'suggestion'};if(back){s.bf[day]=s.bf[day]||{};s.bf[day][h.id]=1;}s.opens[day]=1;s.ci[day]={t:'21:00',note:j%7===0?'Một tuần rèn từng việc nhỏ, mình biết hỏi lại khi chưa rõ.':'',p:0};}
@@ -273,7 +290,7 @@ var runtime16=updateRuntime32;updateRuntime32=function(){runtime16();var el=$('#
 // Chips are an explicit choice, not an automatic answer.
 f2Hints=function(id,status,act,prefix,open){var E=noteHints34(id,status);return '<details class="f2-suggestions hints16" open><summary>Gợi ý ghi chú '+mi('expand_more')+'</summary><div>'+E.o.map(function(o,i){return '<button type="button" class="chp'+(i>2?' hint16-extra':'')+'" data-act="'+act+'" data-v="'+esc((prefix?id+'|':'')+o)+'">'+esc(o)+'</button>';}).join('')+(E.o.length>3?'<button class="hint16-more flow-link" type="button" data-act="hintMore16">Xem thêm '+mi('expand_more')+'</button>':'')+'</div></details>';};
 var note16=drawNote29;drawNote29=function(){if(!NT)return;if(!NT.quick16){note16();var sheet=OV&&$('.sheet',OV);if(sheet)sheet.classList.add('record16');return;}var id=NT.id;ci40Mount('quick16','<header class="ci40-top"><div class="ci40-bar"><b id="f2DialogTitle">'+esc(sname(id))+'</b><button class="m3-icon-button" data-act="close" aria-label="Đóng">'+mi('close')+'</button></div></header><div class="ci40-scroll"><div class="quick16-status"><b>'+esc(RECORD_LABEL[NT.ans])+'</b><button class="flow-link" data-act="quickChange16">Đổi kết quả</button></div><div class="ci40-body">'+ci40Field(id,NT.ans,true)+'</div></div><footer class="ci40-footer"><button class="btn ci40-primary" id="ntGo" data-act="ntSave"'+(String(NT.text||'').trim()?'':' disabled')+'>Lưu ghi nhận '+mi('check')+'</button><button class="flow-link" data-act="flowMemoLater">Đóng và giữ bản nháp</button></footer>',false);$('.sheet',OV).classList.add('quick16','record16');};
-window.openQuick16=function(id,ans){openNote(id,dk());if(NT){NT.ans=ans;NT.quick16=true;flowStashNote();drawNote29();var input=$('#ntIn');if(input)input.focus({preventScroll:true});}};
+window.openQuick16=function(id,ans){openNote(id,dk());if(NT){NT.ans=ans;NT.quick16=false;flowStashNote();drawNote29();var input=$('#ntIn');if(input)input.focus({preventScroll:true});}};
 var ciMount16=ci40Mount;ci40Mount=function(kind,html,keep){ciMount16(kind,html,keep);var top=$('.ci40-top',OV);if(top)top.style.position='relative';};
 var flowWeek16=flowWeek;flowWeek=function(){var box=document.createElement('div');box.innerHTML=flowWeek16();$$('.evening-day-review,.play14-saved-head,.play14-saved',box).forEach(function(el){el.remove();});return box.innerHTML;};
 var renderHead16=renderHead;renderHead=function(){renderHead16();var title=$('#pageTitle35'),star=$('#saved16');if(PG!==1&&star)star.remove();if(title)title.parentElement.classList.toggle('week-title16',PG===1);if(PG===1&&title&&!$('#saved16')){var b=document.createElement('button');b.id='saved16';b.className='m3-icon-button';b.dataset.act='eveningSaved';b.innerHTML=mi('star');title.insertAdjacentElement('afterend',b);}star=$('#saved16');if(star){star.setAttribute('aria-label',JOURNAL_MODE31==='saved'?'Về tuần đang xem':'Đáng nhớ');star.setAttribute('aria-pressed',String(JOURNAL_MODE31==='saved'));}};

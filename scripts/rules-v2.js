@@ -1,5 +1,5 @@
 /* ===== SECTION: rules-v2.js ===== */
-/* M.Claude.3.3.30 · Luật rèn luyện v2 (chốt 15/11/2026, mục 10 tài liệu "Shin routine — Logic rèn luyện").
+/* M.Claude.3.3.32 · Luật rèn luyện v2 (chốt 15/11/2026, mục 10 tài liệu "Shin routine — Logic rèn luyện").
    Một nơi duy nhất tính: Lửa, ngày nghỉ, số ngày/lần của thẻ, bậc thẻ, thẻ duy trì.
    - Lửa: ngày có ghi đúng ngày ≥1 thẻ (kể cả "Chưa làm") +1; trọn mọi thẻ đang rèn +2.
      Thẻ khi gặp dịp ghi "Không gặp dịp" vẫn tính là trọn. Thẻ duy trì không tính vào "trọn".
@@ -88,7 +88,7 @@ function r2Flush(){
   if(a.master){masterShow(a.id);return;}
   fanfare();bigStamp(a.lv===3?'t':'f');
   if(a.lv===2){showTreeAward(a.id,a.stamp);return;}
-  toast('Thẻ '+esc(sname(a.id))+' lên bậc '+LV_NAME[a.lv]+'!',4500);setTimeout(r2Flush,1600);
+  setTimeout(function(){if(!OV)offerTier(a.id);else r2Flush();},1100);
 }
 var r2CloseOv=closeOv;
 closeOv=function(){var out=r2CloseOv.apply(this,arguments);if(R2_QUEUE.length){clearTimeout(R2_FLUSH_T);R2_FLUSH_T=setTimeout(r2Flush,420);}return out;};
@@ -135,3 +135,54 @@ applyRestore32=function(){var out=r2ApplyRestore.apply(this,arguments);if(S){r2M
 /* Ngày đổi khi app vẫn mở: ngày nghỉ hôm qua có thể cộng ngày cho thẻ. */
 var R2_DAY=dk();
 document.addEventListener('visibilitychange',function(){if(document.hidden||!S||SAVE_BLOCK)return;if(R2_DAY!==dk()){R2_DAY=dk();R2C=null;var ups=r2Sync();if(ups.length){save(true);r2Queue(ups);}refreshAll();}});
+
+/* ===== SECTION: rules-v2-ui (M.Claude.3.3.32 · đợt 2 giao diện) ===== */
+/* 1) Trang Hôm nay: thẻ duy trì nằm dưới thẻ đang rèn, kèm "làm gần nhất"; chạm là ghi. */
+function r2KeepLine(id){var d=dk(),m=mark(d,id);if(m)return RECORD_LABEL[m]+' hôm nay';var last=r2LastDone(id),n=r2IdleDays(id),u=H(id);if(!last)return 'Chưa làm lại';if(last===(u&&u.master)&&!((S.log[last]||{})[id]))return 'Thành nếp '+(n?n+' ngày trước':'hôm nay');return 'Làm gần nhất: '+(n?n+' ngày trước':'hôm nay');}
+function r2KeepToday(){
+  var all=keepIds();if(!all.length)return '';var d=dk();
+  var list=all.slice().sort(function(a,b){var ma=mark(d,a)?1:0,mb=mark(d,b)?1:0;return ma-mb||r2IdleDays(b)-r2IdleDays(a);}),shown=list.slice(0,3);
+  var VT={fade:['Shin nhắc','fade'],web:['Mạng nhện','web']};
+  return '<section class="keep31" data-flow-type aria-label="Thẻ đang duy trì"><div class="keep31-head"><h2>Đang duy trì</h2>'+(all.length>shown.length?'<button class="flow-link" data-act="keeps">Xem tất cả · '+all.length+'</button>':'')+'</div>'+
+    shown.map(function(id){var st=mark(d,id)?'live':r2KeepState(id),tag=VT[st];return '<button class="keep31-row'+(mark(d,id)?' is-done':'')+(st==='web'?' is-web':'')+'" data-act="note" data-v="'+id+'|'+d+'" aria-label="Ghi nhận '+esc(sname(id))+'">'+emblem(id,36)+'<span class="keep31-text"><b>'+esc(sname(id))+'</b><small>'+esc(r2KeepLine(id))+'</small></span>'+(tag?'<span class="keep31-tag '+tag[1]+'">'+(st==='web'?webIcon():'')+tag[0]+'</span>':'')+'<span class="keep31-plus" aria-hidden="true">'+mi(mark(d,id)?'edit':'add')+'</span></button>';}).join('')+'</section>';
+}
+var r2Today=vToday;
+vToday=function(){var h=r2Today(),k=r2KeepToday();if(!k)return h;var i=h.lastIndexOf('</div>');return i<0?h+k:h.slice(0,i)+k+h.slice(i);};
+
+/* 2) Thẻ tuần: dòng "Lửa tuần · y/7 ngày có ghi" và đánh dấu rõ ngày nghỉ, ngày lỡ. */
+function r2WeekDays(ws){var C=r2Calc(),t=dk(),out=[];for(var i=0;i<7;i++){var d=addD(ws,i),k=d>t?'future':C.rec[d]?(C.gain[d]===2?'full':'rec'):C.free[d]?'rest':C.miss[d]?'miss':d===t?'today':'none';out.push({d:d,k:k});}return out;}
+function r2Sign(n){return n>0?'+'+n:n<0?'−'+Math.abs(n):'0';}
+function r2WeekFire(ws){
+  var w=r2Week(ws),days=r2WeekDays(ws),label={full:'+2',rec:'+1',rest:'Nghỉ',miss:'Lỡ',today:'Hôm nay',future:'',none:''},miss=days.filter(function(x){return x.k==='miss';}).length;
+  return '<div class="wkfire31" data-flow-type><p>'+mi('local_fire_department')+'<b>Lửa tuần: '+r2Sign(w.fire)+'</b><span>· '+w.days+'/7 ngày có ghi</span></p><div class="wkfire31-days">'+days.map(function(x,i){return '<span class="'+x.k+'" title="'+dm(x.d)+'"><i>'+label[x.k]+'</i><small>'+WDS[i]+'</small></span>';}).join('')+'</div>'+(miss?'<small class="wkfire31-note">Ngày “Lỡ”: bạn chưa ghi. Hãy sẵn sàng kể lý do khi trình thẻ.</small>':'')+'</div>';
+}
+var r2DrawWeek=drawWeek;
+drawWeek=function(){r2DrawWeek();var shin=OV&&$('.wkshin',OV);if(shin&&!$('.wkfire31',OV))shin.insertAdjacentHTML('afterend',r2WeekFire(WK));};
+
+/* 3) Shin hỏi khi mở app: tối đa 1 lần mỗi ngày, ở lần mở đầu tiên; không hỏi nếu mọi thẻ đã ghi hôm nay. */
+function r2AskPick(){
+  var d=dk(),keeps=keepIds().filter(function(id){return !mark(d,id)&&r2IdleDays(id)>=7;}).sort(function(a,b){return r2IdleDays(b)-r2IdleDays(a);});
+  if(keeps.length)return {id:keeps[0],keep:true};
+  var train=r2TrainingNow().filter(function(id){return !mark(d,id)&&!flowDraft(d,id);}).sort(function(a,b){return (needFor(a,H(a).lv)-r2Count(a))-(needFor(b,H(b).lv)-r2Count(b));});
+  return train.length?{id:train[0],keep:false}:null;
+}
+function r2Ask(){
+  if(!S||LOAD_ISSUE32||!S.name||OV||R2_NOTICE||location.hash==='#checkin')return;
+  S.r2=S.r2||{v:2};if(S.r2.ask===dk())return;
+  var d=dk();if(!handList().concat(keepIds()).some(function(id){return !mark(d,id);}))return;
+  var p=r2AskPick();if(!p)return;S.r2.ask=d;save(true);
+  var id=p.id,name='<b>'+esc(S.name)+'</b>',left=needFor(id,H(id).lv)-r2Count(id),q;
+  if(p.keep)q='“'+esc(sname(id))+'” đã '+r2IdleDays(id)+' ngày chưa làm. Hôm nay '+name+' làm lại chưa?';
+  else q='Hôm nay '+name+' đã làm “'+esc(sname(id))+'” chưa?'+(left>0&&left<=3?' Còn '+left+' '+unitOf(id)+' nữa là lên bậc '+esc(LV_NAME[Math.min(3,(H(id).lv||1)+1)]||'')+'.':'');
+  openMini('<div class="ask31">'+say('shin',p.keep?'worry':'hi',q)+'<div class="stack" style="margin-top:14px"><button class="btn btn--wide" data-act="r2AskYes" data-v="'+id+'">Rồi, ghi luôn</button><button class="btn btn--ghost btn--wide" data-act="r2AskNo" data-v="'+id+'">Chưa</button></div></div>');
+}
+function r2AskTip(id){var dip=id&&HMAP[id]&&isDip(id),pool=(typeof GROWTH_TIPS!=='undefined'?GROWTH_TIPS:[]).filter(function(t){return (t[0]==='b1'||t[0]==='b4')&&(dip||t[1].indexOf('gặp dịp')<0);});return pool.length?pool[Math.floor(Math.random()*pool.length)][1]:'Làm phiên bản nhỏ nhất cũng được tính.';}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-act=r2AskYes],[data-act=r2AskNo]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();var id=b.dataset.v;closeOv(true);
+  if(b.dataset.act==='r2AskYes'){if(H(id))openNote(id,dk());}else{PG=0;render();window.scrollTo(0,0);toast('<b>Shin nhắn:</b> '+esc(r2AskTip(id)),6000);}},true);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&S&&!SAVE_BLOCK)setTimeout(r2Ask,600);});
+
+/* ===== SECTION: rules-v2-text (M.Claude.3.3.32 · đợt 3 chữ) ===== */
+/* Gợi ý ghi chú khi Đã làm / Một phần: hướng về ích lợi trước, gợi ý “làm gì, ở đâu” cũ xếp sau (Xem thêm). */
+var R2_BEN_DEFAULT=['Mình tiến bộ thêm một chút','Mình thấy vui với bản thân','Gần hơn với người mình muốn trở thành'];
+var r2NoteHints=noteHints34;
+noteHints34=function(id,status){var E=r2NoteHints(id,status);if(status==='n'||status==='x')return E;var ben=(HMAP[id]&&HMAP[id].ben)||R2_BEN_DEFAULT,old=(E&&E.o)||[];return {q:'Hôm nay thói quen này giúp bạn điều gì?',o:ben.concat(old.filter(function(o){return ben.indexOf(o)<0;}))};};

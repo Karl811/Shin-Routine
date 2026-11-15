@@ -1,6 +1,10 @@
-# Shin routine M.Claude.3.3.30 — Luật rèn luyện v2, đợt 1 (logic lõi)
+# Shin routine M.Claude.3.3.32 — Luật rèn luyện v2, đủ 3 đợt
 
-**Bản mới nhất: M.Claude.3.3.30 (gốc M.Claude.3.3.29).** Luật v2: Lửa cộng dồn, 1 ngày nghỉ trong 7 ngày, thẻ tự lên bậc 7/14/21 ngày (3/6/9 lần), thẻ duy trì 7/14 ngày; bỏ mục tiêu tuần, thử thách tuần, XP, xác nhận, mã và chế độ giáo viên. Nguồn luật: `scripts/rules-v2.js`. Đợt 2 (giao diện) và đợt 3 (chữ) chưa làm.
+**Bản mới nhất: M.Claude.3.3.32 (gốc M.Claude.3.3.31).** Đợt 3 (chữ): bài 1, 4, 5 phần “Trong app”, gợi ý ghi chú hướng về ích lợi, “Cấp” → “Bậc”. Chờ duyệt chữ bằng file Excel.
+
+**M.Claude.3.3.31 (gốc M.Claude.3.3.30).** Thẻ duy trì ở trang Hôm nay, vuốt mở đủ 3 nút, Shin hỏi khi mở app, hỏi chỉnh công thức khi lên bậc, hỏi sang Duy trì khi Thành nếp, Lửa tuần trên Thẻ tuần.
+
+**M.Claude.3.3.30 (gốc M.Claude.3.3.29).** Luật v2: Lửa cộng dồn, 1 ngày nghỉ trong 7 ngày, thẻ tự lên bậc 7/14/21 ngày (3/6/9 lần), thẻ duy trì 7/14 ngày; bỏ mục tiêu tuần, thử thách tuần, XP, xác nhận, mã và chế độ giáo viên. Nguồn luật: `scripts/rules-v2.js`.
 
 **Bản trước: M.Claude.3.3.29 (gốc M3.3.20-5S.2).** Có hình trong "Cách làm" của cả 14 thói quen và trong 5 bài "Nền tảng rèn luyện"; bài Thực tập "Tìm điểm chưa ổn" cho Ngủ, Ăn uống, 5S. Đọc HANDOFF.md mục 0 trước khi sửa.
 

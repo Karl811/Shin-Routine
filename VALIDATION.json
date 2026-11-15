@@ -1,10 +1,10 @@
 {
-  "feature_version": "M.Claude.3.3.30",
-  "cache_build": "M.Claude.3.3.30",
+  "feature_version": "M.Claude.3.3.32",
+  "cache_build": "M.Claude.3.3.32",
   "date": "2026-11-15",
-  "status": "batch1_core_logic_pending_user_review_and_physical_device_test",
+  "status": "batch3_text_pending_user_text_review_and_physical_device_test",
   "files": 54,
-  "baseline": "M.Claude.3.3.29 final",
+  "baseline": "M.Claude.3.3.31",
   "physical_phones_tested": false,
   "production_deployment_performed": false,
   "structure": {
@@ -15,165 +15,89 @@
     "cache_tags_match": true
   },
   "checks_run_this_build": {
-    "doc_example_week_chromium": {
+    "regression_batch1_2": {
       "passed": true,
-      "note": "Ví dụ tuần ở mục 10 (Chào hỏi + 5S): Lửa +6, Chào hỏi 5 ngày; T4 ngày nghỉ (0), T6 lỡ thêm (−1)."
+      "note": "Chạy lại kiểm thử 3.3.30–3.3.31 (ví dụ tuần, dữ liệu cũ, lên bậc + hoàn tác, check-in, các trang, Shin hỏi, thẻ duy trì, chuỗi câu hỏi lên bậc/Thành nếp, Thẻ tuần có ngày Nghỉ/Lỡ): không lỗi JavaScript."
     },
-    "legacy_data_migration_390px": {
+    "no_cap_term": {
       "passed": true,
-      "note": "Dữ liệu kiểu 3.3.29: thẻ lv1 15 ngày → Vững tay; lv3 25 ngày → Thành nếp; khi gặp dịp 7 lần → Vững tay; lv2 5 ngày giữ lv2 (không hạ). Shin báo lên bậc 1 lần, mở lại không báo nữa. xp cũ giữ nguyên trong dữ liệu."
+      "note": "Quét mã: không còn “Cấp/CẤP” trên giao diện, trừ “cấp trên”, “nâng cấp bản thân” và chú thích mã."
     },
-    "demo_390px_and_1280px": {
+    "lessons_app_390px": {
       "passed": true,
-      "note": "Demo mở không lỗi, không popup lên bậc; check-in hoàn tất; ảnh chụp Hôm nay, Lửa, Thẻ tuần (không còn con dấu bạn/thầy cô), Đang duy trì, thẻ, nhật ký thẻ, Sổ tay, Tuần, Hành trình."
+      "note": "Ảnh chụp Trong app bài 1, 4, 5 ở 390px: hình và chữ không đè nhau."
     },
-    "level_up_and_undo": {
+    "note_hints": {
       "passed": true,
-      "note": "Đóng dấu đủ 3 lần (Báo cáo và xác nhận) → Làm quen, treo cây; hoàn tác → về Tập sự, gỡ thẻ khỏi cây."
+      "note": "Đã làm: câu hỏi ích lợi + 3 gợi ý riêng; chạm gợi ý điền vào ô ghi chú. Chưa làm: giữ câu hỏi lý do."
     },
-    "backfill_no_fire": {
+    "card_tree_labels": {
       "passed": true,
-      "note": "Ghi bù: Lửa không đổi, thẻ +1 ngày."
+      "note": "Thẻ hiện “BẬC 1 · Tập sự”; màn hình treo cây “đã lên bậc Làm quen”."
     },
-    "full_day_plus2": {
+    "structure": {
       "passed": true,
-      "note": "Mọi thẻ đang rèn Đã làm / Không gặp dịp → ngày đó +2."
-    },
-    "keep_card_7_14": {
-      "passed": true,
-      "note": "Thẻ duy trì 7 ngày chưa làm → 'fade' (Shin nhắc); 14 ngày → 'web'."
-    },
-    "wizard_no_goal_step": {
-      "passed": true,
-      "note": "openStart: quiz,k,a,w; openCustom: cn,k,a,w,y."
-    },
-    "no_removed_text_on_screens": {
-      "passed": true,
-      "note": "Không còn Học phần, XP, mã thầy cô, Mục tiêu mỗi tuần, Thử thách tuần trên các màn hình chính (Demo)."
-    },
-    "legacy_pages_smoke": {
-      "passed": true,
-      "note": "Tuần, Hành trình, cây, Sổ tay, nhật ký thẻ, thẻ Thành nếp, Thẻ tuần, lưu ảnh Thẻ tuần, in nhật ký, Thư viện: không lỗi JavaScript."
-    },
-    "offline_reload_chromium": {
-      "passed": true,
-      "note": "Service worker cài cache M.Claude.3.3.30 (có rules-v2.js); tải lại khi offline mở được app."
-    },
-    "performance": {
-      "note": "r2Calc + r2Info cho Demo ≈0,3 ms; save ≈0,9 ms (Chromium máy chủ)."
+      "command": "node tools/verify.mjs"
     }
   },
   "not_run": [
     "Safari/WebKit và iPhone thật",
     "Android thật",
-    "Cử chỉ vuốt bằng tay thật",
-    "Âm thanh fanfare, giọng đọc",
-    "Thông báo lịch/nhắc check-in",
-    "Dữ liệu thật của học viên (chỉ dùng dữ liệu tổng hợp và Demo)",
-    "Đổi ngày khi app đang mở qua nửa đêm (chỉ kiểm bằng mã)"
+    "Vuốt bằng ngón tay thật",
+    "Âm thanh",
+    "Dữ liệu thật của học viên"
   ],
-  "data_impact": "Giữ 3 khóa lưu trữ. Thêm S.r2 và S.r2act. Bậc thẻ có thể tăng ở lần mở đầu (không hạ). Không xóa trường cũ.",
+  "data_impact": "Không đổi dữ liệu.",
   "previous_build_validation": {
-    "feature_version": "M.Claude.3.3.29",
-    "cache_build": "M.Claude.3.3.29",
+    "feature_version": "M.Claude.3.3.31",
+    "cache_build": "M.Claude.3.3.31",
     "date": "2026-11-15",
-    "status": "final_pending_physical_device_test",
+    "status": "batch2_ui_pending_user_review_and_physical_device_test",
     "checks_run_this_build": {
-      "how_flows_all_14_habits_chromium_390px": {
-        "passed": 14,
-        "total": 14,
-        "note": "Mở Cách làm của cả 14 thói quen, đi qua mọi thẻ; không lỗi JavaScript; cả 14 có hình mới."
-      },
-      "batch1_visual_review_390px": {
-        "habits": [
-          "vandong",
-          "ngu",
-          "chitieu",
-          "horenso"
-        ],
-        "screens": "Vì sao, Các bước, Thực tập, Ghi nhớ",
-        "method": "chụp màn hình và xem bằng mắt"
-      },
-      "widths": {
-        "checked": [
-          "320px",
-          "390px",
-          "1280px"
-        ]
-      },
-      "practice_types_smoke": {
-        "count": "vandong done",
-        "spot": "ngu, anuong, 5s done",
-        "choose": "horenso done",
-        "pick": "chitieu mở được"
-      },
-      "spot_interaction": {
+      "regression_batch1": {
         "passed": true,
-        "note": "chạm đồ vật ổn → ghi chú xanh, không trừ điểm; tìm đủ 3 → prWin như các bài thực tập khác"
+        "note": "Chạy lại kiểm thử 3.3.30: ví dụ tuần (Lửa +6, Chào hỏi 5 ngày), dữ liệu cũ, lên bậc + hoàn tác, ghi bù, trọn +2, check-in, các trang dữ liệu cũ: không lỗi."
       },
-      "reduced_motion": {
+      "keep_on_today_390_1280_320": {
         "passed": true,
-        "note": "squat dừng ở dáng ngồi; vòng thở dừng, chỉ hiện \"Hít vào bằng mũi\""
+        "note": "3 thẻ duy trì, nhãn Mạng nhện (15 ngày) / Shin nhắc (8 ngày), Xem tất cả · 10; chạm mở ghi nhận thẻ duy trì."
       },
-      "service_worker_cache": {
+      "swipe_full_sheet": {
         "passed": true,
-        "note": "Chromium: cache M.Claude.3.3.29 chứa scripts/how-visual.js"
+        "note": "Kéo chuột trên hàng thẻ ở 390px: mở màn hình ghi nhận đủ 3 nút, Đã làm chọn sẵn."
       },
-      "batch2_visual_review_390px": {
-        "habits": [
-          "anuong",
-          "camxuc",
-          "giup",
-          "5phut"
-        ],
-        "screens": "Vì sao, Các bước, Thực tập, Ghi nhớ",
-        "method": "chụp màn hình và xem bằng mắt"
-      },
-      "batch3_visual_review_390px": {
-        "habits": [
-          "5s",
-          "som",
-          "chao"
-        ],
-        "screens": "Vì sao (kèm hình cũ), Các bước (kèm hình cũ), Thực tập 5S, Ghi nhớ",
-        "method": "chụp màn hình và xem bằng mắt; rà bóng chữ không đè nhân vật cho cả 11 thói quen"
-      },
-      "batch4_visual_review_390px": {
-        "habits": [
-          "memo",
-          "xinloi",
-          "viecko"
-        ],
-        "also": "rà lại bàn tay ở mọi hình sau khi thay hand()",
-        "method": "chụp màn hình và xem bằng mắt"
-      },
-      "lessons_b1_b5_chromium": {
+      "shin_ask": {
         "passed": true,
-        "figures": "b1:3 b2:3 b3:3 b4:3 b5:4",
-        "widths": [
-          "390px",
-          "1280px"
-        ],
-        "note": "mở đủ 4 thẻ mỗi bài, không lỗi JavaScript; thẻ Thử giữ tương tác cũ"
+        "note": "Demo và dữ liệu thử: hỏi thẻ sắp lên bậc; Chưa → về Hôm nay + mẹo; tải lại cùng ngày không hỏi lại."
       },
-      "no_quotes_shown": {
+      "level_up_question": {
         "passed": true,
-        "note": "14 thói quen × mọi thẻ Cách làm và 5 bài × 4 thẻ: không còn khung trích dẫn; grep 'Lê Long Sơn' = 0"
+        "note": "Đóng dấu → treo cây → Tiếp tục → câu hỏi chỉnh công thức → Chỉnh mở sửa công thức (k,a,w)."
       },
-      "lesson_text_fixes": {
+      "master_question": {
         "passed": true,
-        "note": "Bài 1, 3, 4 hiển thị đúng chữ mới ở thẻ Trong app"
+        "note": "Thẻ đang rèn đạt 21 ngày → Thành nếp → câu hỏi → Sang duy trì: thẻ sang keep, rời ô."
       },
-      "card_backs": {
+      "week_fire": {
         "passed": true,
-        "note": "14 mặt sau chụp ở 390px trong Demo: hình mới hiển thị, nền đồng màu thẻ, không lỗi JavaScript"
+        "note": "Tuần ví dụ: Lửa tuần +6 · 5/7 ngày có ghi, T4 Nghỉ, T6 Lỡ; ảnh Thẻ tuần có dòng Lửa tuần · Nghỉ: T4 · Lỡ: T6."
+      },
+      "demo_reload_bug": {
+        "passed": true,
+        "note": "Demo tải lại vẫn có 10 thẻ duy trì."
+      },
+      "structure": {
+        "passed": true,
+        "command": "node tools/verify.mjs"
       }
     },
     "not_run": [
-      "WebKit/Safari (trình duyệt WebKit không có trong môi trường kiểm thử lần này)",
-      "điện thoại thật Android/iPhone",
-      "bộ kiểm tra 72 hồi quy và 372 trạng thái bố cục của bản 5S (không có trong gói)",
-      "kiểm tra đường dẫn con GitHub Pages"
+      "Safari/WebKit và iPhone thật",
+      "Android thật",
+      "Vuốt bằng ngón tay thật (đã thử bằng chuột trong Chromium)",
+      "Âm thanh fanfare",
+      "Shin hỏi khi quay lại app sau khi qua ngày mới (chỉ kiểm bằng mã)",
+      "Dữ liệu thật của học viên"
     ]
   }
 }
