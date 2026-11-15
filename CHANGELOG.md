@@ -1,5 +1,32 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.30 — 15/11/2026 — Luật rèn luyện v2, đợt 1: logic lõi
+
+Theo mục 10 tài liệu "Shin routine — Logic rèn luyện" (đã chốt 15/11/2026). Chỉ đổi logic lõi; giao diện để đợt 2, chữ bài học để đợt 3.
+
+- **Mới `scripts/rules-v2.js`** (tải sau how-visual.js, trước boot.js): một nơi tính Lửa, ngày nghỉ, số ngày/lần của thẻ, bậc, thẻ duy trì; bọc save/writeRecord/undoRecord29/load/applyRestore32/closeOv.
+  - Lửa: ngày có ghi đúng ngày ≥1 thẻ +1 (kể cả "Chưa làm", kể cả đóng dấu lẻ); trọn mọi thẻ đang rèn +2 (khi gặp dịp: Đã làm hoặc Không gặp dịp); thẻ duy trì không tính vào trọn. Không reset, thấp nhất 0. Ngày ghi bù không cộng Lửa.
+  - Ngày nghỉ: 1 ngày trong 7 ngày (không trừ Lửa, thẻ hằng ngày vẫn được tính ngày). Lỡ thêm: −1 Lửa/ngày, thẻ không tính ngày đó.
+  - Bậc: hằng ngày 7/14/21 ngày (Đã làm hoặc Một phần + ngày nghỉ), khi gặp dịp 3/6/9 lần; tự lên bậc, không tự hạ; hoàn tác ghi nhận vừa làm lên bậc thì trả lại bậc cũ.
+  - Thẻ duy trì: 7 ngày chưa làm → "Shin nhắc"; 14 ngày → mạng nhện (cả thẻ khi gặp dịp). Tính từ lần làm gần nhất hoặc từ ngày Thành nếp.
+  - Ghi "thẻ đang rèn" theo ngày (`S.r2act`) để biết ngày nghỉ được cộng cho thẻ nào; ngày trước bản này thì suy từ ngày bắt đầu, Thành nếp và lần ghi cuối.
+  - Lần mở đầu ở v2 (`S.r2`): tính lại bậc theo mốc mới, Lửa tính lại từ lịch sử; Shin báo thẻ nào đã lên bậc (Demo: lặng lẽ).
+  - Mừng lên bậc dùng lại màn hình có sẵn: bậc 2 → treo lên cây (showTreeAward), bậc 3 → con dấu + thông báo, Thành nếp → masterShow. Chờ popup đang mở đóng rồi mới hiện.
+- **Bỏ:** mục tiêu tuần (bước chọn 1–7 ngày, "Rèn thêm nếu muốn", "vượt mục tiêu", mục tiêu mềm), thử thách tuần (lời mời, panel, lưu cảm nhận; trải nghiệm cũ vẫn hiện trong nhật ký), XP (không còn cộng/trừ; trường `xp` cũ giữ nguyên trong dữ liệu), chuỗi riêng từng thẻ và mốc "x ngày liên tiếp", xác nhận bạn cùng tiến và mã thầy cô khi lên cấp, con dấu bạn/thầy cô và mã trên Thẻ tuần, chế độ giáo viên (PIN) trong Cài đặt, "Nâng việc"/"Thử thách cấp" (offerTier chỉ đóng popup; đợt 2 thay bằng câu hỏi chỉnh công thức).
+- **Chữ đổi theo logic (tối thiểu):** nhãn số trên thanh trên và Sổ tay "Lửa" thay "Chuỗi/ngày"; popup Lửa (cách tính v2, lịch tháng theo ngày có ghi); "Đang duy trì" (ghi chú mốc 7/14, "Làm gần nhất"); nhãn "Đang phai" → "Shin nhắc"; Thẻ tuần "Trình thẻ này trước lớp khi thầy cô yêu cầu."; Sổ tay "Báo cáo cuối học phần" → "Báo cáo cho thầy cô"; nhật ký thẻ: "Tuần này: x ngày đã làm", Shin nhắn bậc hiện tại x/mốc; nhật ký in A4: "Lên bậc … ngày …".
+- Tệp sửa: scripts/core.js, habits.js, interaction.js, extensions.js, interface.js, design-system.js, boot.js, index.html, habit-game.html, sw.js; thêm scripts/rules-v2.js. APP_VER và cache: M.Claude.3.3.30. Giữ 3 khóa lưu trữ.
+
+## M.Claude.3.3.29 — 15/11/2026 — Hình mặt sau thẻ (BẢN FINAL)
+
+Người dùng xem 14 hình mặt sau đề xuất (cùng phong cách: nền trong suốt, nét kem/vàng/xanh bạc hà, ẩn dụ câu thành ngữ, không người) và chọn **đổi 8 hình: 2, 4, 5, 6, 7, 8, 12, 13**; giữ 6 hình cũ.
+
+- `design-system.js` (`SHIN_BACK_ART`, `SHIN_BACK_ART_VIEWBOX`): thay hình của som (mặt trời mọc + ba đồng tiền 三文), 5s (sếu cất cánh, mặt hồ trong), xinloi (bát hàn vàng kintsugi), 5phut (chấm nhỏ gom thành núi), camxuc (sóng lặng dần, trăng), vandong (giọt nước khoét đá), viecko (chim non rời tổ), horenso (ba bậc đá qua suối, cầu đá). Các hình mới viewBox 480×200, không có nền riêng.
+- Giữ hình cũ: chao, memo, anuong, ngu, chitieu, giup. Hình giup được kéo giãn ngang nhẹ để đồi không còn mép đứng hai bên.
+- `design-system.css`: dải hình dùng nền phẳng #173F79 đúng màu thẻ (bỏ gradient); mép dưới hình mờ dần sang vùng chữ (mask-image, có -webkit-).
+- APP_VER và cache: M.Claude.3.3.29. Không đổi chữ, câu Nhật, dữ liệu.
+
+Bản này là bản final của phiên. Việc còn lại: thử trên Safari/iPhone và Android thật; tài liệu "Logic rèn luyện" (Claude Docs) chờ người dùng góp ý để điều chỉnh logic ở phiên sau.
+
 ## M.Claude.3.3.28 — 14/11/2026 — Bản final của đợt "Cách làm bằng hình"
 
 Người dùng duyệt 2 câu mới ở Bài 3, Bài 5 và đồng ý sửa 4 chỗ chữ bài học chưa khớp app.

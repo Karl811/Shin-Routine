@@ -1,13 +1,36 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.28 — BẢN FINAL, 14/11/2026)
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.30 — 15/11/2026)
 
-## 0. Bản hiện tại (final): M.Claude.3.3.28 — "Cách làm" và 5 bài "Nền tảng rèn luyện" bằng hình
+## 0. Bản hiện tại: M.Claude.3.3.30 — Luật rèn luyện v2, đợt 1 (logic lõi)
 
-- Gốc: M3.3.20–5S.2 (các mục 1–6 bên dưới vẫn đúng cho phần còn lại của app). APP_VER và cache đều là **M.Claude.3.3.28**; gói 53 tệp.
+- Gốc: M.Claude.3.3.29 final. APP_VER và cache: **M.Claude.3.3.30**; 54 tệp (thêm `scripts/rules-v2.js`).
+- Luật nguồn: mục 10 tài liệu Claude Docs "Shin routine — Logic rèn luyện" (đã chốt 15/11/2026), thay các mục 1–9 cũ.
+- **Mọi cách tính nằm ở `scripts/rules-v2.js`:** `r2Calc()` (Lửa, ngày nghỉ, ngày lỡ, ngày có ghi), `r2Info(id)` (số ngày/lần + ngày chạm mốc), `r2Sync()` (tự lên bậc, Thành nếp), `r2KeepState(id)` (thẻ duy trì 7/14 ngày), `r2Week(ws)` (Lửa tuần, số ngày có ghi — dùng cho đợt 2). Hàm cũ gọi vào đây: `streak()`→Lửa, `daysAt()/dayCount()`→r2Count, `ready()`→false, `vitality()`→r2KeepState.
+- Quy ước tính đã chọn (người dùng cần biết):
+  - "Đúng ngày" = `review16[ngày][thẻ].createdAt` cùng ngày (nếu thiếu thì dựa `S.bf`). Ngày chỉ có ghi bù = như ngày chưa ghi đối với Lửa (có thể là ngày nghỉ hoặc −1), nhưng thẻ vẫn được tính ngày theo bản ghi bù.
+  - Ngày nghỉ được cộng ngày cho mọi thẻ hằng ngày **đang rèn** hôm đó và chưa ghi gì. "Đang rèn" lấy từ ảnh chụp theo ngày `S.r2act` (ghi khi lưu); ngày trước bản 3.3.30 thì suy: đã bắt đầu, chưa Thành nếp, đang trên tay hoặc còn bản ghi về sau.
+  - Ngày không có thẻ đang rèn nào thì không tính lỡ. Ngày hôm nay chưa ghi thì chưa xét.
+  - Bậc không tự hạ (chỉ hoàn tác đúng ghi nhận vừa làm lên bậc mới trả bậc cũ). Thành nếp vẫn bấm "Sang duy trì" như cũ.
+  - Thẻ duy trì: đếm từ lần Đã làm/Một phần gần nhất, hoặc từ ngày Thành nếp nếu chưa làm lại.
+- Dữ liệu: giữ 3 khóa lưu trữ; thêm `S.r2` {v:2, migrated} và `S.r2act`. Trường cũ (`xp`, `tstamps`, `growth.goals`, `growth.challenges`, `cf`, `week[].buddy`) giữ nguyên, không còn dùng (trải nghiệm thử thách cũ vẫn hiện trong nhật ký).
+- Lần mở đầu ở v2: tính lại bậc, Lửa từ lịch sử; Shin báo thẻ đã lên bậc (`r2Notice`, gọi từ boot.js). Demo: chỉnh bậc lặng lẽ.
+- **Chưa làm (đợt 2 — giao diện):** thẻ duy trì ở trang Hôm nay kèm "làm gần nhất"; màn hình sau khi vuốt hiện đủ 3 nút; Shin hỏi khi mở app (1 lần/ngày); câu hỏi "chỉnh công thức?" khi lên bậc (gắn vào `offerTier`, hiện chỉ đóng popup); dòng "Lửa tuần · y/7 ngày có ghi" trên Thẻ tuần (dùng `r2Week`). Nhãn trên thẻ còn ghi "CẤP n · …".
+- **Chưa làm (đợt 3 — chữ):** phần "Trong app" của bài Nền tảng 1, 4, 5 (LESSONS trong core.js và hình LV trong how-visual.js vẫn nói xác nhận, chuỗi về 0, mạng nhện 7 ngày, mốc 3/6/12, nâng việc); gợi ý ghi chú hướng về ích lợi; ghi chú mẫu công thức "Lên cấp vẫn cần bạn xem lại và xác nhận" (habits.js, routine-templates); chữ "cấp" → "bậc" nếu muốn thống nhất.
+- Không gắn app với học phần: Sổ tay đổi "Báo cáo cuối học phần" → "Báo cáo cho thầy cô". `GROUPS[].d` ("Gợi ý Học phần n") còn trong dữ liệu nhưng không hiện trên giao diện (đã quét Hôm nay, Tuần, Hành trình, Thư viện, Sổ tay, tạo thẻ).
+
+---
+
+# (Bản trước) M.Claude.3.3.29 — BẢN FINAL
+
+## 0b. M.Claude.3.3.29 — "Cách làm" và 5 bài "Nền tảng rèn luyện" bằng hình
+
+- Gốc: M3.3.20–5S.2 (các mục 1–6 bên dưới vẫn đúng cho phần còn lại của app). APP_VER và cache đều là **M.Claude.3.3.29**; gói 53 tệp.
 - Người dùng đã chốt: **PA2 "Bước bằng hình"**; nhân vật kết hợp (người làm động tác, Shin nhắc mẹo); làm cả 4 ý: A tranh đôi Bây giờ ↔ Sang Nhật, B "Tìm điểm chưa ổn", C hình động nhẹ, D Shin trong khung/"Shin mách nhỏ".
 - Nét vẽ **bắt buộc đồng bộ** với hình gốc `person()`/`illSVG()` (viền #2B2420, áo #EAF4F5, quần #2F3D5A, da #F3CDA8, nền khung #F4F6FE, chữ xanh #1D5FD1, xanh lá #0B6E4B, đỏ #8E2F22). Bản thử M3.3.21 bị bỏ chính vì không đồng bộ.
 - Đợt 1–3 đã được duyệt (đợt 3 có góp ý bàn tay, đã sửa bằng `hand()`). Đợt 4 (memo, xinloi, viecko) chờ duyệt. Đủ 14/14 thói quen.
 - 5 bài "Nền tảng rèn luyện" (b1–b5) có hình ở thẻ Hiểu, Senpai kể, Trong app (mục `LV`). Đã sửa 4 chỗ chữ bài học cho khớp app (3.3.28).
-- **Trạng thái:** bản final của đợt hình; việc tiếp theo là thử trên điện thoại thật (Safari/iPhone, Android) rồi đưa lên GitHub. Các bản 3.3.22–3.3.27 chỉ để đối chiếu.
+- Mặt sau thẻ (3.3.29): 8 hình mới (som, 5s, xinloi, 5phut, camxuc, vandong, viecko, horenso) + 6 hình cũ giữ lại; nền dải hình phẳng #173F79, mép dưới mờ dần. Không thay lại hình đã chốt khi chưa có yêu cầu.
+- Logic rèn luyện được mô tả đầy đủ trong tài liệu Claude Docs "Shin routine — Logic rèn luyện (bản để góp ý)"; người dùng sẽ góp ý ở phiên sau, chưa đổi logic.
+- **Trạng thái:** bản final; việc tiếp theo là thử trên điện thoại thật (Safari/iPhone, Android) rồi đưa lên GitHub. Các bản 3.3.22–3.3.27 chỉ để đối chiếu.
 - Không trích dẫn lời Thầy Lê Long Sơn trong app (đã xóa ở 3.3.27; câu hay đã chuyển thành chữ của khóa học).
 - Bàn tay: luôn dùng `arm()`/`hand()` (lòng bàn tay + ngón cái), không vẽ tay bằng hình tròn.
 - Lời thoại (bóng chữ) không được đè lên nhân vật: luôn đặt bóng chữ cao hơn đỉnh đầu, kiểm tra bằng ảnh chụp từng khung.

@@ -1,5 +1,5 @@
 {
-  "build": "M.Claude.3.3.28",
+  "build": "M.Claude.3.3.30",
   "canonical_sources": {
     "letters.js": "scripts/core.js",
     "app.js": "scripts/core.js",
@@ -45,7 +45,8 @@
     "routine-sheets.css": "styles/habits.css",
     "refinement16.css": "styles/extensions.css",
     "breath18.css": "styles/extensions.css",
-    "how-visual.js": "scripts/how-visual.js"
+    "how-visual.js": "scripts/how-visual.js",
+    "rules-v2.js": "scripts/rules-v2.js"
   },
   "removed_superseded_code": [
     {
@@ -127,7 +128,8 @@
     {
       "file": "routine-sheets.css",
       "selector": ".m3-review .sheet14-ready>.f2-step-progress"
-    }
+    },
+    "M.Claude.3.3.30: openLvup/lvGo, cuTierSheet, tierYes/cuTier/tierNo, tmodeBody/TMODE/T_PIN/T_SALT/tcodeFor/TCODES, Thẻ tuần buddy/tcode, longestStreak, growthGoal/growthSetGoal/growthGoalPicker/goalButtons16, growthStreak/growthRuns/growthDates, weekly challenge offer/panel/open/save/accept, goal16 wizard step"
   ],
   "approved_changes": {
     "design-system.js": "SHIN_BACK_ART (14 SVG), flowBack and shinCardFaces",
@@ -141,7 +143,9 @@
     "M.Claude.3.3.25": "Bàn tay mới hand()/arm(); đợt 4 memo, xinloi, viecko; đủ 14 thói quen",
     "M.Claude.3.3.26": "5 bài Nền tảng rèn luyện bằng hình (LV)",
     "M.Claude.3.3.27": "Bỏ trích dẫn Thầy Lê Long Sơn (5 quote thẻ, bài 3, bài 5)",
-    "M.Claude.3.3.28": "Sửa 4 chỗ chữ bài học cho khớp app; bản final"
+    "M.Claude.3.3.28": "Sửa 4 chỗ chữ bài học cho khớp app; bản final",
+    "M.Claude.3.3.29": "8 hình mặt sau mới (2,4,5,6,7,8,12,13); nền dải hình phẳng",
+    "M.Claude.3.3.30": "Luật v2 đợt 1 (logic lõi): Lửa cộng dồn, 1 ngày nghỉ/7 ngày, tự lên bậc; bỏ mục tiêu tuần, thử thách tuần, XP, chuỗi riêng, xác nhận, mã GV, chế độ GV, Nâng việc"
   },
   "final_approved_art": {
     "canonical_source": "design-system.js: SHIN_BACK_ART and SHIN_BACK_ART_VIEWBOX",

@@ -1,6 +1,8 @@
-# Shin routine M.Claude.3.3.28 (final) — "Cách làm" và 5 bài nền tảng bằng hình
+# Shin routine M.Claude.3.3.30 — Luật rèn luyện v2, đợt 1 (logic lõi)
 
-**Bản mới nhất: M.Claude.3.3.28 (gốc M3.3.20-5S.2).** Có hình trong "Cách làm" của cả 14 thói quen và trong 5 bài "Nền tảng rèn luyện"; bài Thực tập "Tìm điểm chưa ổn" cho Ngủ, Ăn uống, 5S. Đọc HANDOFF.md mục 0 trước khi sửa.
+**Bản mới nhất: M.Claude.3.3.30 (gốc M.Claude.3.3.29).** Luật v2: Lửa cộng dồn, 1 ngày nghỉ trong 7 ngày, thẻ tự lên bậc 7/14/21 ngày (3/6/9 lần), thẻ duy trì 7/14 ngày; bỏ mục tiêu tuần, thử thách tuần, XP, xác nhận, mã và chế độ giáo viên. Nguồn luật: `scripts/rules-v2.js`. Đợt 2 (giao diện) và đợt 3 (chữ) chưa làm.
+
+**Bản trước: M.Claude.3.3.29 (gốc M3.3.20-5S.2).** Có hình trong "Cách làm" của cả 14 thói quen và trong 5 bài "Nền tảng rèn luyện"; bài Thực tập "Tìm điểm chưa ổn" cho Ngủ, Ăn uống, 5S. Đọc HANDOFF.md mục 0 trước khi sửa.
 
 ---
 

@@ -232,7 +232,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #shinTypographyRoot .shin-card-face>.flow-paper{width:100%;height:100%;max-height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;transition:none;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 #shinTypographyRoot .flow-card-stage .shin-art-back{display:flex;flex-direction:column;padding:0!important;overflow:hidden;background:#173F79;color:#F5F8FF;border:0;--flow-ink:#F5F8FF;--flow-secondary:#C7DBFA}
 #shinTypographyRoot .shin-art-back:before,#shinTypographyRoot .shin-art-back:after{content:none}
-#shinTypographyRoot .shin-back-art{flex:0 0 25%;min-height:0;overflow:hidden;background:linear-gradient(150deg,#214E88,#173F79)}
+#shinTypographyRoot .shin-back-art{flex:0 0 25%;min-height:0;overflow:hidden;background:#173F79}
 #shinTypographyRoot .shin-back-art svg{display:block;width:100%;height:100%}
 #shinTypographyRoot .shin-back-copy{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:18px 24px 20px;scroll-padding:16px;display:flex;flex-direction:column}
 #shinTypographyRoot .shin-back-label{font:500 12px/1.5 var(--f);letter-spacing:1.2px;color:#B6D3F3}
@@ -288,3 +288,5 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @keyframes hvIn{0%,46%{opacity:1}50%,96%{opacity:0}100%{opacity:1}}
 @keyframes hvOut{0%,46%{opacity:0}50%,96%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.hv-anim-breath .hv-breath,.hv-anim-breath .hv-in{animation:none}.hv-anim-breath .hv-out{animation:none;opacity:0}}
+/* M.Claude.3.3.29: hình mặt sau hòa vào màu thẻ, mép dưới mờ dần sang vùng chữ. */
+#shinTypographyRoot .shin-back-art svg{-webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent);mask-image:linear-gradient(to bottom,#000 72%,transparent)}
