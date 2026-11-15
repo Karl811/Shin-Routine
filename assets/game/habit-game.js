@@ -438,8 +438,33 @@
       TABLETOP_HABITS.forEach(item => {
         const source = catalog.find(h => h.id === item.id);
         if(source){item.title=source.title;item.shortTitle=source.shortTitle;item.habit=source.description;}
-        const draw=item.renderInner;
-        item.renderInner=()=>{const box=document.createElement('div');box.innerHTML=draw();const label=box.querySelector('.truncate');if(label)label.textContent=item.shortTitle||item.title;return box.innerHTML;};
+      });
+      // M3.3.33: hộp ném theo phong cách hộp cũ (màu cũ, nhãn nhỏ, ô đậm, họa tiết) — tên gọn, chữ to hơn;
+      // nhiều hình và cỡ: tròn, vuông, chữ nhật to, chữ nhật hẹp đứng, viên dẹt. Tên gọn chỉ dùng trong game.
+      const GAME33_LABELS={chao:'Chào hỏi, cảm ơn',som:'Đúng giờ',memo:'Hỏi và ghi lại','5s':'5S gọn gàng',xinloi:'Nghe và sửa sai','5phut':'Tận dụng 5 phút',camxuc:'Cảm xúc',vandong:'Vận động',anuong:'Ăn uống điều độ',ngu:'Ngủ đủ giấc',chitieu:'Chi tiêu có kế hoạch',viecko:'Dám thử việc khó',horenso:'Báo cáo, xác nhận',giup:'Giúp một việc'};
+      const L=(id,cls)=>'<b class="g33-label'+(cls?' '+cls:'')+'">'+safe(GAME33_LABELS[id])+'</b>';
+      const K=(t,c)=>'<span class="g33-k"'+(c?' style="color:'+c+'"':'')+'>'+t+'</span>';
+      const C=(t,bg,fg,r)=>'<span class="g33-chip" style="background:'+bg+';color:'+fg+(r?';border-radius:'+r:'')+'">'+t+'</span>';
+      const GAME33_BOX={
+        chao:{shape:'rect',w:172,h:80,radius:20,style:'background:#FDF4DC; border:1.5px solid #F3DFA8; color:#1C1917;',html:()=>'<div class="g33-box"><div class="g33-row">'+K('SMILE FIRST','#92400E')+C('+1','#F59E0B','#fff','999px')+'</div>'+L('chao')+'<div class="g33-dots"><i style="background:#F59E0B"></i><i style="background:#F59E0B"></i><i style="background:#FBBF24"></i><s style="border-color:#F59E0B"></s><i style="background:#F43F5E"></i></div></div>'},
+        som:{shape:'rect',w:92,h:114,radius:20,style:'background:#E3F6FD; border:1.5px solid #BAE6FD; color:#0C4A6E;',html:()=>'<div class="g33-box g33-center">'+K('ON TIME','#0369A1')+'<span class="g33-clock"><i></i></span>'+L('som')+'</div>'},
+        memo:{shape:'rect',w:102,h:102,radius:14,style:'background:#FFEDD5 repeating-linear-gradient(180deg,transparent 0 17px,rgba(234,88,12,.18) 17px 18px); border:1.5px solid #FED7AA; color:#7C2D12; box-shadow:inset 14px 0 0 -12px #F87171;',html:()=>'<div class="g33-box" style="padding-left:14px">'+K('NOTEBOOK','#9A3412')+L('memo')+'</div>'},
+        '5s':{shape:'rect',w:100,h:100,radius:18,style:'background:#00B875; border:1.5px solid #009E64; color:#052E16;',html:()=>'<div class="g33-box"><div class="g33-row">'+K('TIDY UP','rgba(5,46,22,.75)')+C('5S','#043927','#6EE7B7')+'</div>'+L('5s')+'</div>'},
+        xinloi:{shape:'rect',w:120,h:76,radius:18,style:'background:#FFE44D repeating-linear-gradient(135deg,transparent 0 10px,rgba(24,24,27,.06) 10px 15px); border:1.5px solid #FACC15; color:#18181B;',html:()=>'<div class="g33-box">'+K('NO EXCUSE','rgba(41,37,36,.75)')+L('xinloi')+'</div>'},
+        '5phut':{shape:'circle',size:100,style:'background:#D1FAE5; border:1.5px solid #6EE7B7; color:#064E3B;',html:()=>'<div class="g33-box g33-center g33-round">'+C('05:00','#064E3B','#A7F3D0')+L('5phut','g33-sm')+'</div>'},
+        camxuc:{shape:'circle',size:94,style:'background:#FFFFFF; border:1.5px solid #E7E5E4; color:#18181B;',html:()=>'<div class="g33-box g33-center g33-round"><svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20 L20 3 A17 17 0 0 1 34.7 11.5 Z" fill="#8B5CF6"/><path d="M20 20 L34.7 11.5 A17 17 0 0 1 34.7 28.5 Z" fill="#06B6D4"/><path d="M20 20 L34.7 28.5 A17 17 0 0 1 20 37 Z" fill="#3B82F6"/><path d="M20 20 L20 37 A17 17 0 0 1 5.3 28.5 Z" fill="#10B981"/><path d="M20 20 L5.3 28.5 A17 17 0 0 1 5.3 11.5 Z" fill="#FACC15"/><path d="M20 20 L5.3 11.5 A17 17 0 0 1 20 3 Z" fill="#EF4444"/><circle cx="20" cy="20" r="5.5" fill="#18181B"/><circle cx="20" cy="20" r="2" fill="#FFFFFF"/></svg>'+L('camxuc','g33-sm')+'</div>'},
+        vandong:{shape:'rect',w:160,h:50,radius:23,style:'background:#CCFBF1; border:1.5px solid #99F6E4; color:#115E59;',html:()=>'<div class="g33-box g33-pill">'+L('vandong')+'<svg width="40" height="16" viewBox="0 0 40 16" aria-hidden="true"><path d="M2 12 L9 4 L16 12 L23 4 L30 12 L37 4" fill="none" stroke="#14B8A6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'},
+        anuong:{shape:'rect',w:136,h:80,radius:18,style:'background:#ECFCCB; border:1.5px solid #D9F99D; color:#365314;',html:()=>'<div class="g33-box"><div class="g33-row">'+K('BALANCE','#3F6212')+C('OK','#65A30D','#fff','999px')+'</div>'+L('anuong')+'</div>'},
+        ngu:{shape:'rect',w:164,h:60,radius:18,style:'background:#E0E7FF radial-gradient(#A5B4FC 1.2px,transparent 1.4px) 0 0/14px 14px; border:1.5px solid #C7D2FE; color:#1E1B4B;',html:()=>'<div class="g33-box g33-pill"><span class="g33-col">'+K('BEDTIME','#3730A3')+L('ngu')+'</span>'+C('7–8h','#312E81','#E0E7FF')+'</div>'},
+        chitieu:{shape:'rect',w:142,h:84,radius:18,style:'background:#FEF9C3; border:1.5px solid #FDE047; color:#713F12;',html:()=>'<div class="g33-box"><div class="g33-row">'+K('1 LINE/DAY','#92400E')+C('₫','#D97706','#fff','6px')+'</div>'+L('chitieu')+'</div>'},
+        viecko:{shape:'rect',w:98,h:122,radius:16,style:'background:#F5F5F4; border:1.5px solid #D6D3D1; color:#18181B;',html:()=>'<div class="g33-box">'+K('STEP UP','#78716C')+'<svg width="38" height="20" viewBox="0 0 44 24" aria-hidden="true"><path d="M2 22 H14 V15 H26 V8 H38 V2" fill="none" stroke="#18181B" stroke-width="3" stroke-linejoin="round"/><circle cx="38" cy="2.5" r="2.5" fill="#F97316"/></svg>'+L('viecko','g33-l3')+'</div>'},
+        horenso:{shape:'rect',w:148,h:80,radius:18,style:'background:#00B875; border:1.5px solid #009E64; color:#052E16;',html:()=>'<div class="g33-box"><div class="g33-row">'+K('報・連・相','rgba(5,46,22,.8)')+C('3X','#043927','#6EE7B7')+'</div>'+L('horenso')+'</div>'},
+        giup:{shape:'rect',w:176,h:48,radius:22,style:'background:#F0FDF4; border:1.5px solid #BBF7D0; color:#14532D;',html:()=>'<div class="g33-box g33-pill">'+L('giup')+C('+1','#16A34A','#fff','999px')+'</div>'}
+      };
+      TABLETOP_HABITS.forEach(item=>{
+        const box=GAME33_BOX[item.id];if(!box)return;
+        item.shape=box.shape;item.style=box.style;item.renderInner=box.html;
+        if(box.shape==='circle'){item.size=box.size;}else{item.w=box.w;item.h=box.h;item.radius=box.radius;}
       });
       function reportResults(){if(host)host.shinGameResults14(selectedHabits.map(x=>x.data.id));}
       function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -447,7 +472,9 @@
       const resultsSection=selectedHabitsList.closest('section'),jumpButton=document.getElementById('game14-results-jump');
       function viewResults(){resultsSection.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}
       scorePill.addEventListener('click',viewResults);jumpButton.addEventListener('click',viewResults);
-      new IntersectionObserver(entries=>{resultsVisible=entries[0].isIntersecting;jumpButton.hidden=resultsVisible||!selectedHabits.length;},{threshold:.4}).observe(resultsSection);
+      jumpButton.hidden=false;
+      const closeBtn=document.getElementById('game33-close');
+      closeBtn.addEventListener('click',()=>{if(host&&typeof host.shinGameClose14==='function')host.shinGameClose14();});
       // Trạng thái game
       let engine = null;
       let world = null;
@@ -462,6 +489,7 @@
       let lastBounceSound = 0;
       let courtWidth = 460;
       let courtHeight = 610;
+      let boxScaleNow = 0; // M3.3.33: cỡ hộp hiện tại (tự giảm trên màn hình thấp)
 
       /**
        * Hiệu ứng âm thanh Web Audio API tinh tế
@@ -545,6 +573,17 @@
         hudTitle.textContent = title;
         hudDesc.textContent = desc;
         hudTag.textContent = tagText;
+        showToast(accentColor, title);
+      }
+      // M3.3.33: thanh hướng dẫn nằm dưới sân, nên lời nhắn hiện 2 giây ngay trên sân.
+      const hudToast = document.getElementById('hud-toast');
+      let toastTimer = 0;
+      function showToast(accentColor, title, ms) {
+        if (!hudToast) return;
+        hudToast.innerHTML = '<i style="background:' + safe(accentColor) + '"></i>' + safe(title);
+        hudToast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => hudToast.classList.remove('show'), ms || 2000);
       }
 
       /**
@@ -559,7 +598,7 @@
           return `<article class="result14"><b>${safe(data.title)}</b><p>${safe(data.habit)}</p><span class="result14-status">${safe(state.label)}</span><div class="result14-actions"><button type="button" data-action="view" data-index="${index}">Xem thẻ</button>${state.onHand?'':`<button type="button" data-action="choose" data-index="${index}">${state.exists?'Đưa lên tay':'Chọn rèn'}</button>`}<button type="button" data-action="return" data-index="${index}" aria-label="Trả ${safe(data.title)} về bàn">Trả về bàn</button></div></article>`;
         }).join('');
         const jump=document.getElementById('game14-results-jump');
-        jump.textContent=selectedHabits.length+' gợi ý · Xem ↓';jump.hidden=!selectedHabits.length||resultsVisible;
+        jump.textContent=selectedHabits.length+' thói quen vào rổ · Lướt xuống ↓';
         reportResults();
       }
 
@@ -567,7 +606,7 @@
        * Tạo một thẻ/khối vật lý Tabletop và đặt lên mặt bàn
        */
       function spawnTabletopWidget(habitData, x, y) {
-        const scale = Math.min(courtWidth / 460, 1.05);
+        const scale = boxScaleNow || Math.max(0.82, Math.min(courtWidth / 460, 1.05)); // M3.3.33: hộp không thu nhỏ quá để chữ dễ đọc
         let body, w, h;
 
         const commonPhysics = {
@@ -664,7 +703,9 @@
 
         // 2. Chiếc Rổ ở phía trên chính giữa
         const hoopX = courtWidth / 2;
-        const hoopY = Math.round(145 * scale);
+        // M3.3.33: rổ nằm trong 1/3 phía trên của sân tràn màn hình (người dùng muốn khó hơn cho vui).
+        const HOOP_TOP = 0.22; // vị trí rổ theo chiều cao sân (0.22 = gần mép trên, trong 1/3 trên)
+        const hoopY = Math.max(Math.round(120 + 86 * scale), Math.round(courtHeight * HOOP_TOP));
         const hoopOpening = Math.round(132 * scale); // Độ rộng miệng rổ thoải mái cho các thẻ Tabletop
         const hoopRadius = hoopOpening / 2;
         hoopGeometry = { x: hoopX, y: hoopY, radius: hoopRadius };
@@ -679,6 +720,7 @@
         hoopForeground.style.left = `${hoopX}px`;
         hoopForeground.style.top = `${hoopY - 5}px`;
         hoopForeground.style.width = `${hoopOpening}px`;
+        if (hudToast) hudToast.style.top = `${hoopY + Math.round(72 * scale)}px`; // M3.3.33: lời nhắn nằm dưới lưới rổ, không che rổ
 
         const rimPostRadius = Math.max(5, Math.round(6 * scale));
         const leftRimPost = Bodies.circle(hoopX - hoopRadius, hoopY, rimPostRadius, {
@@ -710,20 +752,29 @@
         const selectedIds = new Set(selectedHabits.map(s => s.data.id));
         const widgetsToSpawn = TABLETOP_HABITS.filter(item => !selectedIds.has(item.id));
 
-        const cols = 3;
-        const startX = courtWidth * 0.20;
-        const stepX = (courtWidth * 0.60) / (cols - 1);
-        const bottomStartY = courtHeight - Math.round(46 * scale);
-        const rowGapY = Math.round(54 * scale);
-
-        widgetsToSpawn.forEach((habitData, idx) => {
-          const col = idx % cols;
-          const row = Math.floor(idx / cols);
-          const jitterX = (Math.random() - 0.5) * 18 * scale;
-          const x = startX + col * stepX + jitterX;
-          const y = bottomStartY - row * rowGapY;
-          spawnTabletopWidget(habitData, x, y);
+        // M3.3.33: xếp hộp nhiều cỡ thành từng hàng từ đáy lên, không chồng lên nhau lúc bắt đầu.
+        // Hộp không nhỏ hơn 0.82 để chữ dễ đọc; nếu sân thấp, giảm dần để chồng hộp không chạm lưới rổ.
+        const gap = Math.round(6 * scale), margin = Math.round(8 * scale);
+        const roomH = courtHeight - (hoopY + Math.round(110 * scale));
+        const dims = (d, bs) => [Math.round((d.shape === 'circle' ? d.size : d.w) * bs), Math.round((d.shape === 'circle' ? d.size : d.h) * bs)];
+        const packHeight = (bs) => { let x = margin, rh = 0, total = 0, n = 0;
+          widgetsToSpawn.forEach(d => { const [w, h] = dims(d, bs); if (n && x + w > courtWidth - margin) { total += rh + gap; x = margin; rh = 0; n = 0; } x += w + gap; rh = Math.max(rh, h); n++; });
+          return total + rh; };
+        let boxScale = Math.max(0.82, scale);
+        while (boxScale > 0.62 && packHeight(boxScale) * 0.85 > roomH) boxScale -= 0.02;
+        boxScaleNow = boxScale;
+        let rowX = margin, rowBottom = courtHeight - Math.round(4 * scale), rowH = 0, row = [];
+        const placeRow = () => {
+          const free = courtWidth - margin - rowX; let x = margin + free / 2;
+          row.forEach(r => { spawnTabletopWidget(r.d, x + r.w / 2 + (Math.random() - 0.5) * 6 * scale, rowBottom - r.h / 2); x += r.w + gap; });
+          rowBottom -= rowH + gap; rowX = margin; rowH = 0; row = [];
+        };
+        widgetsToSpawn.forEach((habitData) => {
+          const [w, h] = dims(habitData, boxScale);
+          if (row.length && rowX + w > courtWidth - margin) placeRow();
+          row.push({ d: habitData, w, h }); rowX += w + gap; rowH = Math.max(rowH, h);
         });
+        if (row.length) placeRow();
 
         // 4. Kích hoạt kéo & ném
         setupPointerInteraction();
@@ -923,8 +974,8 @@
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-          const newW = courtWrapper.clientWidth;
-          if (Math.abs(newW - courtWidth) > 10) {
+          const newW = courtWrapper.clientWidth, newH = courtWrapper.clientHeight;
+          if (Math.abs(newW - courtWidth) > 10 || Math.abs(newH - courtHeight) > 40) {
             initGameWorld(true);
           }
         }, 160);
@@ -934,6 +985,7 @@
       selectedHabits=(host?host.shinGameSaved14():[]).map(id=>({data:TABLETOP_HABITS.find(x=>x.id===id)})).filter(x=>x.data);
       soundIcon.textContent=soundEnabled?'🔊':'🔇';
       initGameWorld(true);renderSelectedHabits();
+      showToast('#10B981', hudTitle.textContent.trim(), 3000);
       let running=true,frame=0;
       function resume(){if(!running){running=true;lastFrameTime=performance.now();frame=requestAnimationFrame(gameLoop);}}
       document.addEventListener('visibilitychange',()=>{if(document.hidden){running=false;cancelAnimationFrame(frame);if(audioCtx&&audioCtx.state==='running')audioCtx.suspend();}else resume();});

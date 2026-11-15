@@ -18,7 +18,7 @@
 .header-title-line35:has(#saved16) #pageTitle35{flex:0 1 auto;width:auto;max-width:fit-content}.header-title-line35:has(#saved16){justify-content:flex-start;gap:0}
 .m3-review .m3-heading>.week-title16{justify-content:flex-start!important;gap:0!important}.m3-review .week-title16 #pageTitle35{flex:0 1 auto!important;width:auto!important}.week-title16 #headerAction35{margin-left:0}.week-title16 #saved16{margin-left:4px}
 .m3-review .m3-heading>.week-title16{display:flex!important;width:fit-content}.m3-review .week-title16 #pageTitle35{flex:none!important;width:max-content!important;max-width:max-content!important}
-.m3-review .ov:has(.f2-game14),.m3-review .ov:has(.f2-pomodoro){padding:0!important;align-items:stretch}.m3-review .sheet.f2-game14,.m3-review .sheet.f2-pomodoro{height:calc(100dvh - var(--kb))!important;max-height:calc(100dvh - var(--kb))!important;width:100%!important;max-width:none!important;border-radius:0!important;margin:0!important}.f2-game14{display:flex;flex-direction:column}.f2-game14 .play14-frame{flex:1 1 auto;min-height:0;width:100%;height:auto!important}.f2-game14 .play14-intro{order:5;margin:8px 20px;font-size:13px}.f2-game14 .f2-head{flex:none}
+.m3-review .ov:has(.f2-game14),.m3-review .ov:has(.f2-pomodoro){padding:0!important;align-items:stretch}.m3-review .sheet.f2-game14,.m3-review .sheet.f2-pomodoro{height:calc(100dvh - var(--kb))!important;max-height:calc(100dvh - var(--kb))!important;width:100%!important;max-width:none!important;border-radius:0!important;margin:0!important}.f2-game14{display:flex;flex-direction:column}.f2-game14 .play14-frame{flex:1 1 auto;min-height:0;width:100%;height:auto!important}.f2-game14 .play14-intro{order:5;margin:8px 20px;font-size:13px}.f2-game14 .f2-head{flex:none}.m3-review .sheet.f2-game14{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)!important;box-sizing:border-box;background:#FAF9F5}.sheet.f2-game14>.sheet14-grip{display:none!important}
 .evening-tool{position:relative;overflow:hidden;background:#DCE8FF!important;border:1px solid #C6D7F4!important;color:#234D83}.evening-tool:before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 88% 50%,transparent 30px,#547FC31A 31px,#547FC31A 33px,transparent 34px),radial-gradient(circle at 80% 12%,#547FC315 2px,transparent 3px);background-size:auto,18px 18px}.evening-tool.play14-tool:before{background:repeating-linear-gradient(135deg,transparent 0 24px,#547FC30D 25px 27px,transparent 28px 44px)}.evening-tool>*{position:relative}
 #preview16{position:fixed;right:18px;bottom:18px;z-index:99999;border:1px solid #A9BDE1;border-radius:24px;background:#DCE8FF;color:#173F79;padding:12px 18px;font:600 14px Arial;box-shadow:none}#phone16{position:fixed;inset:0;z-index:99990;background:#E4E8EF;display:flex;justify-content:center;align-items:center;padding:16px}#phone16 iframe{width:390px;height:min(844px,calc(100dvh - 32px));border:1px solid #A4ADBB;border-radius:24px;background:#F9F9FF}
 @media(prefers-reduced-motion:reduce){.detail16 *{animation:none!important;transition:none!important}}
@@ -108,3 +108,23 @@
 @media(max-height:560px){.breath18-stage{min-height:300px}.breath18-remaining{top:64px;font-size:34px}.breath18-shin{width:min(40vw,48dvh);bottom:16%}.breath18-stage-controls{bottom:12px;gap:18px}.breath18-stage .breath18-play{width:48px;height:48px;min-height:48px;padding:8px}.breath18-play .mi{font-size:28px!important}}
 @media(prefers-reduced-motion:reduce){.breath18-shin{will-change:auto}.breath18-air{display:none!important}}
 
+
+/* ===== SECTION: play33 (M3.3.33) — thẻ "khu vực game" ở Thư viện › Công cụ ===== */
+.play33-card{display:flex;flex-direction:column;width:100%;margin:8px 0 0;padding:0;border:0;border-radius:28px;overflow:hidden;text-align:left;cursor:pointer;color:#10366D;background:#fff;box-shadow:0 1px 3px rgba(16,54,109,.12),0 6px 18px -6px rgba(34,101,197,.28);transition:transform .2s cubic-bezier(.2,0,0,1),box-shadow .2s}
+.play33-card:active{transform:scale(.985)}
+.play33-card:focus-visible{outline:3px solid #2265C5;outline-offset:3px}
+.play33-stage{position:relative;display:block;padding:14px 12px 4px;background:#E8F0FF radial-gradient(rgba(34,101,197,.16) 1.3px,transparent 1.5px) 0 0/18px 18px}
+.play33-scene{display:block;width:100%;height:auto;max-height:170px;font-family:'Roboto Flex',Arial,sans-serif}
+.play33-badge{position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:8px;background:#2265C5;color:#fff;font-size:var(--shin-meta);line-height:1.3334;font-weight:700;letter-spacing:.06em}
+.play33-copy{display:flex;align-items:center;gap:12px;padding:14px 16px 16px}
+.play33-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.play33-text b{font-size:var(--shin-section);line-height:1.3334;font-weight:700;color:#10366D}
+.play33-text>span{font-size:var(--shin-label);line-height:1.4286;color:#444A57}
+.play33-go{flex:none;display:inline-flex;align-items:center;gap:4px;min-height:48px;padding:0 18px 0 12px;border-radius:24px;background:#2265C5;color:#fff;font-size:var(--shin-label);line-height:1.4286;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.2),0 2px 6px rgba(34,101,197,.3)}
+.play33-go .mi{font-size:22px!important}
+.play33-fly{animation:play33Fly 2.6s cubic-bezier(.45,0,.55,1) infinite;transform-box:fill-box;transform-origin:center}
+.play33-spark{animation:play33Spark 2.6s ease-in-out infinite}
+@keyframes play33Fly{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(8px,-7px) rotate(6deg)}}
+@keyframes play33Spark{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.play33-fly,.play33-spark{animation:none}}
+@media(max-width:359px){.play33-copy{flex-wrap:wrap}.play33-go{width:100%;justify-content:center}}

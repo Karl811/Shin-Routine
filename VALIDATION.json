@@ -1,10 +1,10 @@
 {
-  "feature_version": "M.Claude.3.3.32",
-  "cache_build": "M.Claude.3.3.32",
+  "feature_version": "M.Claude.3.3.34",
+  "cache_build": "M.Claude.3.3.34",
   "date": "2026-11-15",
-  "status": "batch3_text_pending_user_text_review_and_physical_device_test",
+  "status": "m3_icons_done_pending_text_review_and_physical_device_test",
   "files": 54,
-  "baseline": "M.Claude.3.3.31",
+  "baseline": "M.Claude.3.3.33",
   "physical_phones_tested": false,
   "production_deployment_performed": false,
   "structure": {
@@ -15,30 +15,24 @@
     "cache_tags_match": true
   },
   "checks_run_this_build": {
-    "regression_batch1_2": {
-      "passed": true,
-      "note": "Chạy lại kiểm thử 3.3.30–3.3.31 (ví dụ tuần, dữ liệu cũ, lên bậc + hoàn tác, check-in, các trang, Shin hỏi, thẻ duy trì, chuỗi câu hỏi lên bậc/Thành nếp, Thẻ tuần có ngày Nghỉ/Lỡ): không lỗi JavaScript."
-    },
-    "no_cap_term": {
-      "passed": true,
-      "note": "Quét mã: không còn “Cấp/CẤP” trên giao diện, trừ “cấp trên”, “nâng cấp bản thân” và chú thích mã."
-    },
-    "lessons_app_390px": {
-      "passed": true,
-      "note": "Ảnh chụp Trong app bài 1, 4, 5 ở 390px: hình và chữ không đè nhau."
-    },
-    "note_hints": {
-      "passed": true,
-      "note": "Đã làm: câu hỏi ích lợi + 3 gợi ý riêng; chạm gợi ý điền vào ô ghi chú. Chưa làm: giữ câu hỏi lý do."
-    },
-    "card_tree_labels": {
-      "passed": true,
-      "note": "Thẻ hiện “BẬC 1 · Tập sự”; màn hình treo cây “đã lên bậc Làm quen”."
-    },
     "structure": {
       "passed": true,
-      "command": "node tools/verify.mjs"
-    }
+      "note": "node tools/verify.mjs ok, 54 tệp, cache tags khớp."
+    },
+    "icons_chromium": {
+      "passed": true,
+      "note": "Playwright Chromium 390×844, chế độ Demo: Hôm nay (thẻ trên tay, thẻ tự tạo, Đang duy trì), hộp thoại Đang duy trì, Thư viện (thói quen, bài học), mặt trước thẻ thường và thẻ tự tạo, màn hình tạo thẻ riêng (lưới biểu tượng), tab Công cụ và game: icon mới hiển thị đúng, không lỗi JavaScript."
+    },
+    "sticky_sheet_head": {
+      "passed": true,
+      "note": "Hộp thoại Đang duy trì và Lửa cuộn 300–500px: không còn nội dung lộ trên tay nắm hay dưới tiêu đề."
+    },
+    "not_run": [
+      "WebKit/iPhone thật",
+      "Android thật",
+      "Tải lại khi ngoại tuyến",
+      "Thẻ treo trên cây Hành trình (không có dữ liệu Demo hiển thị icon)"
+    ]
   },
   "not_run": [
     "Safari/WebKit và iPhone thật",

@@ -329,3 +329,34 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* Shin hỏi khi mở app */
 .ask31{padding-top:6px}
 @media (prefers-reduced-motion:reduce){.keep31-row{transition:none}}
+
+/* ===== SECTION: m3-habit-icons (M.Claude.3.3.34) =====
+   Icon thói quen chuẩn Material 3 (PA1 tonal): khung vuông bo góc 28%, nền nhạt theo màu nhóm, icon đậm cùng tông.
+   Áp cho mọi khung icon thói quen: .hi (tròn cũ), .emb (đồng xu cũ), .m3hi (icon nhỏ trước thẻ), lưới chọn icon thói quen tự tạo. */
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g1,#shinTypographyRoot .today-habit.g1 .today-habit-icon{--m3c:#D8E2FF;--m3o:#1A4FA0}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g2,#shinTypographyRoot .today-habit.g2 .today-habit-icon{--m3c:#C8EED3;--m3o:#0F5C32}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g3,#shinTypographyRoot .today-habit.g3 .today-habit-icon{--m3c:#C0EDE8;--m3o:#00524D}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g4,#shinTypographyRoot .today-habit.g4 .today-habit-icon{--m3c:#FFD9E2;--m3o:#8A1D45}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g5,#shinTypographyRoot .today-habit.g5 .today-habit-icon{--m3c:#E9DDFF;--m3o:#4A2D9B}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g6,#shinTypographyRoot .today-habit.g6 .today-habit-icon{--m3c:#FFDCC6;--m3o:#783A00}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g7,#shinTypographyRoot .today-habit.g7 .today-habit-icon{--m3c:#FFDAD6;--m3o:#8C1D18}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g8,#shinTypographyRoot .today-habit.g8 .today-habit-icon{--m3c:#F0DFCE;--m3o:#594028}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g9,#shinTypographyRoot .today-habit.g9 .today-habit-icon{--m3c:#DAE3EE;--m3o:#30465A}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button).g10,#shinTypographyRoot .today-habit.g10 .today-habit-icon{--m3c:#F6E2A6;--m3o:#5A4300}
+#shinTypographyRoot :is(.hi,.emb,.m3hi,.journal-icon31,.igrid button,.today-habit-icon){background:var(--m3c,#D8E2FF)!important;background-image:none!important;color:var(--m3o,#1A4FA0)!important;border:0!important;border-radius:28%!important;box-shadow:none!important}
+#shinTypographyRoot :is(.hi,.emb,.journal-icon31,.igrid button,.today-habit-icon,.m3hi)>svg{width:60%!important;height:60%!important;flex:none}
+#shinTypographyRoot .m3hi{display:inline-grid;place-items:center;width:1.6em;height:1.6em;vertical-align:middle;flex:none;line-height:0}
+#shinTypographyRoot :is(.flow-emblem,.m3-row-icon,.m3-emblem,.ci40-emblem){position:relative}
+#shinTypographyRoot :is(.flow-emblem,.m3-row-icon,.m3-emblem,.ci40-emblem)>.m3hi{position:absolute;inset:0;width:auto;height:auto}
+#shinTypographyRoot .evening-mini>.flow-emblem{border-radius:28%}
+#shinTypographyRoot .igrid button{opacity:.55}
+#shinTypographyRoot .igrid button.on{opacity:1;outline:2px solid var(--primary);outline-offset:3px}
+#shinTypographyRoot .tree-detail-icon30{color:#fff}
+#shinTypographyRoot .evening-mini>.flow-emblem{width:36px;height:36px;flex-basis:36px}
+#shinTypographyRoot .keep31-row>.emb{width:40px!important;height:40px!important}
+
+/* ===== SECTION: sheet-sticky-head (M.Claude.3.3.34) =====
+   Sửa lỗi hộp thoại kiểu cũ (vd. "Đang duy trì"): khi cuộn, nội dung lộ ra phía trên tay nắm và dưới tiêu đề trong suốt.
+   Bỏ khoảng đệm trên để tay nắm dính sát mép; tiêu đề dính có nền như hộp thoại. Không áp cho hộp thoại f2 (đã có tiêu đề riêng). */
+#shinTypographyRoot .sheet.sheet14-ready:not(.f2-sheet){padding-top:0!important}
+#shinTypographyRoot .sheet.sheet14-ready:not(.f2-sheet)>.sh__h:not(.f2-head){background:inherit;z-index:11}

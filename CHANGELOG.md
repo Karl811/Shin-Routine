@@ -1,5 +1,31 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.34 — 15/11/2026 — Icon thói quen chuẩn Material 3; sửa hộp thoại “Đang duy trì”
+
+Gốc M.Claude.3.3.33. Người dùng chốt PA1 (khung vuông bo góc, nền nhạt, icon đậm cùng tông), đổi cả icon thói quen tự tạo, sửa lỗi màn hình Đang duy trì.
+
+- **Một bộ icon duy nhất** (SECTION m3-habit-icons cuối design-system.js và design-system.css): Material Symbols Rounded tô đặc (Google, Apache-2.0), nhúng thẳng dạng SVG nên không phụ thuộc phông, chạy được khi ngoại tuyến. 14 thói quen: chào hỏi = bàn tay vẫy, đúng giờ = đồng hồ báo thức, quan sát/ghi lại = ghi chú có bút, 5S = chổi, lắng nghe = tai, 5 phút = đồng hồ cát, cảm xúc = mặt cười, vận động = người chạy, ăn uống = dao dĩa, ngủ = trăng, chi tiêu = heo đất, việc khó = người leo núi, Hō-Ren-Sō = phiếu có dấu tích, giúp đỡ = tay trao tim. 12 icon thói quen tự tạo (giọt nước, sách, tim, tia sét, nốt nhạc, lá, bút, lửa, mặt trời, mặt cười, ngôi sao, trăng) và 4 icon nhóm cũng đổi.
+- **Thay ở mọi chỗ:** `glyph()` trả SVG M3 (tô bằng currentColor); `flowIcon()`, `bandCardIcon()` dùng icon mới; `m3HabitIcon()` trả mã `m3h:id`, `mi()` được bọc để đổi mã này thành icon M3 (thay 10 chỗ trước đây dùng chung icon “style”). Khung `.hi` (tròn nổi), `.emb` (đồng xu có viền), `.m3hi` (icon nhỏ trước thẻ), `.today-habit-icon`, `.journal-icon31`, lưới chọn biểu tượng thẻ tự tạo → vuông bo 28%, nền nhạt theo màu nhóm (1 xanh dương, 2 xanh lá, 3 xanh ngọc, 4 hồng; màu thẻ tự tạo 5–10). core.js: hình thẻ dùng icon trắng (`style="color:#fff"`), `journal-icon31` dùng lớp màu nhóm thay nền đậm.
+- **Sửa lỗi hộp thoại “Đang duy trì”** (và các hộp thoại kiểu cũ khác như Lửa): khi cuộn, nội dung lộ ra trên tay nắm và dưới tiêu đề trong suốt. Bỏ khoảng đệm trên của hộp thoại để tay nắm dính sát mép; tiêu đề dính có nền như hộp thoại (SECTION sheet-sticky-head trong design-system.css). Không áp cho hộp thoại f2.
+- Icon trong mục Đang duy trì ở trang Hôm nay 40px; icon ở thẻ nhỏ Thư viện 36px.
+
+## M.Claude.3.3.33 — 15/11/2026 — Game Tung thói quen tràn màn hình, giao diện M3 ; bỏ Pomodoro và Tập thở
+
+Gốc M.Claude.3.3.32. Người dùng chốt PA1 (sân tràn màn hình, lướt xuống xem kết quả), giữ dải lướt xuống, rổ cao hơn một chút, hộp ném chữ to và tên gọn, game hài hòa giao diện Material 3.
+
+- **Mở game trọn màn hình:** bỏ thanh tiêu đề “Tung thói quen”, câu giới thiệu và tay nắm kéo; khung chừa vùng tai thỏ/thanh home (`shinGameOpen14`, `shinGameClose14` trong SECTION routine-play, extensions.js; extensions.css dòng game14). Hộp thoại vẫn có tên “Tung thói quen” cho trình đọc màn hình.
+- **Sân phủ kín** từ mép tới mép, cao bằng màn hình trừ dải 48px “N thói quen vào rổ · Lướt xuống ↓” (dùng lại nút `#game14-results-jump`, bấm để nhảy xuống). Nút nổi cũ “N gợi ý · Xem ↓” được thay bằng dải này. Máy tính (≥480px): sân bo góc 28px.
+- **Điều khiển nổi trên sân:** ✕ thoát (trái trên), điểm 3/14 và 🔊 (phải trên); Xếp lại, Tung lên ở hàng thứ hai.
+- **Lời nhắn 2 giây trên sân** (`showToast`, `#hud-toast`): khi chạm, kéo, vào rổ; lúc mở hiện câu hướng dẫn 3 giây. Chữ lấy từ thanh hướng dẫn cũ; nằm dưới lưới rổ.
+- **Bên dưới sân:** “14 thói quen – Tung thử nhé!”, thanh hướng dẫn, danh sách đã vào rổ.
+- **Rổ trong 1/3 phía trên** (người dùng muốn khó hơn cho vui): `HOOP_TOP = 0.22` chiều cao sân, không thấp hơn mức chừa 2 hàng nút (habit-game.js, initGameWorld). Sân thay chiều cao >40px thì dựng lại.
+- **Hộp ném theo phong cách hộp cũ (~90%)** (`GAME33_BOX` trong habit-game.js, lớp `.g33-*` trong design-game.css): giữ màu nền/viền cũ, nhãn nhỏ (SMILE FIRST, ON TIME…), ô đậm (+1, 5S, 05:00, 7–8h, ₫, 3X, OK) và họa tiết (chấm, dòng kẻ sổ, sọc chéo, nền sao, đồng hồ, bậc thang, sóng, bánh xe màu). Nhiều hình và cỡ: tròn (Tận dụng 5 phút, Cảm xúc), vuông (Hỏi và ghi lại, 5S), chữ nhật to (Chào hỏi, Chi tiêu, Báo cáo), chữ nhật hẹp đứng (Đúng giờ, Dám thử việc khó), viên dẹt (Vận động, Giúp một việc, Ngủ đủ giấc). Tên gọn 13px đậm, xuống 2 dòng (`GAME33_LABELS`, chỉ dùng trong game).
+- **Xếp hộp lúc bắt đầu:** xếp từng hàng từ đáy lên, không chồng nhau; hộp không nhỏ hơn 0.82 lần; màn hình thấp thì giảm cỡ dần để chồng hộp không chạm lưới rổ (`boxScaleNow`).
+- **Màu và nút theo M3 của app** (design-game.css cuối tệp): mặt sân surface-container-low, rổ màu chủ đạo #2265C5, nút tonal/filled, bỏ chữ “GOAL HOOP”, thẻ kết quả và khung danh sách bo 16/24px. Hộp ném giữ màu cũ.
+- **Bỏ Pomodoro và Tập thở** (người dùng chốt: học viên không để điện thoại mở suốt khi làm việc): tab Công cụ chỉ còn game Tung thói quen; bỏ nút “Tập thở cùng Shin” trong Cách làm Cảm xúc; đồng hồ Pomodoro cũ không chạy nền. Mã cũ giữ lại nhưng không còn lối vào (interaction.js eveningLibrary; extensions.js SECTION routine-pomodoro, breath18). Kiểm tra dữ liệu `evening.pomodoro` giữ nguyên để nhập/xuất dữ liệu cũ.
+- **Thẻ “khu vực game” mới ở Thư viện › Công cụ** (`shinGameCard33`, `shinGameScene33` trong SECTION routine-play; SECTION play33 cuối styles/extensions.css): sân mini nền chấm có rổ, đường bay nét đứt, hộp ném giống trong game (hộp “Chào hỏi” khẽ bay, tắt khi giảm chuyển động), nhãn GAME (hoặc “x / 14 đã vào rổ”), nút “Chơi ngay”; bấm cả thẻ để mở game. Bỏ câu “Chọn một công cụ để bắt đầu dễ hơn”. Chữ mới chờ duyệt: “GAME”, “Chơi ngay”, “x / 14 đã vào rổ”.
+- Chơi game vẫn không cộng ngày rèn, không cộng Lửa; không đổi khóa lưu trữ.
+
 ## M.Claude.3.3.32 — 15/11/2026 — Luật rèn luyện v2, đợt 3: chữ
 
 Gốc M.Claude.3.3.31. Người dùng chốt thống nhất “Cấp” → “Bậc”.

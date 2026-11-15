@@ -93,7 +93,7 @@ function treeLettersSVG37(stage,stems,sx,order,interactive){
    KAIZEN MỖI NGÀY · TQ02
    Một file HTML, dữ liệu lưu trong trình duyệt của từng máy.
    ========================================================= */
-var APP_VER = 'M.Claude.3.3.32';
+var APP_VER = 'M.Claude.3.3.34';
 var APP_NAME = 'Shin routine';
 var KEY = 'shin-curriculum16-v1-data', KEY_DEMO = 'shin-curriculum16-v1-demo', KEY_MODE = 'shin-curriculum16-v1-mode';
 var DEMO_CLASS = 'DEMO-KZ';
@@ -1119,7 +1119,7 @@ function metaSVG(id){
       '<path d="M120 94c-8-8-14-3-10 4l10 9 10-9c4-7-2-12-10-4z" fill="'+G+'" opacity=".95"/>';
   } else {
     var g=HMAP[id].g;
-    s='<circle cx="120" cy="80" r="62" fill="rgba(255,255,255,.1)"/><circle cx="120" cy="80" r="46" fill="'+GCOL[g]+'" stroke="#fff" stroke-width="4"/><g transform="translate(96 56) scale(2)">'+glyph(id,GCOL[g]).replace(/^<svg[^>]*>|<\/svg>$/g,'')+'</g>';
+    s='<circle cx="120" cy="80" r="62" fill="rgba(255,255,255,.1)"/><circle cx="120" cy="80" r="46" fill="'+GCOL[g]+'" stroke="#fff" stroke-width="4"/><g transform="translate(96 56) scale(2)" style="color:#fff">'+glyph(id,GCOL[g]).replace(/^<svg[^>]*>|<\/svg>$/g,'')+'</g>';
   }
   return '<svg viewBox="0 0 240 160" aria-hidden="true">'+s+'</svg>';
 }
@@ -1377,7 +1377,7 @@ function journalStar31(d,id){var key=d+'|'+id;return !!(S.journalStars||{})[key]
 function journalStarButton31(d,id,enabled){return '<button class="journal-star31'+(journalStar31(d,id)?' selected':'')+'" data-act="journalStar31" data-v="'+d+'|'+id+'" aria-pressed="'+journalStar31(d,id)+'" aria-label="'+(journalStar31(d,id)?'Bỏ đánh dấu đáng nhớ':'Đánh dấu đáng nhớ')+'"'+(enabled?'':' disabled')+'><svg viewBox="0 0 24 24" width="18" height="18" fill="'+(journalStar31(d,id)?'currentColor':'none')+'" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.5l-5.7 3 1.1-6.3L2.8 9.7l6.4-.9z"/></svg></button>';}
 function journalRow31(id,d){var m=mark(d,id),note=(S.notes[d]||{})[id]||'',why=(S.why[d]||{})[id]||'',bf=(S.bf[d]||{})[id],meta=journalMeta31(id),reason=REASONS.filter(function(r){return r[0]===why;})[0];
   var chip='<i class="jc '+(m==='x'?'state-x31':m||'e')+'">'+(RECORD_LABEL[m]||'Chưa ghi')+'</i>',text=note||(m==='n'&&reason?'Lý do: '+reason[1]:'');
-  return '<article class="jrow journal-row31" data-v="'+id+'|'+d+'"><button class="journal-entry31" data-act="jrow" data-v="'+id+'|'+d+'"><span class="journal-icon31" style="background:'+(GCOL[meta.g]||GCOL[1])+'">'+glyph(meta.icon,GCOL[meta.g]||GCOL[1])+'</span><span class="jr__b"><span class="jr__h"><b>'+esc(meta.name)+'</b>'+chip+(bf?'<i class="jc e">Ghi bù</i>':'')+'</span>'+(text?'<span class="journal-entry-note31">'+esc(text)+'</span>':'')+'</span></button>'+journalStarButton31(d,id,!!m||!!note)+'</article>';
+  return '<article class="jrow journal-row31" data-v="'+id+'|'+d+'"><button class="journal-entry31" data-act="jrow" data-v="'+id+'|'+d+'"><span class="journal-icon31 g'+(meta.g||1)+'">'+glyph(meta.icon,GCOL[meta.g]||GCOL[1])+'</span><span class="jr__b"><span class="jr__h"><b>'+esc(meta.name)+'</b>'+chip+(bf?'<i class="jc e">Ghi bù</i>':'')+'</span>'+(text?'<span class="journal-entry-note31">'+esc(text)+'</span>':'')+'</span></button>'+journalStarButton31(d,id,!!m||!!note)+'</article>';
 }
 function journalMemo31(d){
   var c=S.ci[d];if(!c||!c.note)return '';

@@ -1,4 +1,29 @@
-# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.32 — 15/11/2026)
+# ĐỌC TRƯỚC — bàn giao Shin routine (cập nhật M.Claude.3.3.34 — 15/11/2026)
+
+## 0. Bản hiện tại: M.Claude.3.3.34 — Icon thói quen chuẩn Material 3; sửa hộp thoại Đang duy trì
+
+- Gốc: M.Claude.3.3.33. APP_VER và cache: **M.Claude.3.3.34**; 54 tệp.
+- Icon: mọi icon thói quen/thẻ tự tạo/bài học/nhóm đi qua SECTION m3-habit-icons (cuối design-system.js: `M3HI_PATHS`, `m3HabitSvg`, `m3HabitBadge`; cuối design-system.css: màu khung theo nhóm). Muốn đổi một icon: thay đường vẽ trong `M3HI_PATHS` (lấy từ Material Symbols Rounded, bản tô đặc 400).
+- Hộp thoại kiểu cũ: SECTION sheet-sticky-head cuối design-system.css.
+- Tệp đã đổi: design-system.js, design-system.css, scripts/core.js (2 chỗ glyph), cùng số phiên bản (core.js, sw.js, index.html, habit-game.html).
+- Vẫn treo: duyệt 14 tên gọn hộp ném và chữ thẻ game (3.3.33); file duyệt chữ luật v2 (3.3.32); chưa thử trên iPhone/Android thật.
+
+---
+
+# (Bản trước) M.Claude.3.3.33
+
+## 0. Bản hiện tại: M.Claude.3.3.33 — Game Tung thói quen tràn màn hình; bỏ Pomodoro và Tập thở
+
+- Gốc: M.Claude.3.3.32. APP_VER và cache: **M.Claude.3.3.33**; 54 tệp.
+- Đã làm: game Tung thói quen mở trọn màn hình, sân tràn, dải “Lướt xuống ↓”, nút nổi ✕/điểm/âm thanh/Xếp lại/Tung lên, lời nhắn 2 giây trên sân, rổ trong 1/3 phía trên (`HOOP_TOP = 0.22`), hộp ném theo phong cách hộp cũ nhiều hình/cỡ (`GAME33_BOX`, `GAME33_LABELS`). Chi tiết ở CHANGELOG.
+- Tệp đã đổi: habit-game.html, assets/game/habit-game.js, design-game.css, scripts/extensions.js (SECTION routine-play, routine-pomodoro, breath18), scripts/interaction.js (eveningLibrary), styles/extensions.css (dòng game14, SECTION play33), cùng số phiên bản (core.js, sw.js, index.html).
+- Đã bỏ Pomodoro và Tập thở khỏi tab Công cụ (mã còn, không lối vào); tab Công cụ chỉ còn thẻ game mới `shinGameCard33` (SECTION play33 trong styles/extensions.css).
+- **Việc tiếp theo:** người dùng thử trên điện thoại thật; duyệt 14 tên gọn hộp ném và chữ “GAME”, “Chơi ngay”; có thể bàn công cụ mới (đã đề xuất: Trước – Sau cho 5S, Hộp 5 phút) khi người dùng yêu cầu (SECTION routine-pomodoro, extensions.js) trong cùng bản 3.3.33 theo yêu cầu người dùng.
+- Vẫn treo: file duyệt chữ `Shin-routine-3.3.32_Duyet-chu-luat-v2.xlsx` (áp vào bản sau 3.3.33); chưa thử trên iPhone/Android thật.
+
+---
+
+# (Bản trước) M.Claude.3.3.32
 
 ## 0. Bản hiện tại: M.Claude.3.3.32 — Luật rèn luyện v2, đợt 3 (chữ) — đủ 3 đợt
 
