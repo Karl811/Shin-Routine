@@ -6,6 +6,7 @@
 Dữ liệu nằm trên thiết bị/trình duyệt. Mã lớp Demo-KZ dùng dữ liệu minh họa. Khác địa chỉ web có thể khác vùng dữ liệu. Đừng suy luận rằng dữ liệu đã mất chỉ vì chuyển sang địa chỉ xem thử khác.
 
 ## Mốc hiện tại
+- **M.Claude.3.3.40 (mượt):** SECTION batch40 cuối design-system.js/.css; extensions.js: tay nắm gắn đồng bộ, lùi về tab/bước đã xem không dựng lại hộp thoại (silent40); Senpai kể về thẻ; thanh điều hướng 64px.
 - **M.Claude.3.3.39 (font):** Be Vietnam Pro cho nội dung, Nunito cho tiêu đề/nút/số/nhãn — styles/fonts39.css + SECTION batch39 cuối design-system.css; SVG/canvas giữ Roboto Flex.
 - **M.Claude.3.3.38 (đợt 3):** SECTION batch38 (design-system.js/.css): Thư viện mới (ô tìm `LIB38Q`/`HOW38Q`, `KW38`, `match38`/`filt38`, thẻ nổi bật `hero38`, `lesTab38`), Sổ tay › Tiến bộ `nbReview38`, Thẻ thành tựu `.ach38`, chữ câu công thức 18px.
 - **M.Claude.3.3.37 (đợt 2):** SECTION batch37 (design-system.js/.css): menu ⋯ khi xem thẻ (Sửa công thức · Tạm dừng/Tiếp tục rèn · Cất thẻ), tạm dừng = thẻ vẫn trên tay không tính ngày; bước 1 tạo thẻ riêng gọn (`cuStepName`, `.cu37`); bỏ câu lấy từ lời Thầy ở Bài 3, Bài 5.

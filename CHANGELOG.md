@@ -1,5 +1,19 @@
 # Lịch sử và bàn giao
 
+## M.Claude.3.3.40 — 16/11/2026 — Tiêu đề Tuần, thanh điều hướng gọn, chuyển tab không giật, Senpai kể về lại thẻ
+
+Gốc M.Claude.3.3.39. Theo memo 9 mục của người dùng (không có mục 8).
+
+- (1) Tiêu đề trang Tuần thẳng hàng 3 trang còn lại: nút ngôi sao 48px dùng margin âm, hàng tiêu đề giữ 28px.
+- (2) Thanh điều hướng điện thoại: cao 64px, đệm trên/dưới 6px; nổi phía trên thanh vuốt iPhone (`bottom:max(8px, safe-area − 10px)`) thay vì cộng vùng an toàn vào bên trong (trước: đáy dày ~38px trên iPhone).
+- (3–5) Hết giật khi chuyển tab/bước — 4 nguyên nhân: (a) tay nắm kéo 24px bị xóa khi dựng lại hộp thoại và chỉ gắn lại ở setTimeout → nay gắn ngay trong sheetSet/f2Mount/openOv (`window.sheetGrip40`, `handle` luôn giữ lớp `sheet14-ready`); (b) quay lại tab/bước đã xem (Nhật ký → Thẻ, Bước trước, Sổ tay › Tóm tắt…) gọi `history.go` rồi dựng lại cả hộp thoại kèm hiệu ứng mở → nay chỉ lùi lịch sử (`silent40`), không dựng lại; nút Back của máy vẫn như cũ; (c) hai tab Thẻ thói quen / Nhật ký cao 48 ↔ 54px → cố định 48px; (d) hộp thoại Sửa/Thiết lập thói quen đổi chiều cao giữa các bước → giữ cao toàn màn hình (điện thoại) / cố định (máy tính). Thêm: đổi Đã làm/Một phần/Chưa làm khi đang cuộn xuống đáy thì thêm khoảng trống cuối để giữ vị trí cuộn (`ci40Mount`).
+- (6) Senpai kể mở từ thẻ: nút ×, chạm nền, vuốt xuống, Esc, Back đều về lại đúng thẻ (mặt sau), kể cả khi thẻ mở từ màn Ghi nhận (trước: nút × về Ghi nhận; vuốt xuống về trang chủ). Thẻ hiện lại tại chỗ, không trượt lên.
+- (7) Thư viện: tên thẻ/bài trong danh sách, ô Cách làm, tiêu đề thẻ nổi bật dùng Nunito 600 (semibold); tiêu đề mục (“5 bài nền tảng”) 700.
+- (9) Lời “Shin nhắn” ở các bước công thức bỏ dòng “Từ bài …”.
+- Vẫn treo: duyệt chữ đợt 2 (3.3.37) và đợt 3 (3.3.38); 14 tên gọn hộp ném + “GAME/Chơi ngay”; file luật v2 (3.3.32); thử trên iPhone/Android thật (thanh điều hướng với vùng an toàn thật, độ mượt khi chuyển tab, font).
+- Kiểm thử (Playwright Chromium, Demo, 390×844, 390×660 và 1280×800): đo vị trí từng khung hình 650ms sau mỗi thao tác cho 30+ lần chuyển (Thư viện 3 tab + chip, Sổ tay 3 tab, Bài học/Cách làm tới-lui, lật thẻ, Thẻ ↔ Nhật ký, Theo tháng ↔ Từ khi bắt đầu, tháng trước, ngày trong lịch, Ghi nhận Đã làm/Một phần/Chưa làm, Check-in đáp án + tiếp/lui, Sửa công thức 3 bước): không còn khung hình nhảy, tab/đầu hộp thoại đứng yên. Lịch sử Back: Thẻ → Nhật ký → Thẻ → Nhật ký → Back về Thẻ → Back đóng thẻ → Back về trang trước, đúng như cũ. Senpai kể: 2 đường mở (Ghi nhận › Xem thẻ, Thư viện) × 4 cách đóng đều về thẻ. Hồi quy: người học mới, ghi nhận + lưu, Check-in 4 bước, 14 Cách làm, 5 bài học, game: không lỗi JavaScript. node tools/verify.mjs ok.
+- Chưa thử: iPhone/Android thật (vùng an toàn thật của thanh điều hướng, cảm giác mượt khi chạm), Safari/WebKit.
+
 ## M.Claude.3.3.39 — 15/11/2026 — Font chữ: Nunito (tiêu đề) + Be Vietnam Pro (nội dung)
 
 Gốc M.Claude.3.3.38. Người dùng thấy font cũ (Roboto Flex) rõ nhưng đơn điệu; xem 2 vòng bản mẫu (3 phương án, rồi 3 cách ghép với Nunito) và chọn phương án A.

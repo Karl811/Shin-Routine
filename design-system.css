@@ -580,3 +580,23 @@ html{background:#F9F9FF}
 #shinTypographyRoot#shinTypographyRoot :is(.rv38-stats b,.f3-stats b,.kpi b,.num38){font-weight:850!important}
 #shinTypographyRoot#shinTypographyRoot .sentence{font-family:var(--f)!important}
 #shinTypographyRoot :is(.jp,[lang="ja"]){font-family:var(--jp,'Noto Sans JP'),sans-serif}
+
+/* ===== SECTION batch40 (M.Claude.3.3.40 — tiêu đề Tuần, thanh điều hướng gọn, chuyển tab không nhảy) ===== */
+/* 1. Tiêu đề trang Tuần thẳng hàng với 3 trang còn lại: nút ngôi sao 48px không làm hàng tiêu đề cao thêm */
+#shinTypographyRoot .m3-heading>.week-title16{align-items:center!important;min-height:0}
+#shinTypographyRoot .week-title16 #saved16{margin-top:-10px!important;margin-bottom:-10px!important}
+/* 2. Thanh điều hướng: trên dưới cân nhau (6px), cao 64px; nổi phía trên thanh vuốt của iPhone thay vì cộng vùng an toàn vào bên trong */
+@media(max-width:767px){
+ #shinTypographyRoot .m3-navigation{min-height:0;padding:6px 4px;bottom:max(8px,calc(env(safe-area-inset-bottom) - 10px))}
+ #shinTypographyRoot .m3-navigation>button{min-height:52px;padding:0;gap:4px;justify-content:center}
+}
+/* 3. Hai tab Thẻ thói quen / Nhật ký cao bằng nhau ở cả hai chế độ (trước: 48 ↔ 54px làm nội dung nhảy) */
+#shinTypographyRoot .f2-sheet>.f2-detail-tabs>button{min-height:48px!important;height:48px}
+/* 7. Thư viện: tiêu đề dùng Nunito semibold cho nhẹ mắt */
+#shinTypographyRoot#shinTypographyRoot :is(.row38-t>b,.how38-chip>b){font-weight:600!important}
+#shinTypographyRoot#shinTypographyRoot .hero38-text h3{font-weight:600!important}
+#shinTypographyRoot#shinTypographyRoot h2.h38{font-weight:700!important}
+/* 5. Các bước Sửa/Thiết lập thói quen: hộp thoại giữ cùng chiều cao giữa các bước (trước: bước ngắn làm cả hộp thoại tụt xuống) */
+@media(max-width:699px){#shinTypographyRoot .ov .sheet.wizard16{min-height:calc(100dvh - 12px - var(--kb,0px))}#shinTypographyRoot .ov .sheet.wizard16>.lc{flex:1 1 auto}}
+/* Máy tính: hộp thoại thẻ và các bước Sửa thói quen giữ chiều cao cố định khi đổi tab/bước */
+@media(min-width:700px){#shinTypographyRoot .ov .sheet:is(.habit-sheet33,.wizard16){height:calc(100dvh - 48px);max-height:calc(100dvh - 48px)}#shinTypographyRoot .ov .sheet.wizard16>.lc{flex:1 1 auto}}

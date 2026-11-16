@@ -229,3 +229,18 @@ openTreeCard30=function(id){b38TreeCard(id);var sheet=OV&&$('.sheet',OV),box=she
   (a.act?'<section class="ach38-sec"><small>Việc nhỏ đã bắt đầu</small><p>'+(a.anchor?'Khi '+esc(a.anchor)+', ':'')+'<b>'+esc(a.act)+'</b></p></section>':'')+
   (a.note?'<section class="ach38-sec ach38-note"><small>Ghi chú của bạn</small><p>“'+esc(a.note)+'”</p></section>':'')+reflHTML;
  var bar=$('.sbar .btn',sheet);if(bar)bar.className='btn btn--wide ach38-back';};
+
+/* ===== SECTION batch40 (M.Claude.3.3.40 — chuyển tab mượt, Senpai kể quay về thẻ) =====
+   Hộp thoại dựng lại bằng innerHTML làm mất tay nắm kéo (24px); trước đây tay nắm được gắn lại
+   ở setTimeout → có 1 khung hình nội dung nhảy lên rồi tụt xuống. Nay gắn lại ngay, cùng lượt. */
+function b40Grip(){var s=OV&&$('.sheet',OV);if(s&&window.sheetGrip40)window.sheetGrip40(s);}
+var b40SheetSet=sheetSet;sheetSet=function(){var r=b40SheetSet.apply(this,arguments);b40Grip();return r;};
+var b40F2Mount=f2Mount;f2Mount=function(){var r=b40F2Mount.apply(this,arguments);b40Grip();return r;};
+var b40OpenOv=openOv;openOv=function(){var r=b40OpenOv.apply(this,arguments);b40Grip();return r;};
+/* 6. Senpai kể mở từ thẻ: nút đóng luôn về lại thẻ trước (kể cả khi thẻ được mở từ Ghi nhận/Cách làm). */
+window.addEventListener('click',function(e){if(!OV||!HABIT_RETURN33||$('.habit-sheet33',OV))return;var b=e.target.closest&&e.target.closest('[data-act=close]');if(!(b&&OV.contains(b))&&e.target!==OV)return;e.preventDefault();e.stopImmediatePropagation();NT=null;restoreHabit33();},true);
+/* 4. Đổi Đã làm / Một phần / Chưa làm khi đang cuộn xuống: nội dung mới ngắn hơn thì thêm khoảng trống cuối
+   để giữ nguyên vị trí cuộn (trước: cả khung tụt xuống 70–80px). */
+var b40CiMount=ci40Mount;ci40Mount=function(kind,html,keep){var old=OV&&$('.ci40-scroll',OV),top=old?old.scrollTop:0;var r=b40CiMount.apply(this,arguments);var n=keep&&OV&&$('.ci40-scroll',OV);if(n&&top>0){var max=n.scrollHeight-n.clientHeight;if(max<top)n.style.paddingBottom=((parseFloat(getComputedStyle(n).paddingBottom)||0)+top-max)+'px';n.scrollTop=top;}return r;};
+/* Về lại thẻ sau Senpai kể: hiện ngay tại chỗ, không trượt lên lại từ dưới. */
+var b40RestoreHabit=restoreHabit33;restoreHabit33=function(){var r=b40RestoreHabit.apply(this,arguments);if(r&&OV){[OV,$('.sheet',OV)].forEach(function(el){if(!el)return;el.style.animation='none';if(el.getAnimations)el.getAnimations().forEach(function(a){a.cancel();});});}return r;};
